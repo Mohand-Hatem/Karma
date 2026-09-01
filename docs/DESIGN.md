@@ -12,13 +12,19 @@
 ## 1. Visual Philosophy & Art Direction
 
 ### 1.1 Aesthetic Identity: *Modern Academic Workspace*
+- **Brand Logo & Mark:** The official Karma emblem (`docs/assets/logo.png`, `apps/web/public/images/logo.png`) combines:
+  - An academic graduation cap (mortarboard) crowning a stylized, gradient blue letter **"K"**.
+  - An open knowledge book at the base in deep midnight navy.
+  - Three progressive student silhouettes on the inline-start in vibrant teal (`#00a896`).
+  - An upward growth/analytics chart on the inline-end in vibrant teal (`#00a896`).
+  - Geometric, clean logotype "KARMA" with teal triangular accents inside the 'A's, underscored by "SCHOOL MANAGEMENT SYSTEM".
 - **Calm & Focused:** Clean slate surfaces, subtle 1px border definitions, and generous whitespace. We avoid chaotic multi-color dashboard cards or playful juvenile styles; the tool must feel like Linear or Stripe, tailored for education.
 - **Data-Dense with Breathing Room:** High information density where needed (tables, gradebooks, timetables), balanced with structured visual grouping (card containment, clear typographic hierarchy).
 - **Physical-Property Prohibition:** All spatial logic (margins, paddings, borders, flex/grid alignments, positioning) strictly uses **CSS logical properties** (`margin-inline-start`, `padding-inline`, `inset-inline-end`).
 - **Semantic Color Hierarchy (60-30-10 Rule):**
   - **60% Dominant Base:** Slate background & white/charcoal card surfaces.
-  - **30% Structure & Text:** Crisp high-contrast typography and subtle borders.
-  - **10% Intentional Accent:** Electric Indigo/Royal Blue for brand actions, plus strict semantic badges (Emerald for Success, Amber for Late, Crimson for Absent/Overdue).
+  - **30% Structure & Text:** Deep Midnight Navy (`#0f2942`) and crisp high-contrast typography.
+  - **10% Intentional Accent:** Royal Azure Blue (`#2563eb` / `#0084d1`) for brand actions, paired with Academic Teal (`#00a896`) for secondary highlights and analytics, plus strict semantic badges (Emerald for Success, Amber for Late, Crimson for Absent/Overdue).
 
 ---
 
