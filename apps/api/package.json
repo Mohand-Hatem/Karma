@@ -1,0 +1,12 @@
+{
+  "name": "@karma/api",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "build": "tsup src/server.ts --format esm"
+  }
+}

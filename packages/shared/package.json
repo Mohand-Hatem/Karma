@@ -1,0 +1,10 @@
+{
+  "name": "@karma/shared",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "tsup src/index.ts --format esm,cjs --dts"
+  }
+}
