@@ -6,6 +6,25 @@
 
 ---
 
+## 0. Core Engineering & Execution Principles
+
+1. **Aim directly at your goals, stay concise, avoid over-engineering:**
+   - Solve concrete requirements directly with clear, readable code.
+   - Do not create speculative abstractions, unnecessary wrapper layers, or complex architectures for hypothetical future needs.
+   - Keep communication and documentation brief, actionable, and focused on outcomes.
+
+2. **Skill-Driven Execution:**
+   Always activate and leverage the project's specialized skills to maintain the highest standard of craft and discipline:
+   - **UI/UX & Frontend Craft:** `/impeccable` and `/ui-ux-pro-max` — ensure world-class aesthetic polish, WCAG 2.2 AA accessibility, responsive design, and Arabic RTL harmony.
+   - **Execution & Superpower Discipline:** `/using-superpowers` and `/using-agent-skills` — strictly follow plans, maintain TDD rigor, and verify before claiming completion.
+   - **Planning & Breakdown:** `/planning-and-task-breakdown` — decompose multi-step milestones into ordered, testable steps.
+   - **Quality & Reliability:** `/test-driven-development` — follow the RED $\rightarrow$ GREEN $\rightarrow$ REFACTOR cycle with real database integration tests.
+   - **Speed & Scale:** `/performance-optimization` — optimize queries, state management, bundle size, and render performance.
+   - **Knowledge & Relationships:** `/graphify` — map codebase dependencies, God nodes, and architectural patterns.
+   - **Pipeline & Quality Gates:** `/ci-cd-and-automation` — protect main branch with automated lint, typecheck, test, and build gates.
+
+---
+
 ## 1. Product Overview
 
 **Karma** is a modern, full-stack School Management & Learning Platform connecting four primary roles:
