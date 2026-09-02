@@ -2,6 +2,7 @@ import type { ReactNode } from 'react'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages } from 'next-intl/server'
 import { locales, type AppLocale } from '../../../i18n/request'
+import { QueryProvider } from '../../lib/query-provider'
 import '../../styles/globals.css'
 
 const RTL_LOCALES: AppLocale[] = ['ar']
@@ -24,7 +25,9 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} dir={dir}>
       <body>
-        <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
+        <NextIntlClientProvider messages={messages}>
+          <QueryProvider>{children}</QueryProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   )
