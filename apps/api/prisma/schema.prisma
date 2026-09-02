@@ -8,4 +8,88 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-// Models added in Task 7 and beyond.
+model OrganizationSettings {
+  id                         String   @id @default(cuid())
+  organizationId             String   @unique
+  timezone                   String   @default("UTC")
+  defaultLocale              Locale   @default(EN)
+  weekStartDay               DayOfWeek @default(SUNDAY)
+  attendanceEditWindowHours  Int      @default(24)
+  gradingDefaults            Json?
+  createdAt                  DateTime @default(now())
+  updatedAt                  DateTime @updatedAt
+}
+
+model Plan {
+  id                 String   @id @default(cuid())
+  code               String   @unique
+  name               String
+  nameAr             String?
+  maxStudents        Int
+  maxTeachers        Int
+  storageMb          Int
+  aiRequestsPerMonth Int
+  isActive           Boolean  @default(true)
+  sortOrder          Int      @default(0)
+  subscriptions      Subscription[]
+}
+
+model Subscription {
+  id                      String             @id @default(cuid())
+  organizationId          String
+  planId                  String
+  status                  SubscriptionStatus @default(TRIALING)
+  currentPeriodStart      DateTime
+  currentPeriodEnd        DateTime
+  canceledAt              DateTime?
+  provider                String?
+  externalCustomerId      String?
+  externalSubscriptionId  String?
+  createdAt               DateTime @default(now())
+  updatedAt               DateTime @updatedAt
+
+  plan Plan @relation(fields: [planId], references: [id])
+
+  @@index([organizationId, status])
+}
+
+model UsageCounter {
+  id              String      @id @default(cuid())
+  organizationId  String
+  metric          UsageMetric
+  period          String
+  value           Int         @default(0)
+  updatedAt       DateTime    @updatedAt
+
+  @@unique([organizationId, metric, period])
+}
+
+enum Locale {
+  EN
+  AR
+}
+
+enum DayOfWeek {
+  SUNDAY
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+  SATURDAY
+}
+
+enum SubscriptionStatus {
+  TRIALING
+  ACTIVE
+  PAST_DUE
+  CANCELED
+  EXPIRED
+}
+
+enum UsageMetric {
+  STUDENTS
+  TEACHERS
+  STORAGE_MB
+  AI_REQUESTS
+}
