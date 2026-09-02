@@ -24,6 +24,16 @@
    - **Code Review & Quality:** `/code-review-and-quality` — conduct rigorous multi-axis review (correctness, readability, architecture, security, performance) before committing changes.
    - **Pipeline & Quality Gates:** `/ci-cd-and-automation` — protect main branch with automated lint, typecheck, test, and build gates.
 
+3. **Interactive Step-by-Step Task Approval Workflow:**
+   - Every phase is decomposed into structured, ordered tasks.
+   - Before starting **each task**, the agent MUST explain:
+     - **What will be done** in this specific task.
+     - **What skills, libraries, and tools** will be used.
+     - **What the code looks like** (architectural signatures, schemas, key code snippets).
+     - **Why this is the best recommended approach**.
+   - The agent MUST stop, present this overview to the user, and ask for explicit approval before writing code or running modifying actions for that task.
+   - Execution of that task proceeds ONLY after the user reviews and confirms approval.
+
 ---
 
 ## 1. Product Overview
