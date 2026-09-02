@@ -1,8 +1,10 @@
 import express, { type Express } from 'express'
 import helmet from 'helmet'
 import cors from 'cors'
+import { toNodeHandler } from 'better-auth/node'
 import { HealthResponseSchema } from '@karma/shared'
 import { env } from './config/env'
+import { auth } from './auth/auth'
 import { requestLogger } from './middleware/request-logger'
 import { errorHandler } from './middleware/error-handler'
 
@@ -12,6 +14,9 @@ export function createApp(): Express {
   app.use(requestLogger)
   app.use(helmet())
   app.use(cors({ origin: env.WEB_URL, credentials: true }))
+
+  app.all('/api/auth/{*splat}', toNodeHandler(auth))
+
   app.use(express.json())
 
   app.get('/healthz', (_req, res) => {

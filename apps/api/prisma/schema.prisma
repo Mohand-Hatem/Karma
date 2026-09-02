@@ -8,29 +8,143 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
+// -----------------------------------------------------------------------------
+// Better Auth Core + Organization Plugin Tables
+// -----------------------------------------------------------------------------
+
+model User {
+  id            String       @id
+  name          String
+  email         String       @unique
+  emailVerified Boolean      @default(false)
+  image         String?
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  sessions      Session[]
+  accounts      Account[]
+  members       Member[]
+  invitations   Invitation[]
+
+  @@map("user")
+}
+
+model Session {
+  id                   String        @id
+  expiresAt            DateTime
+  token                String        @unique
+  createdAt            DateTime      @default(now())
+  updatedAt            DateTime      @updatedAt
+  ipAddress            String?
+  userAgent            String?
+  userId               String
+  user                 User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  activeOrganizationId String?
+
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  issuer                String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@map("account")
+}
+
+model Verification {
+  id         String    @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime? @default(now())
+  updatedAt  DateTime? @updatedAt
+
+  @@map("verification")
+}
+
+model Organization {
+  id            String                @id
+  name          String
+  slug          String?               @unique
+  logo          String?
+  createdAt     DateTime              @default(now())
+  metadata      String?
+  members       Member[]
+  invitations   Invitation[]
+  settings      OrganizationSettings?
+  subscriptions Subscription[]
+
+  @@map("organization")
+}
+
+model Member {
+  id             String       @id
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  userId         String
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role           String
+  createdAt      DateTime     @default(now())
+
+  @@unique([organizationId, userId])
+  @@map("member")
+}
+
+model Invitation {
+  id             String       @id
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  email          String
+  role           String?
+  status         String
+  expiresAt      DateTime
+  inviterId      String
+  user           User         @relation(fields: [inviterId], references: [id], onDelete: Cascade)
+
+  @@map("invitation")
+}
+
+// -----------------------------------------------------------------------------
+// Organization Configuration & SaaS Models
+// -----------------------------------------------------------------------------
+
 model OrganizationSettings {
-  id                         String   @id @default(cuid())
-  organizationId             String   @unique
-  timezone                   String   @default("UTC")
-  defaultLocale              Locale   @default(EN)
-  weekStartDay               DayOfWeek @default(SUNDAY)
-  attendanceEditWindowHours  Int      @default(24)
-  gradingDefaults            Json?
-  createdAt                  DateTime @default(now())
-  updatedAt                  DateTime @updatedAt
+  id                        String       @id @default(cuid())
+  organizationId            String       @unique
+  timezone                  String       @default("UTC")
+  defaultLocale             Locale       @default(EN)
+  weekStartDay              DayOfWeek    @default(SUNDAY)
+  attendanceEditWindowHours Int          @default(24)
+  gradingDefaults           Json?
+  createdAt                 DateTime     @default(now())
+  updatedAt                 DateTime     @updatedAt
+
+  organization              Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
 }
 
 model Plan {
-  id                 String   @id @default(cuid())
-  code               String   @unique
+  id                 String         @id @default(cuid())
+  code               String         @unique
   name               String
   nameAr             String?
   maxStudents        Int
   maxTeachers        Int
   storageMb          Int
   aiRequestsPerMonth Int
-  isActive           Boolean  @default(true)
-  sortOrder          Int      @default(0)
+  isActive           Boolean        @default(true)
+  sortOrder          Int            @default(0)
   subscriptions      Subscription[]
 }
 
@@ -45,21 +159,22 @@ model Subscription {
   provider                String?
   externalCustomerId      String?
   externalSubscriptionId  String?
-  createdAt               DateTime @default(now())
-  updatedAt               DateTime @updatedAt
+  createdAt               DateTime           @default(now())
+  updatedAt               DateTime           @updatedAt
 
-  plan Plan @relation(fields: [planId], references: [id])
+  organization            Organization       @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  plan                    Plan               @relation(fields: [planId], references: [id])
 
   @@index([organizationId, status])
 }
 
 model UsageCounter {
-  id              String      @id @default(cuid())
-  organizationId  String
-  metric          UsageMetric
-  period          String
-  value           Int         @default(0)
-  updatedAt       DateTime    @updatedAt
+  id             String      @id @default(cuid())
+  organizationId String
+  metric         UsageMetric
+  period         String
+  value          Int         @default(0)
+  updatedAt      DateTime    @updatedAt
 
   @@unique([organizationId, metric, period])
 }

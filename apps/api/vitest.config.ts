@@ -1,12 +1,10 @@
 import { defineConfig } from 'vitest/config'
+import 'dotenv/config'
 
 export default defineConfig({
   test: {
-    env: {
-      NODE_ENV: 'test',
-      WEB_URL: 'http://localhost:3000',
-      DATABASE_URL: 'postgresql://postgres:postgres@localhost:5432/postgres',
-      DIRECT_URL: 'postgresql://postgres:postgres@localhost:5432/postgres',
-    },
+    environment: 'node',
+    testTimeout: 30000,
+    hookTimeout: 30000,
   },
 })

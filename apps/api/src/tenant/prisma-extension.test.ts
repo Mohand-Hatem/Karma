@@ -7,10 +7,13 @@ const rawPrisma = new PrismaClient()
 const scopedPrisma = withTenantScope(rawPrisma)
 
 let orgAPlanId: string
-const orgAId = 'test-org-a'
-const orgBId = 'test-org-b'
+const orgAId = `test-org-a-${Date.now()}`
+const orgBId = `test-org-b-${Date.now()}`
 
 beforeAll(async () => {
+  await rawPrisma.organization.create({ data: { id: orgAId, name: 'Org A' } })
+  await rawPrisma.organization.create({ data: { id: orgBId, name: 'Org B' } })
+
   const plan = await rawPrisma.plan.create({
     data: { code: 'TEST_ISOLATION_' + Date.now(), name: 'Test Plan', maxStudents: 10, maxTeachers: 10, storageMb: 100, aiRequestsPerMonth: 10 },
   })
@@ -34,13 +37,14 @@ beforeAll(async () => {
       currentPeriodEnd: new Date(Date.now() + 86400000),
     },
   })
-})
+}, 30000)
 
 afterAll(async () => {
   await rawPrisma.subscription.deleteMany({ where: { organizationId: { in: [orgAId, orgBId] } } })
+  await rawPrisma.organization.deleteMany({ where: { id: { in: [orgAId, orgBId] } } })
   await rawPrisma.plan.delete({ where: { id: orgAPlanId } })
   await rawPrisma.$disconnect()
-})
+}, 30000)
 
 describe('tenant Prisma extension', () => {
   it('scopes findMany to the current organization only', async () => {
