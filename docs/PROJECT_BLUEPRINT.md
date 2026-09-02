@@ -21,6 +21,7 @@
    - **Quality & Reliability:** `/test-driven-development` — follow the RED $\rightarrow$ GREEN $\rightarrow$ REFACTOR cycle with real database integration tests.
    - **Speed & Scale:** `/performance-optimization` — optimize queries, state management, bundle size, and render performance.
    - **Knowledge & Relationships:** `/graphify` — map codebase dependencies, God nodes, and architectural patterns.
+   - **Code Review & Quality:** `/code-review-and-quality` — conduct rigorous multi-axis review (correctness, readability, architecture, security, performance) before committing changes.
    - **Pipeline & Quality Gates:** `/ci-cd-and-automation` — protect main branch with automated lint, typecheck, test, and build gates.
 
 ---
