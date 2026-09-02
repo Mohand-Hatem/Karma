@@ -9,7 +9,7 @@
     "test": "vitest run",
     "build": "tsup src/server.ts --format esm",
     "db:seed": "tsx src/seed.ts",
-    "postinstall": "prisma generate"
+    "db:generate": "prisma generate"
   },
   "prisma": {
     "seed": "tsx src/seed.ts"
