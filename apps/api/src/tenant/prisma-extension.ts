@@ -10,12 +10,19 @@ const WRITE_ONE_OPS = new Set(['create'])
 const WRITE_MANY_OPS = new Set(['updateMany', 'deleteMany'])
 const WRITE_WHERE_OPS = new Set(['update', 'delete', 'upsert'])
 
+type OperationArgs = {
+  model?: string
+  operation: string
+  args: Record<string, unknown>
+  query: (args: unknown) => Promise<unknown>
+}
+
 export function withTenantScope(prisma: PrismaClient) {
   return prisma.$extends({
     name: 'tenant-scope',
     query: {
       $allModels: {
-        async $allOperations({ model, operation, args, query }) {
+        async $allOperations({ model, operation, args, query }: OperationArgs) {
           if (!model || EXEMPT_MODELS.has(model)) {
             return query(args)
           }

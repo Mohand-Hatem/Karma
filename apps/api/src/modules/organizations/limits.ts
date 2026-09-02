@@ -18,10 +18,18 @@ function periodFor(metric: UsageMetric): string {
 
 function limitFieldFor(metric: UsageMetric): 'maxStudents' | 'maxTeachers' | 'storageMb' | 'aiRequestsPerMonth' {
   switch (metric) {
-    case 'STUDENTS': return 'maxStudents'
-    case 'TEACHERS': return 'maxTeachers'
-    case 'STORAGE_MB': return 'storageMb'
-    case 'AI_REQUESTS': return 'aiRequestsPerMonth'
+    case 'STUDENTS':
+      return 'maxStudents'
+    case 'TEACHERS':
+      return 'maxTeachers'
+    case 'STORAGE_MB':
+      return 'storageMb'
+    case 'AI_REQUESTS':
+      return 'aiRequestsPerMonth'
+    default: {
+      const _exhaustive: never = metric
+      throw new Error(`Unhandled metric: ${_exhaustive}`)
+    }
   }
 }
 
