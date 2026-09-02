@@ -25,6 +25,12 @@ model User {
   members       Member[]
   invitations   Invitation[]
 
+  // Domain Profile Links (1:1 per user)
+  student       Student?
+  teacher       Teacher?
+  parent        Parent?
+  auditLogs     AuditLog[]
+
   @@map("user")
 }
 
@@ -75,16 +81,41 @@ model Verification {
 }
 
 model Organization {
-  id            String                @id
-  name          String
-  slug          String?               @unique
-  logo          String?
-  createdAt     DateTime              @default(now())
-  metadata      String?
-  members       Member[]
-  invitations   Invitation[]
-  settings      OrganizationSettings?
-  subscriptions Subscription[]
+  id                    String                 @id
+  name                  String
+  slug                  String?                @unique
+  logo                  String?
+  createdAt             DateTime               @default(now())
+  metadata              String?
+  members               Member[]
+  invitations           Invitation[]
+  settings              OrganizationSettings?
+  subscriptions         Subscription[]
+  usageCounters         UsageCounter[]
+
+  // Phase 1 Domain Relations
+  students              Student[]
+  teachers              Teacher[]
+  parents               Parent[]
+  parentStudents        ParentStudent[]
+  academicYears         AcademicYear[]
+  terms                 Term[]
+  classes               Class[]
+  subjects              Subject[]
+  classSubjects         ClassSubject[]
+  teacherSubjects       TeacherSubject[]
+  studentEnrollments    StudentEnrollment[]
+  lessons               Lesson[]
+  lessonResources       LessonResource[]
+  gradingSchemes        GradingScheme[]
+  gradeCategories       GradeCategory[]
+  assignments           Assignment[]
+  assignmentResources   AssignmentResource[]
+  assignmentSubmissions AssignmentSubmission[]
+  submissionFiles       SubmissionFile[]
+  results               Result[]
+  fileAssets            FileAsset[]
+  auditLogs             AuditLog[]
 
   @@map("organization")
 }
@@ -171,13 +202,528 @@ model Subscription {
 model UsageCounter {
   id             String      @id @default(cuid())
   organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
   metric         UsageMetric
   period         String
   value          Int         @default(0)
   updatedAt      DateTime    @updatedAt
 
   @@unique([organizationId, metric, period])
+  @@index([organizationId])
 }
+
+// -----------------------------------------------------------------------------
+// Platform & Storage
+// -----------------------------------------------------------------------------
+
+model FileAsset {
+  id                  String               @id @default(cuid())
+  organizationId      String
+  uploadedById        String
+  cloudinaryPublicId  String               @unique
+  url                 String
+  secureUrl           String
+  originalName        String
+  mimeType            String
+  sizeBytes           Int
+  context             FileContext
+  createdAt           DateTime             @default(now())
+  deletedAt           DateTime?
+
+  organization        Organization         @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  studentAvatars      Student[]
+  teacherAvatars      Teacher[]
+  parentAvatars       Parent[]
+  lessonResources     LessonResource[]
+  assignmentResources AssignmentResource[]
+  submissionFiles     SubmissionFile[]
+
+  @@index([organizationId, context])
+}
+
+// -----------------------------------------------------------------------------
+// Profiles (Student, Teacher, Parent, ParentStudent)
+// -----------------------------------------------------------------------------
+
+model Student {
+  id               String                 @id @default(cuid())
+  organizationId   String
+  userId           String                 @unique
+  studentCode      String
+  firstName        String
+  lastName         String
+  firstNameAr      String?
+  lastNameAr       String?
+  dateOfBirth      DateTime               @db.Date
+  gender           Gender?
+  phone            String?
+  address          String?
+  avatarFileId     String?
+  admissionDate    DateTime               @db.Date
+  status           ProfileStatus          @default(ACTIVE)
+  archivedAt       DateTime?
+  createdAt        DateTime               @default(now())
+  updatedAt        DateTime               @updatedAt
+
+  organization     Organization           @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  user             User                   @relation(fields: [userId], references: [id], onDelete: Restrict)
+  avatar           FileAsset?             @relation(fields: [avatarFileId], references: [id], onDelete: SetNull)
+  enrollments      StudentEnrollment[]
+  parentLinks      ParentStudent[]
+  submissions      AssignmentSubmission[]
+  results          Result[]
+
+  @@unique([organizationId, studentCode])
+  @@index([organizationId, status])
+}
+
+model Teacher {
+  id                String                 @id @default(cuid())
+  organizationId    String
+  userId            String                 @unique
+  employeeCode      String
+  firstName         String
+  lastName          String
+  firstNameAr       String?
+  lastNameAr        String?
+  gender            Gender?
+  phone             String?
+  address           String?
+  avatarFileId      String?
+  specialization    String?
+  hireDate          DateTime               @db.Date
+  status            ProfileStatus          @default(ACTIVE)
+  archivedAt        DateTime?
+  createdAt         DateTime               @default(now())
+  updatedAt         DateTime               @updatedAt
+
+  organization      Organization           @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  user              User                   @relation(fields: [userId], references: [id], onDelete: Restrict)
+  avatar            FileAsset?             @relation(fields: [avatarFileId], references: [id], onDelete: SetNull)
+  homeroomClasses   Class[]
+  classSubjects     ClassSubject[]
+  qualifiedSubjects TeacherSubject[]
+  createdAssignments Assignment[]
+  gradedSubmissions AssignmentSubmission[]
+
+  @@unique([organizationId, employeeCode])
+  @@index([organizationId, status])
+}
+
+model Parent {
+  id             String          @id @default(cuid())
+  organizationId String
+  userId         String          @unique
+  firstName      String
+  lastName       String
+  firstNameAr    String?
+  lastNameAr     String?
+  gender         Gender?
+  phone          String?
+  address        String?
+  avatarFileId   String?
+  occupation     String?
+  status         ProfileStatus   @default(ACTIVE)
+  archivedAt     DateTime?
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+
+  organization   Organization    @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  user           User            @relation(fields: [userId], references: [id], onDelete: Restrict)
+  avatar         FileAsset?      @relation(fields: [avatarFileId], references: [id], onDelete: SetNull)
+  studentLinks   ParentStudent[]
+
+  @@index([organizationId, status])
+}
+
+model ParentStudent {
+  id               String       @id @default(cuid())
+  organizationId   String
+  parentId         String
+  studentId        String
+  relationship     Relationship
+  isPrimaryContact Boolean      @default(false)
+  createdAt        DateTime     @default(now())
+
+  organization     Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  parent           Parent       @relation(fields: [parentId], references: [id], onDelete: Cascade)
+  student          Student      @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@unique([parentId, studentId])
+  @@index([organizationId, studentId])
+}
+
+// -----------------------------------------------------------------------------
+// Academic Structure
+// -----------------------------------------------------------------------------
+
+model AcademicYear {
+  id                 String              @id @default(cuid())
+  organizationId     String
+  name               String
+  startDate          DateTime            @db.Date
+  endDate            DateTime            @db.Date
+  status             AcademicYearStatus  @default(UPCOMING)
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+
+  organization       Organization        @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  terms              Term[]
+  classes            Class[]
+  studentEnrollments StudentEnrollment[]
+
+  @@unique([organizationId, name])
+  @@index([organizationId, status])
+}
+
+model Term {
+  id             String       @id @default(cuid())
+  organizationId String
+  academicYearId String
+  name           String
+  nameAr         String?
+  order          Int
+  startDate      DateTime     @db.Date
+  endDate        DateTime     @db.Date
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  academicYear   AcademicYear @relation(fields: [academicYearId], references: [id], onDelete: Cascade)
+  results        Result[]
+
+  @@unique([academicYearId, order])
+  @@unique([academicYearId, name])
+  @@index([organizationId, academicYearId])
+}
+
+model Class {
+  id                String              @id @default(cuid())
+  organizationId    String
+  academicYearId    String
+  name              String
+  nameAr            String?
+  gradeLevel        Int
+  section           String?
+  homeroomTeacherId String?
+  capacity          Int?
+  status            ProfileStatus       @default(ACTIVE)
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+
+  organization      Organization        @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  academicYear      AcademicYear        @relation(fields: [academicYearId], references: [id], onDelete: Restrict)
+  homeroomTeacher   Teacher?            @relation(fields: [homeroomTeacherId], references: [id], onDelete: SetNull)
+  classSubjects     ClassSubject[]
+  enrollments       StudentEnrollment[]
+
+  @@unique([organizationId, academicYearId, name])
+  @@index([organizationId, academicYearId])
+}
+
+model Subject {
+  id                   String           @id @default(cuid())
+  organizationId       String
+  code                 String
+  name                 String
+  nameAr               String?
+  description          String?
+  status               ProfileStatus    @default(ACTIVE)
+  createdAt            DateTime         @default(now())
+  updatedAt            DateTime         @updatedAt
+
+  organization         Organization     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  classSubjects        ClassSubject[]
+  teacherQualifications TeacherSubject[]
+
+  @@unique([organizationId, code])
+  @@index([organizationId, status])
+}
+
+model ClassSubject {
+  id             String         @id @default(cuid())
+  organizationId String
+  classId        String
+  subjectId      String
+  teacherId      String
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+
+  organization   Organization   @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  class          Class          @relation(fields: [classId], references: [id], onDelete: Cascade)
+  subject        Subject        @relation(fields: [subjectId], references: [id], onDelete: Restrict)
+  teacher        Teacher        @relation(fields: [teacherId], references: [id], onDelete: Restrict)
+  lessons        Lesson[]
+  assignments    Assignment[]
+  gradingScheme  GradingScheme?
+  results        Result[]
+
+  @@unique([classId, subjectId])
+  @@index([organizationId, teacherId])
+}
+
+model TeacherSubject {
+  id             String       @id @default(cuid())
+  organizationId String
+  teacherId      String
+  subjectId      String
+  createdAt      DateTime     @default(now())
+
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  teacher        Teacher      @relation(fields: [teacherId], references: [id], onDelete: Cascade)
+  subject        Subject      @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+
+  @@unique([teacherId, subjectId])
+  @@index([organizationId, subjectId])
+}
+
+model StudentEnrollment {
+  id             String           @id @default(cuid())
+  organizationId String
+  studentId      String
+  classId        String
+  academicYearId String
+  enrolledAt     DateTime         @default(now())
+  leftAt         DateTime?
+  status         EnrollmentStatus @default(ACTIVE)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+
+  organization   Organization     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  student        Student          @relation(fields: [studentId], references: [id], onDelete: Restrict)
+  class          Class            @relation(fields: [classId], references: [id], onDelete: Restrict)
+  academicYear   AcademicYear     @relation(fields: [academicYearId], references: [id], onDelete: Restrict)
+
+  @@unique([studentId, classId, academicYearId])
+  @@index([organizationId, classId, status])
+}
+
+// -----------------------------------------------------------------------------
+// Learning: Lessons & Assignments
+// -----------------------------------------------------------------------------
+
+model Lesson {
+  id              String           @id @default(cuid())
+  organizationId  String
+  classSubjectId  String
+  timetableSlotId String?
+  title           String
+  titleAr         String?
+  description     String?
+  content         String?
+  scheduledAt     DateTime?
+  status          LessonStatus     @default(DRAFT)
+  publishedAt     DateTime?
+  createdById     String
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+
+  organization    Organization     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  classSubject    ClassSubject     @relation(fields: [classSubjectId], references: [id], onDelete: Cascade)
+  resources       LessonResource[]
+
+  @@index([organizationId, classSubjectId, scheduledAt])
+}
+
+model LessonResource {
+  id             String       @id @default(cuid())
+  organizationId String
+  lessonId       String
+  fileAssetId    String
+  title          String
+  order          Int
+  createdAt      DateTime     @default(now())
+
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  lesson         Lesson       @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  fileAsset      FileAsset    @relation(fields: [fileAssetId], references: [id], onDelete: Restrict)
+
+  @@unique([lessonId, order])
+  @@index([organizationId, lessonId])
+}
+
+model GradeCategory {
+  id              String        @id @default(cuid())
+  organizationId  String
+  gradingSchemeId String
+  name            String
+  nameAr          String?
+  weight          Decimal       @db.Decimal(5, 2)
+  order           Int
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  organization    Organization  @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  gradingScheme   GradingScheme @relation(fields: [gradingSchemeId], references: [id], onDelete: Cascade)
+  assignments     Assignment[]
+
+  @@unique([gradingSchemeId, name])
+  @@index([organizationId, gradingSchemeId])
+}
+
+model GradingScheme {
+  id             String          @id @default(cuid())
+  organizationId String
+  classSubjectId String          @unique
+  name           String
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+
+  organization   Organization    @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  classSubject   ClassSubject    @relation(fields: [classSubjectId], references: [id], onDelete: Cascade)
+  categories     GradeCategory[]
+
+  @@index([organizationId, classSubjectId])
+}
+
+model Assignment {
+  id                  String                 @id @default(cuid())
+  organizationId      String
+  classSubjectId      String
+  gradeCategoryId     String?
+  title               String
+  titleAr             String?
+  description         String?
+  instructions        String?
+  maxScore            Decimal                @db.Decimal(6, 2)
+  dueAt               DateTime
+  lateUntil           DateTime?
+  allowLateSubmission Boolean                @default(true)
+  status              AssignmentStatus       @default(DRAFT)
+  publishedAt         DateTime?
+  createdById         String
+  createdAt           DateTime               @default(now())
+  updatedAt           DateTime               @updatedAt
+
+  organization        Organization           @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  classSubject        ClassSubject           @relation(fields: [classSubjectId], references: [id], onDelete: Restrict)
+  gradeCategory       GradeCategory?         @relation(fields: [gradeCategoryId], references: [id], onDelete: SetNull)
+  createdBy           Teacher                @relation(fields: [createdById], references: [id], onDelete: Restrict)
+  resources           AssignmentResource[]
+  submissions         AssignmentSubmission[]
+
+  @@index([organizationId, classSubjectId, dueAt])
+}
+
+model AssignmentResource {
+  id             String       @id @default(cuid())
+  organizationId String
+  assignmentId   String
+  fileAssetId    String
+  order          Int
+  createdAt      DateTime     @default(now())
+
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  assignment     Assignment   @relation(fields: [assignmentId], references: [id], onDelete: Cascade)
+  fileAsset      FileAsset    @relation(fields: [fileAssetId], references: [id], onDelete: Restrict)
+
+  @@unique([assignmentId, order])
+  @@index([organizationId, assignmentId])
+}
+
+model AssignmentSubmission {
+  id             String           @id @default(cuid())
+  organizationId String
+  assignmentId   String
+  studentId      String
+  content        String?
+  submittedAt    DateTime
+  attemptNumber  Int              @default(1)
+  status         SubmissionStatus @default(SUBMITTED)
+  score          Decimal?         @db.Decimal(6, 2)
+  feedback       String?
+  gradedAt       DateTime?
+  gradedById     String?
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+
+  organization   Organization     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  assignment     Assignment       @relation(fields: [assignmentId], references: [id], onDelete: Cascade)
+  student        Student          @relation(fields: [studentId], references: [id], onDelete: Restrict)
+  gradedBy       Teacher?         @relation(fields: [gradedById], references: [id], onDelete: SetNull)
+  files          SubmissionFile[]
+
+  @@unique([assignmentId, studentId])
+  @@index([organizationId, status])
+}
+
+model SubmissionFile {
+  id             String               @id @default(cuid())
+  organizationId String
+  submissionId   String
+  fileAssetId    String
+  createdAt      DateTime             @default(now())
+
+  organization   Organization         @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  submission     AssignmentSubmission @relation(fields: [submissionId], references: [id], onDelete: Cascade)
+  fileAsset      FileAsset            @relation(fields: [fileAssetId], references: [id], onDelete: Restrict)
+
+  @@unique([submissionId, fileAssetId])
+  @@index([organizationId, submissionId])
+}
+
+// -----------------------------------------------------------------------------
+// Grading: Results & Snapshot History
+// -----------------------------------------------------------------------------
+
+model Result {
+  id               String       @id @default(cuid())
+  organizationId   String
+  studentId        String
+  classSubjectId   String
+  termId           String
+  version          Int          @default(1)
+  score            Decimal      @db.Decimal(6, 2)
+  letterGrade      String?
+  breakdown        Json
+  comment          String?
+  publishedAt      DateTime     @default(now())
+  publishedById    String
+  supersededAt     DateTime?
+  supersededById   String?
+  correctionReason String?
+  createdAt        DateTime     @default(now())
+
+  organization     Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  student          Student      @relation(fields: [studentId], references: [id], onDelete: Restrict)
+  classSubject     ClassSubject @relation(fields: [classSubjectId], references: [id], onDelete: Restrict)
+  term             Term         @relation(fields: [termId], references: [id], onDelete: Restrict)
+  supersededBy     Result?      @relation("ResultCorrections", fields: [supersededById], references: [id], onDelete: SetNull)
+  correctedResults Result[]     @relation("ResultCorrections")
+
+  @@unique([studentId, classSubjectId, termId, version])
+  @@index([organizationId, termId, classSubjectId])
+}
+
+// -----------------------------------------------------------------------------
+// Platform: AuditLog
+// -----------------------------------------------------------------------------
+
+model AuditLog {
+  id             String       @id @default(cuid())
+  organizationId String
+  actorUserId    String?
+  action         String
+  resourceType   String
+  resourceId     String
+  before         Json?
+  after          Json?
+  reason         String?
+  ipAddress      String?
+  userAgent      String?
+  requestId      String?
+  createdAt      DateTime     @default(now())
+
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  actor          User?        @relation(fields: [actorUserId], references: [id], onDelete: SetNull)
+
+  @@index([organizationId, resourceType, resourceId, createdAt])
+  @@index([organizationId, actorUserId, createdAt])
+}
+
+// -----------------------------------------------------------------------------
+// Enums
+// -----------------------------------------------------------------------------
 
 enum Locale {
   EN
@@ -207,4 +753,64 @@ enum UsageMetric {
   TEACHERS
   STORAGE_MB
   AI_REQUESTS
+}
+
+enum Gender {
+  MALE
+  FEMALE
+}
+
+enum Relationship {
+  FATHER
+  MOTHER
+  GUARDIAN
+  OTHER
+}
+
+enum ProfileStatus {
+  ACTIVE
+  INACTIVE
+  GRADUATED
+  TRANSFERRED
+  ARCHIVED
+}
+
+enum AcademicYearStatus {
+  UPCOMING
+  ACTIVE
+  CLOSED
+}
+
+enum EnrollmentStatus {
+  ACTIVE
+  TRANSFERRED
+  WITHDRAWN
+  COMPLETED
+}
+
+enum LessonStatus {
+  DRAFT
+  PUBLISHED
+}
+
+enum AssignmentStatus {
+  DRAFT
+  PUBLISHED
+  CLOSED
+}
+
+enum SubmissionStatus {
+  SUBMITTED
+  LATE
+  GRADED
+  RETURNED
+}
+
+enum FileContext {
+  AVATAR
+  LESSON_RESOURCE
+  ASSIGNMENT_RESOURCE
+  SUBMISSION
+  ANNOUNCEMENT
+  DOCUMENT
 }
