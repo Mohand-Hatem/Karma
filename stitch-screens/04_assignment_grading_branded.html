@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+
+<html class="light" dir="ltr" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Karma - Assignment Submissions</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<style type="text/css">
+    /* Internal Styles for Custom Elements or Animations */
+    .drawer-enter { transform: translateX(100%); }
+    .drawer-enter-active { transform: translateX(0); transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1); }
+    
+    /* Ensuring proper height for drawer content */
+    .drawer-content-height { height: calc(100vh - 64px - 80px); } /* Header height - Footer height */
+  </style>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+                  "surface-container-high": "#e7e7f3",
+                  "app-bg": "#f8fafc",
+                  "on-tertiary": "#ffffff",
+                  "on-tertiary-fixed": "#360f00",
+                  "outline": "#737686",
+                  "secondary": "#515f74",
+                  "outline-variant": "#c3c6d7",
+                  "surface-bright": "#faf8ff",
+                  "text-primary": "#0f172a",
+                  "surface-subtle": "#f1f5f9",
+                  "tertiary-fixed-dim": "#ffb596",
+                  "on-error": "#ffffff",
+                  "primary-fixed-dim": "#b4c5ff",
+                  "on-secondary-fixed-variant": "#3a485b",
+                  "surface-container-low": "#f3f3fe",
+                  "background": "#faf8ff",
+                  "surface-dim": "#d9d9e5",
+                  "inverse-primary": "#b4c5ff",
+                  "text-muted": "#64748b",
+                  "inverse-surface": "#2e3039",
+                  "secondary-fixed": "#d5e3fc",
+                  "warning": "#f59e0b",
+                  "on-secondary": "#ffffff",
+                  "on-tertiary-container": "#ffede6",
+                  "tertiary": "#943700",
+                  "on-surface": "#191b23",
+                  "on-primary-fixed": "#00174b",
+                  "on-secondary-fixed": "#0d1c2e",
+                  "primary": "#004ac6",
+                  "on-surface-variant": "#434655",
+                  "primary-container": "#2563eb",
+                  "secondary-fixed-dim": "#b9c7df",
+                  "surface": "#ffffff",
+                  "surface-container-highest": "#e1e2ed",
+                  "on-secondary-container": "#57657a",
+                  "on-primary-fixed-variant": "#003ea8",
+                  "surface-container-lowest": "#ffffff",
+                  "on-tertiary-fixed-variant": "#7d2d00",
+                  "error": "#ef4444",
+                  "on-error-container": "#93000a",
+                  "tertiary-container": "#bc4800",
+                  "on-primary-container": "#eeefff",
+                  "surface-tint": "#0053db",
+                  "tertiary-fixed": "#ffdbcd",
+                  "secondary-container": "#d5e3fc",
+                  "info": "#6366f1",
+                  "surface-variant": "#e1e2ed",
+                  "surface-container": "#ededf9",
+                  "success": "#10b981",
+                  "inverse-on-surface": "#f0f0fb",
+                  "primary-fixed": "#dbe1ff",
+                  "on-background": "#191b23",
+                  "on-primary": "#ffffff",
+                  "error-container": "#ffdad6"
+          },
+          "borderRadius": {
+                  "DEFAULT": "0.25rem",
+                  "lg": "0.5rem",
+                  "xl": "0.75rem",
+                  "full": "9999px"
+          },
+          "spacing": {
+                  "space-4": "16px",
+                  "space-8": "32px",
+                  "space-2": "8px",
+                  "space-3": "12px",
+                  "space-1": "4px",
+                  "space-6": "24px",
+                  "space-12": "48px"
+          },
+          "fontFamily": {
+                  "h1-mobile": ["inter"],
+                  "body-default": ["inter"],
+                  "caption": ["inter"],
+                  "h1": ["inter"],
+                  "h3": ["inter"],
+                  "display-mobile": ["inter"],
+                  "body-medium": ["inter"],
+                  "micro": ["inter"],
+                  "h2": ["inter"],
+                  "display": ["inter"]
+          },
+          "fontSize": {
+                  "h1-mobile": ["22px", { "lineHeight": "1.3", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+                  "body-default": ["14px", { "lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400" }],
+                  "caption": ["12px", { "lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                  "h1": ["24px", { "lineHeight": "1.3", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+                  "h3": ["15px", { "lineHeight": "1.4", "letterSpacing": "0", "fontWeight": "600" }],
+                  "display-mobile": ["28px", { "lineHeight": "1.25", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                  "body-medium": ["14px", { "lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "500" }],
+                  "micro": ["11px", { "lineHeight": "1.3", "letterSpacing": "0.02em", "fontWeight": "600" }],
+                  "h2": ["18px", { "lineHeight": "1.35", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                  "display": ["32px", { "lineHeight": "1.25", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+          }
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-app-bg text-text-primary font-body-default min-h-screen flex overflow-hidden">
+<!-- Side Navigation (Shared Component) -->
+<aside class="w-64 h-screen sticky top-0 left-0 bg-surface border-r border-outline-variant flex flex-col h-full py-space-6 px-space-4 hidden lg:flex flex-shrink-0 z-10">
+<div class="mb-space-8 px-space-2">
+<img alt="Karma SaaS" class="h-12 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrLvbc6fj_ArUbGOCHrGGXjhQeAwWjyVx-49zF34JGCBMEW4M9TY_bj7Impm9-s3HaViNfbaacr47vDSjCqpa_EPubwGRgGcEycorDZaI98yAOOZz8OIEFyQt_bmbXcgNfCZN0hAVrQiuFSfGxGNXHRbzLmwBJfYtxVFgUiFkl3fd12SpCBz83W2dAOjicjbI8PrbPgqC9hSPvreO0Evdm9nVaGhi10r6luOp5SAWxT4CnRRQ_5O52aFTJjNRZvxIBOgY"/>
+<p class="text-caption font-caption text-text-muted mt-1">AY 2023-24</p>
+</div>
+<nav class="flex-1 flex flex-col gap-1">
+<a class="flex items-center gap-space-3 px-space-3 py-2 rounded-md hover:bg-surface-subtle transition-colors text-text-muted" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">dashboard</span>
+<span class="text-body-medium font-body-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-space-3 px-space-3 py-2 rounded-md hover:bg-surface-subtle transition-colors text-text-muted" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">school</span>
+<span class="text-body-medium font-body-medium">Academic</span>
+</a>
+<a class="flex items-center gap-space-3 px-space-3 py-2 rounded-md hover:bg-surface-subtle transition-colors text-text-muted" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">group</span>
+<span class="text-body-medium font-body-medium">Student Info</span>
+</a>
+<a class="flex items-center gap-space-3 px-space-3 py-2 rounded-md hover:bg-surface-subtle transition-colors text-text-muted" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">calendar_today</span>
+<span class="text-body-medium font-body-medium">Attendance</span>
+</a>
+<!-- Active Tab -->
+<a class="flex items-center gap-space-3 px-space-3 py-2 rounded-md bg-surface-subtle text-primary font-bold" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">grade</span>
+<span class="text-body-medium font-body-medium">Gradebook</span>
+</a>
+<a class="flex items-center gap-space-3 px-space-3 py-2 rounded-md hover:bg-surface-subtle transition-colors text-text-muted" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">settings</span>
+<span class="text-body-medium font-body-medium">Settings</span>
+</a>
+</nav>
+<div class="mt-auto pt-space-4 border-t border-outline-variant flex flex-col gap-1">
+<button class="w-full bg-primary-container text-on-primary-container hover:bg-primary transition-colors py-2 px-space-4 rounded-md text-body-medium font-body-medium mb-space-4 scale-98 active:scale-95 duration-150">
+        Quick Action
+      </button>
+<a class="flex items-center gap-space-3 px-space-3 py-2 rounded-md hover:bg-surface-subtle transition-colors text-text-muted" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">help</span>
+<span class="text-caption font-caption">Help Center</span>
+</a>
+<a class="flex items-center gap-space-3 px-space-3 py-2 rounded-md hover:bg-surface-subtle transition-colors text-text-muted" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">support_agent</span>
+<span class="text-caption font-caption">Support</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col min-w-0 relative">
+<!-- Top App Bar (Shared Component - Web Active) -->
+<header class="docked full-width top-0 sticky z-40 bg-surface/80 backdrop-blur-md border-b border-outline-variant flex justify-between items-center h-16 px-space-6 w-full hidden md:flex flex-shrink-0">
+<div class="flex items-center gap-space-8">
+<!-- Search omitted for spacing/simplicity as instructed to focus on right drawer, but maintaining layout structure -->
+<div class="relative w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-[20px]">search</span>
+<input class="w-full pl-10 pr-4 py-1.5 bg-surface-subtle border-none rounded-md text-body-medium focus:ring-2 focus:ring-primary-500/20 text-text-primary placeholder-text-muted transition-all duration-200 ease-in-out" placeholder="Search (⌘K)" type="text"/>
+</div>
+</div>
+<nav class="flex gap-space-6">
+<a class="text-caption font-caption text-text-muted hover:text-primary transition-all duration-200 ease-in-out" href="#">Directory</a>
+<a class="text-caption font-caption text-text-muted hover:text-primary transition-all duration-200 ease-in-out" href="#">Calendar</a>
+<a class="text-caption font-caption text-text-muted hover:text-primary transition-all duration-200 ease-in-out" href="#">Reports</a>
+</nav>
+<div class="flex items-center gap-space-4">
+<button class="text-text-muted hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-caption font-caption font-semibold text-text-muted hover:text-primary transition-colors">EN/AR</button>
+<button class="bg-primary text-on-primary hover:bg-primary-container px-space-4 py-1.5 rounded-md text-body-medium font-body-medium transition-all duration-200 ease-in-out">
+          Create New
+        </button>
+<img alt="User Avatar" class="w-8 h-8 rounded-full border border-outline-variant ml-space-2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCq9-_n9_2vty_mS1X7qKUicm8L348VHnuhSHxsVi5DMSDew4W5CzP496EfPgTyYWwWXTy-7osWaiYMd_C3H3_cc-GibCPgXRy5PHhGOfBxwal6PlF9fhOpm-UwPwqbDg35vmHIiovmFIAxiXRsmtW3PdHzWPKZfITmy2IYMpFZiLWCggQ5kQf3lap7BvRzt5QfbpEP5mPETGa3UiEXSa9qE5IPjDWC0qt_e1WmJgjH2yqYCrgfQQzBhA"/>
+</div>
+</header>
+<!-- Canvas: Assignments Table (Background) -->
+<div class="flex-1 overflow-auto p-space-6 md:p-space-8">
+<div class="flex justify-between items-end mb-space-6">
+<div>
+<nav class="flex text-caption font-caption text-text-muted mb-2">
+<a class="hover:text-primary" href="#">Gradebook</a>
+<span class="mx-2">/</span>
+<a class="hover:text-primary" href="#">Physics 101</a>
+<span class="mx-2">/</span>
+<span class="text-text-primary">Lab Reports</span>
+</nav>
+<h2 class="text-display font-display text-text-primary">Physics Lab Report #3: Newton's Laws</h2>
+<p class="text-body-medium font-body-medium text-text-muted mt-1">Due: Oct 24, 2023 • 32 Students • Weight: 25%</p>
+</div>
+<div class="flex gap-space-3">
+<button class="px-space-4 py-2 border border-outline-variant rounded-md text-body-medium font-body-medium text-text-primary hover:bg-surface-subtle transition-colors flex items-center gap-2 bg-surface">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+            Filter
+          </button>
+<button class="px-space-4 py-2 bg-primary text-on-primary rounded-md text-body-medium font-body-medium hover:bg-primary-container transition-colors flex items-center gap-2 shadow-sm">
+<span class="material-symbols-outlined text-[18px]">publish</span>
+            Publish All Grades
+          </button>
+</div>
+</div>
+<!-- Main Table Card -->
+<div class="bg-surface rounded-lg border border-outline-variant shadow-sm overflow-hidden">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant">
+<th class="py-space-3 px-space-4 text-micro font-micro text-text-muted uppercase tracking-wider w-10">
+<input class="rounded border-outline-variant text-primary focus:ring-primary-500/20" type="checkbox"/>
+</th>
+<th class="py-space-3 px-space-4 text-micro font-micro text-text-muted uppercase tracking-wider">Student Name</th>
+<th class="py-space-3 px-space-4 text-micro font-micro text-text-muted uppercase tracking-wider">Submission Date</th>
+<th class="py-space-3 px-space-4 text-micro font-micro text-text-muted uppercase tracking-wider">Status</th>
+<th class="py-space-3 px-space-4 text-micro font-micro text-text-muted uppercase tracking-wider">Score</th>
+<th class="py-space-3 px-space-4 text-micro font-micro text-text-muted uppercase tracking-wider text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Row 1: Graded -->
+<tr class="hover:bg-surface-subtle transition-colors group">
+<td class="py-space-3 px-space-4">
+<input class="rounded border-outline-variant text-primary focus:ring-primary-500/20" type="checkbox"/>
+</td>
+<td class="py-space-3 px-space-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center text-caption font-bold">AK</div>
+<span class="text-body-medium font-body-medium text-text-primary font-medium">Ahmad Khalid (10A)</span>
+</div>
+</td>
+<td class="py-space-3 px-space-4 text-body-default font-body-default text-text-muted">Oct 23, 14:30</td>
+<td class="py-space-3 px-space-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-micro font-micro bg-surface-variant text-on-surface-variant font-medium">
+                  Graded
+                </span>
+</td>
+<td class="py-space-3 px-space-4 text-body-medium font-body-medium text-text-primary font-semibold">92 / 100</td>
+<td class="py-space-3 px-space-4 text-right">
+<button class="text-text-muted hover:text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</td>
+</tr>
+<!-- Row 2: Selected / Active (Zainab) -->
+<tr class="bg-secondary-fixed/30 border-l-2 border-l-primary group">
+<td class="py-space-3 px-space-4">
+<input checked="" class="rounded border-outline-variant text-primary focus:ring-primary-500/20" type="checkbox"/>
+</td>
+<td class="py-space-3 px-space-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-tertiary-container text-on-tertiary-container flex items-center justify-center text-caption font-bold">ZA</div>
+<span class="text-body-medium font-body-medium text-text-primary font-medium">Zainab Al-Fassi (10A)</span>
+</div>
+</td>
+<td class="py-space-3 px-space-4 text-body-default font-body-default text-text-muted">Oct 24, 18:00</td>
+<td class="py-space-3 px-space-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-micro font-micro bg-warning/20 text-warning font-medium">
+                  Late
+                </span>
+</td>
+<td class="py-space-3 px-space-4 text-body-medium font-body-medium text-text-muted italic">Draft (88)</td>
+<td class="py-space-3 px-space-4 text-right">
+<button class="text-primary hover:text-primary-container transition-colors">
+<span class="material-symbols-outlined">edit_square</span>
+</button>
+</td>
+</tr>
+<!-- Row 3: Submitted (Needs Grading) -->
+<tr class="hover:bg-surface-subtle transition-colors group">
+<td class="py-space-3 px-space-4">
+<input class="rounded border-outline-variant text-primary focus:ring-primary-500/20" type="checkbox"/>
+</td>
+<td class="py-space-3 px-space-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-fixed text-on-primary-fixed flex items-center justify-center text-caption font-bold">FA</div>
+<span class="text-body-medium font-body-medium text-text-primary font-medium">Faisal Abdullah (10B)</span>
+</div>
+</td>
+<td class="py-space-3 px-space-4 text-body-default font-body-default text-text-muted">Oct 24, 09:15</td>
+<td class="py-space-3 px-space-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-micro font-micro bg-info/10 text-info font-medium">
+                  Submitted
+                </span>
+</td>
+<td class="py-space-3 px-space-4 text-body-medium font-body-medium text-text-muted italic">- / 100</td>
+<td class="py-space-3 px-space-4 text-right">
+<button class="text-text-muted hover:text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</td>
+</tr>
+<!-- Row 4: Missing -->
+<tr class="hover:bg-surface-subtle transition-colors group">
+<td class="py-space-3 px-space-4">
+<input class="rounded border-outline-variant text-primary focus:ring-primary-500/20" type="checkbox"/>
+</td>
+<td class="py-space-3 px-space-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-variant text-on-surface-variant flex items-center justify-center text-caption font-bold">SM</div>
+<span class="text-body-medium font-body-medium text-text-primary font-medium">Sara Mansour (10A)</span>
+</div>
+</td>
+<td class="py-space-3 px-space-4 text-body-default font-body-default text-text-muted">-</td>
+<td class="py-space-3 px-space-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-micro font-micro bg-error/10 text-error font-medium">
+                  Missing
+                </span>
+</td>
+<td class="py-space-3 px-space-4 text-body-medium font-body-medium text-text-muted italic">0 / 100</td>
+<td class="py-space-3 px-space-4 text-right">
+<button class="text-text-muted hover:text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Backdrop Overlay for Drawer -->
+<div class="absolute inset-0 bg-text-primary/40 backdrop-blur-[2px] z-40 transition-opacity"></div>
+<!-- Slide-Over Drawer (Right Side) -->
+<aside class="absolute top-0 right-0 h-full w-full max-w-[600px] bg-surface shadow-2xl border-l border-outline-variant z-50 flex flex-col drawer-enter-active">
+<!-- Drawer Header -->
+<header class="h-16 px-space-6 border-b border-outline-variant flex items-center justify-between flex-shrink-0 bg-surface">
+<div class="flex flex-col justify-center">
+<div class="flex items-center gap-3">
+<h3 class="text-h2 font-h2 text-text-primary">Zainab Al-Fassi (10A)</h3>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-micro font-micro bg-warning/20 text-warning-800 font-medium">
+              LATE (Submitted 2h after due date)
+            </span>
+</div>
+</div>
+<button class="p-1 rounded-md text-text-muted hover:bg-surface-subtle hover:text-text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500/20">
+<span class="material-symbols-outlined">close</span>
+</button>
+</header>
+<!-- Drawer Body (Scrollable) -->
+<div class="flex-1 overflow-y-auto drawer-content-height p-space-6 flex flex-col gap-space-8 bg-surface-bright">
+<!-- Section 1: Submitted Files -->
+<section>
+<h4 class="text-h3 font-h3 text-text-primary mb-space-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-text-muted">attachment</span>
+            Submitted Files
+          </h4>
+<div class="p-space-3 border border-outline-variant rounded-lg bg-surface flex items-center justify-between hover:border-primary/50 transition-colors group">
+<div class="flex items-center gap-space-3">
+<div class="w-10 h-10 rounded bg-error/10 text-error flex items-center justify-center">
+<span class="material-symbols-outlined">picture_as_pdf</span>
+</div>
+<div>
+<p class="text-body-medium font-body-medium text-text-primary group-hover:text-primary transition-colors">physics_lab_report_zainab.pdf</p>
+<p class="text-caption font-caption text-text-muted">2.4 MB • Oct 24, 18:00</p>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="p-2 text-text-muted hover:text-primary hover:bg-surface-subtle rounded transition-colors" title="Preview">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+<button class="p-2 text-text-muted hover:text-primary hover:bg-surface-subtle rounded transition-colors" title="Download">
+<span class="material-symbols-outlined">download</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Section 2: Student Comments -->
+<section>
+<h4 class="text-h3 font-h3 text-text-primary mb-space-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-text-muted">chat</span>
+            Student Comments
+          </h4>
+<blockquote class="pl-space-4 py-space-2 border-l-4 border-primary-fixed-dim bg-surface p-space-3 rounded-r-lg text-body-default font-body-default text-on-surface-variant italic">
+            "I completed the experiment on Tuesday, apologies for the slight delay in submission."
+          </blockquote>
+</section>
+<!-- Divider -->
+<hr class="border-outline-variant"/>
+<!-- Section 3: Grading & Evaluation -->
+<section>
+<h4 class="text-h3 font-h3 text-text-primary mb-space-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-text-muted">grading</span>
+            Grading &amp; Evaluation
+          </h4>
+<div class="grid grid-cols-2 gap-space-6 mb-space-6">
+<!-- Score Input -->
+<div class="flex flex-col gap-2">
+<label class="text-caption font-caption text-text-muted font-medium">Final Score</label>
+<div class="flex items-center gap-3">
+<div class="relative w-24">
+<input class="w-full pl-3 pr-2 py-2 border border-outline-variant rounded-md text-h2 font-h2 text-text-primary focus:ring-2 focus:ring-primary-500/20 focus:border-primary text-center bg-surface" type="number" value="88"/>
+</div>
+<span class="text-body-medium font-body-medium text-text-muted">/ 100</span>
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-caption font-caption bg-success/10 text-success font-semibold ml-2">
+                  88%
+                </span>
+</div>
+</div>
+<!-- Category -->
+<div class="flex flex-col gap-2">
+<label class="text-caption font-caption text-text-muted font-medium">Grade Category</label>
+<div class="py-2.5 px-3 border border-outline-variant rounded-md bg-surface-container-lowest text-body-medium font-body-medium text-text-primary flex items-center justify-between">
+<span>Lab Work</span>
+<span class="text-caption text-text-muted">Weight: 25%</span>
+</div>
+</div>
+</div>
+<!-- Rubric Checklist -->
+<div class="bg-surface border border-outline-variant rounded-lg p-space-4">
+<h5 class="text-caption font-caption text-text-primary uppercase tracking-wider mb-space-3 font-semibold">Rubric Criteria</h5>
+<ul class="flex flex-col gap-space-3">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-success mt-0.5 text-[18px]">check_circle</span>
+<div class="flex-1">
+<span class="text-body-medium font-body-medium text-text-primary">Hypothesis Formulation</span>
+</div>
+<span class="text-caption text-text-muted">10/10</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-success mt-0.5 text-[18px]">check_circle</span>
+<div class="flex-1">
+<span class="text-body-medium font-body-medium text-text-primary">Methodology &amp; Procedure</span>
+</div>
+<span class="text-caption text-text-muted">20/20</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-success mt-0.5 text-[18px]">check_circle</span>
+<div class="flex-1">
+<span class="text-body-medium font-body-medium text-text-primary">Data Analysis &amp; Graphs</span>
+</div>
+<span class="text-caption text-text-muted">35/40</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-warning mt-0.5 text-[18px]">error</span>
+<div class="flex-1">
+<span class="text-body-medium font-body-medium text-text-primary">Conclusion &amp; Evaluation</span>
+<p class="text-caption text-text-muted mt-0.5">Needs more detail on error sources.</p>
+</div>
+<span class="text-caption text-text-muted">23/30</span>
+</li>
+</ul>
+</div>
+</section>
+<!-- Section 4: Teacher Feedback -->
+<section class="pb-space-8">
+<h4 class="text-h3 font-h3 text-text-primary mb-space-3 flex items-center justify-between">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-text-muted">rate_review</span>
+              Teacher Feedback
+            </span>
+</h4>
+<div class="border border-outline-variant rounded-lg overflow-hidden bg-surface focus-within:ring-2 focus-within:ring-primary-500/20 focus-within:border-primary transition-all">
+<!-- Formatting toolbar (simplified) -->
+<div class="bg-surface-container-low border-b border-outline-variant px-2 py-1.5 flex gap-1">
+<button class="p-1 rounded text-text-muted hover:bg-surface-variant transition-colors"><span class="material-symbols-outlined text-[18px]">format_bold</span></button>
+<button class="p-1 rounded text-text-muted hover:bg-surface-variant transition-colors"><span class="material-symbols-outlined text-[18px]">format_italic</span></button>
+<button class="p-1 rounded text-text-muted hover:bg-surface-variant transition-colors"><span class="material-symbols-outlined text-[18px]">format_list_bulleted</span></button>
+</div>
+<textarea class="w-full p-space-3 border-none resize-y min-h-[120px] text-body-default font-body-default text-text-primary focus:ring-0 bg-transparent" placeholder="Write constructive feedback here...">Solid grasp of the concepts, Zainab. Your methodology was clear and easy to follow.
+
+However, your conclusion lacked a deep dive into the potential sources of error during the friction measurement phase. Next time, try to quantify how much those errors might have skewed your final results.</textarea>
+</div>
+<!-- Quick Snippets -->
+<div class="mt-space-3">
+<span class="text-micro font-micro text-text-muted uppercase tracking-wider mb-2 block">Quick Insert</span>
+<div class="flex flex-wrap gap-2">
+<button class="px-2.5 py-1 rounded-full border border-outline-variant bg-surface text-caption font-caption text-text-secondary hover:border-primary hover:text-primary transition-colors">
+                Great effort!
+              </button>
+<button class="px-2.5 py-1 rounded-full border border-outline-variant bg-surface text-caption font-caption text-text-secondary hover:border-primary hover:text-primary transition-colors">
+                Check calculations in section 3
+              </button>
+<button class="px-2.5 py-1 rounded-full border border-outline-variant bg-surface text-caption font-caption text-text-secondary hover:border-primary hover:text-primary transition-colors">
+                Improve graph labeling
+              </button>
+</div>
+</div>
+</section>
+</div>
+<!-- Sticky Drawer Footer -->
+<footer class="h-20 border-t border-outline-variant bg-surface px-space-6 flex items-center justify-between flex-shrink-0 z-10 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
+<button class="text-body-medium font-body-medium text-text-muted hover:text-primary transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">undo</span>
+          Reopen for Resubmission
+        </button>
+<div class="flex items-center gap-space-3">
+<button class="px-space-4 py-2 border border-outline-variant rounded-md text-body-medium font-body-medium text-text-primary hover:bg-surface-subtle transition-colors">
+            Save Draft
+          </button>
+<button class="px-space-6 py-2 bg-primary text-on-primary rounded-md text-body-medium font-body-medium font-medium hover:bg-primary-container transition-colors shadow-sm">
+            Publish Grade
+          </button>
+</div>
+</footer>
+</aside>
+</main>
+</body></html>

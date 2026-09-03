@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+
+<html class="light" dir="ltr" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Karma - Attendance Register</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "surface-container": "#ededf9",
+                "outline": "#737686",
+                "surface-dim": "#d9d9e5",
+                "secondary-fixed-dim": "#b9c7df",
+                "on-primary-fixed-variant": "#003ea8",
+                "success": "#10b981",
+                "on-tertiary-container": "#ffede6",
+                "on-error": "#ffffff",
+                "primary-fixed": "#dbe1ff",
+                "inverse-on-surface": "#f0f0fb",
+                "on-background": "#191b23",
+                "info": "#6366f1",
+                "surface-container-lowest": "#ffffff",
+                "on-primary-fixed": "#00174b",
+                "on-secondary": "#ffffff",
+                "inverse-surface": "#2e3039",
+                "tertiary-fixed-dim": "#ffb596",
+                "error": "#ef4444",
+                "tertiary": "#943700",
+                "error-container": "#ffdad6",
+                "text-primary": "#0f172a",
+                "surface-container-highest": "#e1e2ed",
+                "on-secondary-fixed": "#0d1c2e",
+                "on-tertiary-fixed-variant": "#7d2d00",
+                "primary-container": "#2563eb",
+                "surface-variant": "#e1e2ed",
+                "app-bg": "#f8fafc",
+                "primary-fixed-dim": "#b4c5ff",
+                "surface-tint": "#0053db",
+                "text-muted": "#64748b",
+                "outline-variant": "#c3c6d7",
+                "on-tertiary": "#ffffff",
+                "surface-container-high": "#e7e7f3",
+                "surface-subtle": "#f1f5f9",
+                "on-surface": "#191b23",
+                "on-tertiary-fixed": "#360f00",
+                "inverse-primary": "#b4c5ff",
+                "surface": "#ffffff",
+                "warning": "#f59e0b",
+                "background": "#faf8ff",
+                "secondary-fixed": "#d5e3fc",
+                "surface-bright": "#faf8ff",
+                "on-secondary-fixed-variant": "#3a485b",
+                "on-secondary-container": "#57657a",
+                "surface-container-low": "#f3f3fe",
+                "primary": "#004ac6",
+                "tertiary-fixed": "#ffdbcd",
+                "on-error-container": "#93000a",
+                "tertiary-container": "#bc4800",
+                "secondary": "#515f74",
+                "on-primary-container": "#eeefff",
+                "on-surface-variant": "#434655",
+                "secondary-container": "#d5e3fc",
+                "on-primary": "#ffffff"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+        },
+        "spacing": {
+                "space-1": "4px",
+                "space-6": "24px",
+                "space-3": "12px",
+                "space-2": "8px",
+                "space-8": "32px",
+                "space-12": "48px",
+                "space-4": "16px"
+        },
+        "fontFamily": {
+                "display-mobile": [
+                        "inter"
+                ],
+                "h2": [
+                        "inter"
+                ],
+                "h1-mobile": [
+                        "inter"
+                ],
+                "caption": [
+                        "inter"
+                ],
+                "body-default": [
+                        "inter"
+                ],
+                "h1": [
+                        "inter"
+                ],
+                "h3": [
+                        "inter"
+                ],
+                "micro": [
+                        "inter"
+                ],
+                "body-medium": [
+                        "inter"
+                ],
+                "display": [
+                        "inter"
+                ]
+        },
+        "fontSize": {
+                "display-mobile": [
+                        "28px",
+                        {
+                                "lineHeight": "1.25",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "h2": [
+                        "18px",
+                        {
+                                "lineHeight": "1.35",
+                                "letterSpacing": "-0.01em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "h1-mobile": [
+                        "22px",
+                        {
+                                "lineHeight": "1.3",
+                                "letterSpacing": "-0.015em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "caption": [
+                        "12px",
+                        {
+                                "lineHeight": "1.4",
+                                "letterSpacing": "0.01em",
+                                "fontWeight": "500"
+                        }
+                ],
+                "body-default": [
+                        "14px",
+                        {
+                                "lineHeight": "1.5",
+                                "letterSpacing": "0",
+                                "fontWeight": "400"
+                        }
+                ],
+                "h1": [
+                        "24px",
+                        {
+                                "lineHeight": "1.3",
+                                "letterSpacing": "-0.015em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "h3": [
+                        "15px",
+                        {
+                                "lineHeight": "1.4",
+                                "letterSpacing": "0",
+                                "fontWeight": "600"
+                        }
+                ],
+                "micro": [
+                        "11px",
+                        {
+                                "lineHeight": "1.3",
+                                "letterSpacing": "0.02em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "body-medium": [
+                        "14px",
+                        {
+                                "lineHeight": "1.5",
+                                "letterSpacing": "0",
+                                "fontWeight": "500"
+                        }
+                ],
+                "display": [
+                        "32px",
+                        {
+                                "lineHeight": "1.25",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "700"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+</head>
+<body class="bg-app-bg text-text-primary antialiased flex h-screen overflow-hidden font-body-default text-body-default">
+<!-- SideNavBar -->
+<nav class="bg-surface dark:bg-inverse-surface border-r border-outline-variant dark:border-outline w-64 h-screen sticky top-0 left-0 flex flex-col py-space-6 px-space-4 hidden lg:flex flex-shrink-0 z-10">
+<div class="mb-space-8 flex items-center gap-space-3 px-space-2">
+<div class="w-10 h-10 flex items-center justify-center">
+<img alt="Karma Logo" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiI_QhPnosfbEsns2KkmBiIcmEpbgNqL3nGGvjUh3Y8CRC487UCfHNMFQMqNxPK82y3yIkWA9MVH-_M3UTk1HodXTb0gWO7kFECPiuq2Rf-4X6gOBCvrweHc7iLjWRokL0Nx352i9KWKMx4sl7Np6PvYaXxRTLBNTDQ38gNtVZZ3PB9bFncS9IUOeMXzDctrwzpiaBW8PSUCNx33dvzibfVokHJEnVatYmJbnJFmOXze9ZPn34t9SCfrRVpwVVESeA_f4"/>
+</div>
+<div>
+<h1 class="text-h2 font-h2 font-bold text-primary dark:text-inverse-primary">Karma SaaS</h1>
+<p class="text-caption font-caption text-text-muted">AY 2023-24</p>
+</div>
+</div>
+<button class="mb-space-6 w-full h-[38px] bg-primary text-on-primary rounded-md flex items-center justify-center gap-space-2 hover:bg-surface-tint transition-colors scale-98 active:scale-95 duration-150">
+<span class="material-symbols-outlined text-[18px]">add</span>
+<span class="text-body-medium font-body-medium">Quick Action</span>
+</button>
+<ul class="flex flex-col gap-space-1 flex-grow overflow-y-auto">
+<li>
+<a class="flex items-center gap-space-3 px-space-3 py-space-2 rounded-md text-text-muted dark:text-on-surface-variant hover:bg-surface-subtle dark:hover:bg-surface-container-high transition-colors scale-98 active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-body-medium font-body-medium">Dashboard</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-space-3 px-space-3 py-space-2 rounded-md text-text-muted dark:text-on-surface-variant hover:bg-surface-subtle dark:hover:bg-surface-container-high transition-colors scale-98 active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="school">school</span>
+<span class="text-body-medium font-body-medium">Academic</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-space-3 px-space-3 py-space-2 rounded-md text-text-muted dark:text-on-surface-variant hover:bg-surface-subtle dark:hover:bg-surface-container-high transition-colors scale-98 active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="text-body-medium font-body-medium">Student Info</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-space-3 px-space-3 py-space-2 rounded-md bg-surface-subtle text-primary dark:text-primary-fixed-dim font-bold transition-colors scale-98 active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today" data-weight="fill" style="font-variation-settings: 'FILL' 1;">calendar_today</span>
+<span class="text-body-medium font-body-medium">Attendance</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-space-3 px-space-3 py-space-2 rounded-md text-text-muted dark:text-on-surface-variant hover:bg-surface-subtle dark:hover:bg-surface-container-high transition-colors scale-98 active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="grade">grade</span>
+<span class="text-body-medium font-body-medium">Gradebook</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-space-3 px-space-3 py-space-2 rounded-md text-text-muted dark:text-on-surface-variant hover:bg-surface-subtle dark:hover:bg-surface-container-high transition-colors scale-98 active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-body-medium font-body-medium">Settings</span>
+</a>
+</li>
+</ul>
+<div class="mt-auto pt-space-4 border-t border-outline-variant">
+<ul class="flex flex-col gap-space-1">
+<li>
+<a class="flex items-center gap-space-3 px-space-3 py-space-2 rounded-md text-text-muted dark:text-on-surface-variant hover:bg-surface-subtle dark:hover:bg-surface-container-high transition-colors scale-98 active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="text-body-medium font-body-medium">Help Center</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-space-3 px-space-3 py-space-2 rounded-md text-text-muted dark:text-on-surface-variant hover:bg-surface-subtle dark:hover:bg-surface-container-high transition-colors scale-98 active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="support_agent">support_agent</span>
+<span class="text-body-medium font-body-medium">Support</span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="flex-1 flex flex-col h-full overflow-hidden">
+<!-- TopNavBar -->
+<header class="bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-md border-b border-outline-variant dark:border-outline docked full-width top-0 sticky z-40 flex justify-between items-center h-16 px-space-6 w-full flex-shrink-0">
+<div class="flex items-center gap-space-6 lg:hidden">
+<span class="text-h1 font-h1 font-black text-text-primary dark:text-on-surface">Karma</span>
+</div>
+<div class="hidden lg:flex items-center gap-space-8 flex-1">
+<div class="relative max-w-md w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted">search</span>
+<input class="w-full h-9 pl-10 pr-4 rounded-md border border-outline-variant bg-surface-subtle text-body-medium focus:ring-2 focus:ring-primary-500/20 focus:border-primary focus:bg-surface outline-none transition-all placeholder:text-text-muted" placeholder="Search students, classes, or staff... (⌘K)" type="text"/>
+</div>
+<nav class="flex items-center gap-space-6">
+<a class="text-text-muted dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-all duration-200 ease-in-out text-caption font-caption" href="#">Directory</a>
+<a class="text-text-muted dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-all duration-200 ease-in-out text-caption font-caption" href="#">Calendar</a>
+<a class="text-text-muted dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-all duration-200 ease-in-out text-caption font-caption" href="#">Reports</a>
+</nav>
+</div>
+<div class="flex items-center gap-space-4">
+<button class="hidden lg:flex px-4 h-9 bg-primary text-on-primary rounded-md items-center justify-center text-body-medium font-body-medium hover:bg-surface-tint transition-colors">
+                    Create New
+                </button>
+<button class="text-text-muted hover:text-primary transition-colors text-caption font-caption">
+                    EN/AR
+                </button>
+<button class="text-text-muted hover:text-primary transition-colors relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-variant border border-outline-variant overflow-hidden cursor-pointer">
+<img alt="User Avatar" class="w-full h-full object-cover" data-alt="A small, professional circular avatar portrait of a modern corporate employee, high key lighting, clean background, head and shoulders, looking forward, subtle depth of field." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAV6m7zkSBu8d93JILMQShO0ExtAyThU5f76WrexyTaGg-7Vz3WHQI2HcaOaBNN1-yIz-Vvr8-8jFLguNxpApnQjnKPbhSyEHnF7gAq0GE6WfavsiFCVJy2gBM59fSHusuiN0CGJFfeK9CaH2RwWw3EylQ6hePGZ2ooBNmrqMMcWmE_y1IxJIhpi0zbXmiuwhcBdRM1mmxQPfABRTLDqkUw-PoO8WjXYC0fIjdZp_qX9mY1eSPHl3tztA"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 overflow-y-auto bg-app-bg relative">
+<div class="max-w-7xl mx-auto px-space-6 py-space-8 pb-32">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-space-8 gap-4">
+<div>
+<h2 class="text-display font-display text-text-primary mb-1">Attendance Register: Grade 10A — Physics <span class="text-h2 font-h2 text-text-muted font-normal">(Period 2: 09:15 – 10:00 AM)</span></h2>
+<div class="flex items-center gap-2 text-body-medium font-body-medium text-text-muted">
+<span class="material-symbols-outlined text-[16px]">calendar_today</span>
+<span>Sunday, Oct 12, 2026</span>
+<span class="px-2 text-outline-variant">|</span>
+<span class="material-symbols-outlined text-[16px]">meeting_room</span>
+<span>Room 204</span>
+<span class="px-2 text-outline-variant">|</span>
+<span class="material-symbols-outlined text-[16px]">person</span>
+<span>Teacher: Ahmed Hassan</span>
+</div>
+</div>
+<div class="bg-success/10 border border-success/20 text-success rounded-lg px-4 py-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">schedule</span>
+<div class="flex flex-col">
+<span class="text-caption font-caption font-bold">24-Hour Teacher Edit Window Active</span>
+<span class="text-micro font-micro opacity-80">(23h 45m remaining)</span>
+</div>
+</div>
+</div>
+<!-- Action Bar -->
+<div class="flex flex-col sm:flex-row justify-between items-center gap-4 mb-space-4">
+<div class="flex items-center gap-3 w-full sm:w-auto">
+<div class="relative w-full sm:w-72">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-[20px]">search</span>
+<input class="w-full h-9 pl-9 pr-4 rounded-md border border-outline-variant bg-surface text-body-default focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all placeholder:text-text-muted shadow-sm" placeholder="Search student by name..." type="text"/>
+</div>
+<button class="h-9 px-3 border border-outline-variant rounded-md bg-surface text-text-primary hover:bg-surface-subtle flex items-center gap-2 text-body-medium font-body-medium shadow-sm transition-colors whitespace-nowrap">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+                            Filter by Status
+                        </button>
+</div>
+<button class="h-9 px-4 bg-primary text-on-primary rounded-md flex items-center gap-2 text-body-medium font-body-medium hover:bg-primary-container shadow-sm transition-colors whitespace-nowrap w-full sm:w-auto justify-center">
+<span class="material-symbols-outlined text-[18px]">done_all</span>
+                        Mark All Present
+                    </button>
+</div>
+<!-- Interactive Roster Table -->
+<div class="bg-surface border border-outline-variant rounded-xl shadow-sm overflow-hidden flex flex-col h-[600px]">
+<div class="overflow-x-auto flex-grow">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-subtle border-b border-outline-variant sticky top-0 z-10 text-micro font-micro text-text-muted uppercase tracking-wider">
+<tr>
+<th class="py-3 px-4 w-12 text-center">#</th>
+<th class="py-3 px-4 min-w-[250px]">Student Photo &amp; Name</th>
+<th class="py-3 px-4 w-32">Code</th>
+<th class="py-3 px-4 w-[280px]">Status</th>
+<th class="py-3 px-4 w-48">Note</th>
+<th class="py-3 px-4 w-32 text-right">History</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant text-body-default font-body-default">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-subtle/50 transition-colors group">
+<td class="py-3 px-4 text-center text-text-muted">1</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-variant overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A clear, professional headshot photo of a young male student, 15 years old, wearing a smart navy blue school uniform blazer and white shirt, neutral background, soft portrait lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEkbgkq13hAdIFOIJKTmNUhy0chmGa8DcVY1xmCo43mf0R72Oed1DU7YNdnVWyMhKXlDOTBzrCbcjz1MReapqqK4gbQMgiKcwAgwMqbBEYN6djNjCXcz5VyluDJCnxdY31WnOWDdo0bYaolgfGWRiNk46HyVYIqzbM-4HkbISC5Q4aYI-dkmTczTsPuMhSDTutY3u2QUH-7GuHaCrbvdANLAoUCVrCtJFCSWlB4nRDhr1WzLtqRmJ5zg"/>
+</div>
+<div class="flex flex-col">
+<span class="font-medium text-text-primary">Omar Al-Farsi</span>
+<span class="text-caption font-caption text-text-muted">عمر الفارسي</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-4 text-text-muted font-mono text-caption">STD-10042</td>
+<td class="py-3 px-4">
+<div class="flex bg-surface-subtle p-1 rounded-lg border border-outline-variant/50 w-fit">
+<button class="w-10 h-8 rounded-md flex items-center justify-center text-caption font-bold transition-all bg-success text-on-primary shadow-sm" title="Present">P</button>
+<button class="w-10 h-8 rounded-md flex items-center justify-center text-caption font-bold transition-all text-text-muted hover:bg-surface hover:text-text-primary" title="Absent">A</button>
+<button class="w-10 h-8 rounded-md flex items-center justify-center text-caption font-bold transition-all text-text-muted hover:bg-surface hover:text-text-primary" title="Late">L</button>
+<button class="w-10 h-8 rounded-md flex items-center justify-center text-caption font-bold transition-all text-text-muted hover:bg-surface hover:text-text-primary" title="Excused">E</button>
+</div>
+</td>
+<td class="py-3 px-4"></td>
+<td class="py-3 px-4 text-right">
+<span class="inline-flex items-center justify-center w-6 h-6 rounded bg-success/10 text-success text-micro font-bold" title="98% Attendance">98%</span>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-subtle/50 transition-colors group">
+<td class="py-3 px-4 text-center text-text-muted">2</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-variant overflow-hidden flex-shrink-0 flex items-center justify-center text-text-muted font-bold">
+                                                FA
+                                            </div>
+<div class="flex flex-col">
+<span class="font-medium text-text-primary">Faisal Abdullah</span>
+<span class="text-caption font-caption text-text-muted">فيصل عبدالله</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-4 text-text-muted font-mono text-caption">STD-10087</td>
+<td class="py-3 px-4">
+<div class="flex bg-surface-subtle p-1 rounded-lg border border-outline-variant/50 w-fit">
+<button class="w-10 h-8 rounded-md flex items-center justify-center text-caption font-bold transition-all text-text-muted hover:bg-surface hover:text-text-primary" title="Present">P</button>
+<button class="w-10 h-8 rounded-md flex items-center justify-center text-caption font-bold transition-all bg-error text-on-error shadow-sm" title="Absent">A</button>
+<button class="w-10 h-8 rounded-md flex items-center justify-center text-caption font-bold transition-all text-text-muted hover:bg-surface hover:text-text-primary" title="Late">L</button>
+<button class="w-10 h-8 rounded-md flex items-center justify-center text-caption font-bold transition-all text-text-muted hover:bg-surface hover:text-text-primary" title="Excused">E</button>
+</div>
+</td>
+<td class="py-3 px-4">
+<button class="text-primary hover:underline text-caption font-caption flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-[14px]">edit_note</span> Add Note
+                                        </button>
+</td>
+<td class="py-3 px-4 text-right">
+<span class="inline-flex items-center justify-center w-6 h-6 rounded bg-error/10 text-error text-micro font-bold" title="82% Attendance">82%</span>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-subtle/50 transition-colors group">
+<td class="py-3 px-4 text-center text-text-muted">3</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-variant overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A clear, professional headshot photo of a young female student, 15 years old, wearing a smart grey school uniform and white shirt, neutral background, soft portrait lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwJ5aMS05HmcQRYLvs0wa6Z5FNQ1vCM_xZLs-OnmI94Ucy3gLmtqVDrmfQW8wMfvdRf25YeQmBb-mUdaUNGhvlhXBxD37jQTN8D8HEqmw6snNKJvOpyn00iKOYOFeBlW7jbwU2ZZJszJdNmfv0UcNwGhUsxZALD4Yseh4nqYwvUtC7VvXYATLyJ3FaZ6njjk6m8U4rL6aQZmVlVc2eYOB-dZTr_NO0pqO3AIQH5ZLOwp89D9rPn12UMQ"/>
+</div>
+<div class="flex flex-col">
+<span class="font-medium text-text-primary">Layla Mahmoud</span>
+<span class="text-caption font-caption text-text-muted">ليلى محمود</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-4 text-text-muted font-mono text-caption">STD-10102</td>
+<td class="py-3 px-4">
+<div class="flex bg-surface-subtle p-1 rounded-lg border border-outline-variant/50 w-fit">
+<button class="w-10 h-8 rounded-md flex items-center justify-center text-caption font-bold transition-all text-text-muted hover:bg-surface hover:text-text-primary" title="Present">P</button>
+<button class="w-10 h-8 rounded-md flex items-center justify-center text-caption font-bold transition-all text-text-muted hover:bg-surface hover:text-text-primary" title="Absent">A</button>
+<button class="w-10 h-8 rounded-md flex items-center justify-center text-caption font-bold transition-all bg-warning text-white shadow-sm ring-2 ring-warning/30" title="Late">L</button>
+<button class="w-10 h-8 rounded-md flex items-center justify-center text-caption font-bold transition-all text-text-muted hover:bg-surface hover:text-text-primary" title="Excused">E</button>
+</div>
+</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-2">
+<span class="text-caption text-warning font-medium bg-warning/10 px-2 py-0.5 rounded border border-warning/20">12m late</span>
+</div>
+</td>
+<td class="py-3 px-4 text-right">
+<span class="inline-flex items-center justify-center w-6 h-6 rounded bg-warning/10 text-warning text-micro font-bold" title="91% Attendance">91%</span>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-subtle/50 transition-colors group">
+<td class="py-3 px-4 text-center text-text-muted">4</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-variant overflow-hidden flex-shrink-0 flex items-center justify-center text-text-muted font-bold">
+                                                TH
+                                            </div>
+<div class="flex flex-col">
+<span class="font-medium text-text-primary">Tariq Haddad</span>
+<span class="text-caption font-caption text-text-muted">طارق حداد</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-4 text-text-muted font-mono text-caption">STD-10155</td>
+<td class="py-3 px-4">
+<div class="flex bg-surface-subtle p-1 rounded-lg border border-outline-variant/50 w-fit">
+<button class="w-10 h-8 rounded-md flex items-center justify-center text-caption font-bold transition-all text-text-muted hover:bg-surface hover:text-text-primary" title="Present">P</button>
+<button class="w-10 h-8 rounded-md flex items-center justify-center text-caption font-bold transition-all text-text-muted hover:bg-surface hover:text-text-primary" title="Absent">A</button>
+<button class="w-10 h-8 rounded-md flex items-center justify-center text-caption font-bold transition-all text-text-muted hover:bg-surface hover:text-text-primary" title="Late">L</button>
+<button class="w-10 h-8 rounded-md flex items-center justify-center text-caption font-bold transition-all bg-info text-white shadow-sm" title="Excused">E</button>
+</div>
+</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-2">
+<span class="text-caption text-info font-medium bg-info/10 px-2 py-0.5 rounded border border-info/20 flex items-center gap-1"><span class="material-symbols-outlined text-[12px]">medical_services</span> Medical</span>
+</div>
+</td>
+<td class="py-3 px-4 text-right">
+<span class="inline-flex items-center justify-center w-6 h-6 rounded bg-success/10 text-success text-micro font-bold" title="95% Attendance">95%</span>
+</td>
+</tr>
+<!-- Placeholder rows for visual density -->
+<tr class="hover:bg-surface-subtle/50 transition-colors group">
+<td class="py-3 px-4 text-center text-text-muted">5</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-variant overflow-hidden flex-shrink-0 flex items-center justify-center text-text-muted font-bold">SN</div>
+<div class="flex flex-col">
+<span class="font-medium text-text-primary">Sara Naser</span>
+<span class="text-caption font-caption text-text-muted">سارة ناصر</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-4 text-text-muted font-mono text-caption">STD-10188</td>
+<td class="py-3 px-4">
+<div class="flex bg-surface-subtle p-1 rounded-lg border border-outline-variant/50 w-fit">
+<button class="w-10 h-8 rounded-md flex items-center justify-center text-caption font-bold transition-all bg-success text-white shadow-sm" title="Present">P</button>
+<button class="w-10 h-8 rounded-md flex items-center justify-center text-caption font-bold transition-all text-text-muted hover:bg-surface hover:text-text-primary">A</button>
+<button class="w-10 h-8 rounded-md flex items-center justify-center text-caption font-bold transition-all text-text-muted hover:bg-surface hover:text-text-primary">L</button>
+<button class="w-10 h-8 rounded-md flex items-center justify-center text-caption font-bold transition-all text-text-muted hover:bg-surface hover:text-text-primary">E</button>
+</div>
+</td>
+<td class="py-3 px-4"></td>
+<td class="py-3 px-4 text-right"><span class="inline-flex items-center justify-center w-6 h-6 rounded bg-success/10 text-success text-micro font-bold">99%</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Bottom Sticky Action Bar -->
+<div class="fixed bottom-0 left-0 lg:left-64 right-0 bg-surface border-t border-outline-variant p-space-4 flex flex-col sm:flex-row justify-between items-center gap-4 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] z-30">
+<div class="flex items-center gap-4 text-body-medium font-body-medium bg-surface-subtle px-4 py-2 rounded-lg border border-outline-variant/50">
+<span class="font-semibold border-r border-outline-variant pr-4">Total: 25</span>
+<span class="text-success flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-success"></span> Present: 22 (88%)</span>
+<span class="text-error flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-error"></span> Absent: 1</span>
+<span class="text-warning flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-warning"></span> Late: 1</span>
+<span class="text-info flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-info"></span> Excused: 1</span>
+</div>
+<div class="flex items-center gap-3">
+<button class="h-10 px-4 border border-outline-variant rounded-md bg-surface text-text-primary hover:bg-surface-subtle font-medium transition-colors">
+                        Save as Draft
+                    </button>
+<button class="h-10 px-6 bg-primary text-on-primary rounded-md font-medium hover:bg-primary-container shadow-sm transition-colors relative group">
+                        Submit Register
+                        <div class="absolute bottom-full right-0 mb-2 w-48 bg-inverse-surface text-inverse-on-surface text-caption p-2 rounded shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all pointer-events-none text-center">
+                            Submit and notify parents of absences.
+                            <div class="absolute top-full right-6 w-0 h-0 border-l-[6px] border-r-[6px] border-t-[6px] border-l-transparent border-r-transparent border-t-inverse-surface"></div>
+</div>
+</button>
+</div>
+</div>
+</main>
+</div>
+</body></html>

@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+
+<html class="light" dir="ltr" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Audit Log - Karma SaaS</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary": "#ffffff",
+                    "on-secondary-fixed": "#0d1c2e",
+                    "on-primary-fixed": "#00174b",
+                    "secondary-fixed": "#d5e3fc",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "primary-fixed": "#dbe1ff",
+                    "on-surface-variant": "#434655",
+                    "tertiary-fixed": "#ffdbcd",
+                    "secondary-container": "#d5e3fc",
+                    "primary-container": "#2563eb",
+                    "on-surface": "#191b23",
+                    "inverse-surface": "#2e3039",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-fixed-variant": "#7d2d00",
+                    "info": "#6366f1",
+                    "on-tertiary-fixed": "#360f00",
+                    "error": "#ef4444",
+                    "tertiary-container": "#bc4800",
+                    "secondary": "#515f74",
+                    "surface-subtle": "#f1f5f9",
+                    "on-background": "#191b23",
+                    "success": "#10b981",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "on-primary-container": "#eeefff",
+                    "on-tertiary-container": "#ffede6",
+                    "inverse-on-surface": "#f0f0fb",
+                    "surface": "#ffffff",
+                    "outline": "#737686",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-fixed-dim": "#ffb596",
+                    "inverse-primary": "#b4c5ff",
+                    "tertiary": "#943700",
+                    "text-muted": "#64748b",
+                    "on-secondary-container": "#57657a",
+                    "warning": "#f59e0b",
+                    "surface-tint": "#0053db",
+                    "surface-container": "#ededf9",
+                    "surface-bright": "#faf8ff",
+                    "on-error": "#ffffff",
+                    "secondary-fixed-dim": "#b9c7df",
+                    "surface-container-high": "#e7e7f3",
+                    "on-secondary-fixed-variant": "#3a485b",
+                    "on-error-container": "#93000a",
+                    "surface-container-low": "#f3f3fe",
+                    "surface-container-lowest": "#ffffff",
+                    "background": "#faf8ff",
+                    "text-primary": "#0f172a",
+                    "on-primary": "#ffffff",
+                    "surface-container-highest": "#e1e2ed",
+                    "app-bg": "#f8fafc",
+                    "outline-variant": "#c3c6d7",
+                    "primary": "#004ac6",
+                    "surface-dim": "#d9d9e5",
+                    "surface-variant": "#e1e2ed"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "space-4": "16px",
+                    "space-6": "24px",
+                    "space-12": "48px",
+                    "space-1": "4px",
+                    "space-3": "12px",
+                    "space-8": "32px",
+                    "space-2": "8px"
+            },
+            "fontFamily": {
+                    "h3": ["Inter"],
+                    "display": ["Inter"],
+                    "h1": ["Inter"],
+                    "caption": ["Inter"],
+                    "h2": ["Inter"],
+                    "h1-mobile": ["Inter"],
+                    "body-medium": ["Inter"],
+                    "body-default": ["Inter"],
+                    "micro": ["Inter"],
+                    "display-mobile": ["Inter"]
+            },
+            "fontSize": {
+                    "h3": ["15px", {"lineHeight": "1.4", "letterSpacing": "0", "fontWeight": "600"}],
+                    "display": ["32px", {"lineHeight": "1.25", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "h1": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.015em", "fontWeight": "600"}],
+                    "caption": ["12px", {"lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "h2": ["18px", {"lineHeight": "1.35", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "h1-mobile": ["22px", {"lineHeight": "1.3", "letterSpacing": "-0.015em", "fontWeight": "600"}],
+                    "body-medium": ["14px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "500"}],
+                    "body-default": ["14px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}],
+                    "micro": ["11px", {"lineHeight": "1.3", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                    "display-mobile": ["28px", {"lineHeight": "1.25", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .drawer-open {
+            transform: translateX(0%);
+        }
+        .drawer-closed {
+            transform: translateX(100%);
+        }
+        .backdrop-open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .backdrop-closed {
+            opacity: 0;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="bg-app-bg text-on-background font-body-default min-h-screen flex flex-col md:flex-row antialiased">
+<!-- Side Nav (Desktop) -->
+<nav class="hidden md:flex w-64 h-screen sticky top-0 left-0 bg-surface border-r border-outline-variant flex-col py-space-6 px-space-4 z-30">
+<div class="mb-space-8 flex items-center gap-space-3">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-on-primary font-bold">K</div>
+<div>
+<h2 class="text-h2 font-h2 font-bold text-primary">Karma SaaS</h2>
+<p class="text-caption font-caption text-text-muted">AY 2023-24</p>
+</div>
+</div>
+<div class="flex-1 space-y-space-2">
+<a class="flex items-center gap-space-3 px-space-3 py-2 rounded-md hover:bg-surface-subtle transition-colors text-text-muted" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-body-medium font-body-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-space-3 px-space-3 py-2 rounded-md hover:bg-surface-subtle transition-colors text-text-muted" href="#">
+<span class="material-symbols-outlined" data-icon="school">school</span>
+<span class="text-body-medium font-body-medium">Academic</span>
+</a>
+<a class="flex items-center gap-space-3 px-space-3 py-2 rounded-md hover:bg-surface-subtle transition-colors text-text-muted" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="text-body-medium font-body-medium">Student Info</span>
+</a>
+<a class="flex items-center gap-space-3 px-space-3 py-2 rounded-md hover:bg-surface-subtle transition-colors text-text-muted" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span class="text-body-medium font-body-medium">Attendance</span>
+</a>
+<a class="flex items-center gap-space-3 px-space-3 py-2 rounded-md hover:bg-surface-subtle transition-colors text-text-muted" href="#">
+<span class="material-symbols-outlined" data-icon="grade">grade</span>
+<span class="text-body-medium font-body-medium">Gradebook</span>
+</a>
+<a class="flex items-center gap-space-3 px-space-3 py-2 rounded-md text-primary font-bold bg-primary-fixed/20" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-body-medium font-body-medium">Settings</span>
+</a>
+</div>
+<button class="mt-space-6 mb-space-4 w-full h-[38px] rounded-md bg-primary text-on-primary font-body-medium text-body-medium hover:bg-primary/90 transition-colors flex items-center justify-center gap-2 scale-98 active:scale-95 duration-150">
+<span class="material-symbols-outlined text-sm">add</span> Quick Action
+        </button>
+<div class="mt-auto border-t border-outline-variant pt-space-4 space-y-space-2">
+<a class="flex items-center gap-space-3 px-space-3 py-2 rounded-md hover:bg-surface-subtle transition-colors text-text-muted" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="text-body-medium font-body-medium">Help Center</span>
+</a>
+<a class="flex items-center gap-space-3 px-space-3 py-2 rounded-md hover:bg-surface-subtle transition-colors text-text-muted" href="#">
+<span class="material-symbols-outlined" data-icon="support_agent">support_agent</span>
+<span class="text-body-medium font-body-medium">Support</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col min-h-screen max-w-full overflow-hidden">
+<!-- Top Nav -->
+<header class="flex justify-between items-center h-16 px-space-6 w-full docked full-width top-0 sticky z-40 bg-surface/80 backdrop-blur-md border-b border-outline-variant transition-all duration-200 ease-in-out">
+<div class="flex items-center gap-space-6">
+<!-- Mobile Menu Button -->
+<button class="md:hidden text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="md:hidden font-h1 font-black text-text-primary">Karma</div>
+<!-- Search -->
+<div class="hidden md:flex relative w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-[18px]">search</span>
+<input class="w-full pl-10 pr-3 py-1.5 bg-surface-container-low border border-outline-variant rounded-md text-body-default focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary" placeholder="Search audit logs... (⌘K)" type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-space-4">
+<div class="hidden md:flex gap-space-4 mr-space-4">
+<a class="text-caption font-caption text-text-muted hover:text-primary transition-colors" href="#">Directory</a>
+<a class="text-caption font-caption text-text-muted hover:text-primary transition-colors" href="#">Calendar</a>
+<a class="text-caption font-caption text-text-muted hover:text-primary transition-colors" href="#">Reports</a>
+</div>
+<button class="text-text-muted hover:text-primary transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-caption font-caption font-semibold text-text-muted hover:text-primary transition-colors">EN/AR</button>
+<button class="hidden md:flex h-[32px] px-3 rounded-md bg-primary text-on-primary font-caption text-caption hover:bg-primary/90 transition-colors items-center justify-center">
+                    Create New
+                </button>
+<div class="w-8 h-8 rounded-full bg-secondary-container overflow-hidden border border-outline-variant ml-2">
+<img alt="User Avatar" class="w-full h-full object-cover" data-alt="A professional headshot of a user in a modern office environment, soft lighting, sharp focus, corporate aesthetic, high quality, realistic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAV6LhhnqB8cSXWjQ3_4xmHwiIMt3oh1iX1nO0WVVZFFcSFsR9dSpLC27jxZ55TT430FavtQN4CEyp4OexR1qYT5LhEgIwD6ctrBigbnHvHMn1E_ILjzteEyzNrxvTuYdrEePheKo2Q0cQiabmnWCllrNi4XYGGFw2ocTn30A8pNdDLFgrQ7H9bqxb6gVlzi8xbdodjq0fprUKp9Yzss0LbpcTTEPvCNBGdmTMf9xZK8OD56K9NGaoeAg"/>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-1 p-space-4 md:p-space-8 overflow-y-auto">
+<div class="max-w-7xl mx-auto space-y-space-6">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-4">
+<div>
+<h1 class="text-display-mobile md:text-display font-display-mobile md:font-display text-on-background">Audit Log</h1>
+<p class="text-body-medium font-body-medium text-text-muted mt-1">Immutable security and operational event history.</p>
+</div>
+<div class="flex items-center gap-space-3">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-[18px]">calendar_today</span>
+<select class="pl-9 pr-8 py-2 bg-surface border border-outline-variant rounded-md text-body-default text-on-surface focus:outline-none focus:ring-2 focus:ring-primary-500/20 appearance-none">
+<option>Last 7 Days</option>
+<option>Last 30 Days</option>
+<option>All Time</option>
+</select>
+</div>
+<button class="flex items-center gap-2 px-4 py-2 bg-surface border border-outline-variant rounded-md text-body-medium font-body-medium text-on-surface hover:bg-surface-subtle transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]">filter_list</span> Filter
+                        </button>
+<button class="flex items-center gap-2 px-4 py-2 bg-surface border border-outline-variant rounded-md text-body-medium font-body-medium text-on-surface hover:bg-surface-subtle transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]">download</span> Export
+                        </button>
+</div>
+</div>
+<!-- KPI / Summary Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-4">
+<div class="bg-surface border border-outline-variant rounded-lg p-space-4 shadow-sm">
+<div class="flex items-center justify-between mb-2">
+<span class="text-caption font-caption text-text-muted uppercase tracking-wider">Total Events</span>
+<span class="material-symbols-outlined text-text-muted">analytics</span>
+</div>
+<div class="text-h1 font-h1 text-on-surface">12,458</div>
+<div class="text-micro font-micro text-success flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[14px]">arrow_upward</span> 2.4% vs last week
+                        </div>
+</div>
+<div class="bg-surface border border-outline-variant rounded-lg p-space-4 shadow-sm">
+<div class="flex items-center justify-between mb-2">
+<span class="text-caption font-caption text-text-muted uppercase tracking-wider">Critical Actions</span>
+<span class="material-symbols-outlined text-warning">warning</span>
+</div>
+<div class="text-h1 font-h1 text-on-surface">342</div>
+<div class="text-micro font-micro text-text-muted mt-1">Requires review</div>
+</div>
+<div class="bg-surface border border-outline-variant rounded-lg p-space-4 shadow-sm">
+<div class="flex items-center justify-between mb-2">
+<span class="text-caption font-caption text-text-muted uppercase tracking-wider">System Health</span>
+<span class="material-symbols-outlined text-success">check_circle</span>
+</div>
+<div class="text-h1 font-h1 text-on-surface">Normal</div>
+<div class="text-micro font-micro text-text-muted mt-1">All logging systems active</div>
+</div>
+</div>
+<!-- Data Table Card -->
+<div class="bg-surface border border-outline-variant rounded-lg shadow-sm overflow-hidden flex flex-col h-[600px]">
+<div class="overflow-x-auto flex-1">
+<table class="w-full text-left border-collapse">
+<thead class="sticky top-0 bg-surface-container-low border-b border-outline-variant z-10 shadow-[0_1px_2px_rgba(0,0,0,0.05)]">
+<tr>
+<th class="py-3 px-4 text-micro font-micro text-text-muted uppercase tracking-wider font-semibold whitespace-nowrap">Timestamp (UTC)</th>
+<th class="py-3 px-4 text-micro font-micro text-text-muted uppercase tracking-wider font-semibold">Actor</th>
+<th class="py-3 px-4 text-micro font-micro text-text-muted uppercase tracking-wider font-semibold">Action</th>
+<th class="py-3 px-4 text-micro font-micro text-text-muted uppercase tracking-wider font-semibold">Resource</th>
+<th class="py-3 px-4 text-micro font-micro text-text-muted uppercase tracking-wider font-semibold hidden md:table-cell">Reason</th>
+<th class="py-3 px-4 text-micro font-micro text-text-muted uppercase tracking-wider font-semibold text-right">Details</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/50">
+<tr class="hover:bg-surface-subtle transition-colors group cursor-pointer" onclick="openDrawer()">
+<td class="py-3 px-4 text-body-medium font-body-medium text-on-surface whitespace-nowrap">2023-10-27 14:32:01</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-3">
+<div class="w-6 h-6 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center text-xs font-bold shrink-0">JD</div>
+<div>
+<div class="text-body-medium font-body-medium text-on-surface">Jane Doe</div>
+<div class="text-micro font-micro text-text-muted">System Admin</div>
+</div>
+</div>
+</td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-secondary-container text-on-secondary-container">RESULT_PUBLISHED</span>
+</td>
+<td class="py-3 px-4">
+<div class="text-body-medium font-body-medium text-on-surface">Gradebook</div>
+<div class="text-micro font-micro text-text-muted font-mono">GB-2023-TERM1</div>
+</td>
+<td class="py-3 px-4 hidden md:table-cell text-body-medium font-body-medium text-text-muted max-w-[200px] truncate">
+                                        End of term finalization.
+                                    </td>
+<td class="py-3 px-4 text-right">
+<button class="p-1 rounded hover:bg-surface-variant text-text-muted transition-colors">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-subtle transition-colors group cursor-pointer" onclick="openDrawer()">
+<td class="py-3 px-4 text-body-medium font-body-medium text-on-surface whitespace-nowrap">2023-10-27 13:15:44</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-3">
+<div class="w-6 h-6 rounded-full bg-tertiary-container text-on-tertiary-container flex items-center justify-center text-xs font-bold shrink-0">AS</div>
+<div>
+<div class="text-body-medium font-body-medium text-on-surface">Ahmed Smith</div>
+<div class="text-micro font-micro text-text-muted">Teacher</div>
+</div>
+</div>
+</td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-warning/20 text-warning">ATTENDANCE_OVERRIDDEN</span>
+</td>
+<td class="py-3 px-4">
+<div class="text-body-medium font-body-medium text-on-surface">AttendanceRecord</div>
+<div class="text-micro font-micro text-text-muted font-mono">AR-9942-MATH</div>
+</td>
+<td class="py-3 px-4 hidden md:table-cell text-body-medium font-body-medium text-text-muted max-w-[200px] truncate">
+                                        Student provided medical note late.
+                                    </td>
+<td class="py-3 px-4 text-right">
+<button class="p-1 rounded hover:bg-surface-variant text-text-muted transition-colors">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-subtle transition-colors group cursor-pointer" onclick="openDrawer()">
+<td class="py-3 px-4 text-body-medium font-body-medium text-on-surface whitespace-nowrap">2023-10-27 11:02:10</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-3">
+<div class="w-6 h-6 rounded-full bg-surface-variant text-on-surface flex items-center justify-center text-xs font-bold shrink-0">SYS</div>
+<div>
+<div class="text-body-medium font-body-medium text-on-surface">System Process</div>
+<div class="text-micro font-micro text-text-muted">Automation</div>
+</div>
+</div>
+</td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-surface-container-highest text-on-surface">USER_INVITED</span>
+</td>
+<td class="py-3 px-4">
+<div class="text-body-medium font-body-medium text-on-surface">User</div>
+<div class="text-micro font-micro text-text-muted font-mono">USR-NEW-882</div>
+</td>
+<td class="py-3 px-4 hidden md:table-cell text-body-medium font-body-medium text-text-muted max-w-[200px] truncate">
+                                        Automated batch onboarding.
+                                    </td>
+<td class="py-3 px-4 text-right">
+<button class="p-1 rounded hover:bg-surface-variant text-text-muted transition-colors">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+</td>
+</tr>
+<!-- Placeholder rows to fill space -->
+<tr class="hover:bg-surface-subtle transition-colors group"><td class="py-8 text-center text-text-muted text-body-medium" colspan="6">...</td></tr>
+<tr class="hover:bg-surface-subtle transition-colors group"><td class="py-8 text-center text-text-muted text-body-medium" colspan="6">...</td></tr>
+<tr class="hover:bg-surface-subtle transition-colors group"><td class="py-8 text-center text-text-muted text-body-medium" colspan="6">...</td></tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Footer -->
+<div class="bg-surface border-t border-outline-variant px-4 py-3 flex items-center justify-between shrink-0">
+<div class="text-body-medium font-body-medium text-text-muted">
+                            Showing <span class="font-semibold text-on-surface">1</span> to <span class="font-semibold text-on-surface">50</span> of <span class="font-semibold text-on-surface">12,458</span> entries
+                        </div>
+<div class="flex items-center gap-2">
+<button class="p-1.5 rounded border border-outline-variant text-text-muted hover:bg-surface-subtle disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="px-3 py-1.5 rounded bg-primary text-on-primary text-body-medium font-body-medium">1</button>
+<button class="px-3 py-1.5 rounded text-on-surface hover:bg-surface-subtle text-body-medium font-body-medium">2</button>
+<button class="px-3 py-1.5 rounded text-on-surface hover:bg-surface-subtle text-body-medium font-body-medium">3</button>
+<span class="text-text-muted px-1">...</span>
+<button class="p-1.5 rounded border border-outline-variant text-text-muted hover:bg-surface-subtle">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Slide-Over Drawer (Diff Viewer) -->
+<div class="fixed inset-0 bg-on-background/40 backdrop-blur-sm z-50 transition-opacity duration-300 backdrop-closed" id="drawerBackdrop" onclick="closeDrawer()"></div>
+<div class="fixed inset-y-0 right-0 w-full max-w-2xl bg-surface shadow-2xl z-50 flex flex-col transition-transform duration-300 ease-in-out drawer-closed border-l border-outline-variant" id="diffDrawer">
+<!-- Drawer Header -->
+<div class="px-space-6 py-space-4 border-b border-outline-variant flex items-center justify-between bg-surface-container-lowest shrink-0">
+<div>
+<h2 class="text-h2 font-h2 text-on-surface">Event Details</h2>
+<p class="text-caption font-caption text-text-muted mt-1 font-mono">ID: LOG-998273-XYZ</p>
+</div>
+<button class="p-2 rounded-full hover:bg-surface-variant text-text-muted transition-colors" onclick="closeDrawer()">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<!-- Drawer Content -->
+<div class="flex-1 overflow-y-auto p-space-6 space-y-space-6">
+<!-- Metadata Bento -->
+<div class="grid grid-cols-2 gap-space-4">
+<div class="bg-surface-container-low rounded-md p-space-3 border border-outline-variant/50">
+<div class="text-micro font-micro text-text-muted uppercase tracking-wider mb-1">Actor</div>
+<div class="text-body-medium font-body-medium text-on-surface font-medium flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary">person</span> Jane Doe (Admin)
+                    </div>
+</div>
+<div class="bg-surface-container-low rounded-md p-space-3 border border-outline-variant/50">
+<div class="text-micro font-micro text-text-muted uppercase tracking-wider mb-1">Timestamp</div>
+<div class="text-body-medium font-body-medium text-on-surface font-mono">2023-10-27 14:32:01 UTC</div>
+</div>
+<div class="bg-surface-container-low rounded-md p-space-3 border border-outline-variant/50">
+<div class="text-micro font-micro text-text-muted uppercase tracking-wider mb-1">Action</div>
+<div class="text-body-medium font-body-medium text-on-surface font-mono bg-secondary-container/50 px-1.5 py-0.5 rounded text-sm w-max">RESULT_PUBLISHED</div>
+</div>
+<div class="bg-surface-container-low rounded-md p-space-3 border border-outline-variant/50">
+<div class="text-micro font-micro text-text-muted uppercase tracking-wider mb-1">IP Address</div>
+<div class="text-body-medium font-body-medium text-on-surface font-mono">192.168.1.45</div>
+</div>
+<div class="col-span-2 bg-surface-container-low rounded-md p-space-3 border border-outline-variant/50">
+<div class="text-micro font-micro text-text-muted uppercase tracking-wider mb-1">Reason Provided</div>
+<div class="text-body-default font-body-default text-on-surface italic">"End of term finalization and parent distribution."</div>
+</div>
+</div>
+<!-- Diff Viewer -->
+<div class="space-y-space-2">
+<h3 class="text-h3 font-h3 text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">difference</span> Payload Diff
+                </h3>
+<div class="border border-outline-variant rounded-md overflow-hidden bg-[#1e1e1e] text-[#d4d4d4] font-mono text-sm leading-relaxed flex flex-col md:flex-row">
+<!-- Before -->
+<div class="flex-1 border-b md:border-b-0 md:border-r border-[#404040]">
+<div class="bg-[#2d2d2d] px-3 py-1.5 text-xs text-[#9cdcfe] font-semibold flex items-center gap-2 border-b border-[#404040]">
+<span class="w-2 h-2 rounded-full bg-error inline-block"></span> Before (Old State)
+                        </div>
+<pre class="p-4 overflow-x-auto"><code>{
+  "resource_id": "GB-2023-TERM1",
+  "status": <span class="bg-error/30 text-error-container px-1 rounded">"draft"</span>,
+  "last_modified": "2023-10-25T09:12:00Z",
+  "approver_id": null
+}</code></pre>
+</div>
+<!-- After -->
+<div class="flex-1">
+<div class="bg-[#2d2d2d] px-3 py-1.5 text-xs text-[#4ec9b0] font-semibold flex items-center gap-2 border-b border-[#404040]">
+<span class="w-2 h-2 rounded-full bg-success inline-block"></span> After (New State)
+                        </div>
+<pre class="p-4 overflow-x-auto"><code>{
+  "resource_id": "GB-2023-TERM1",
+  "status": <span class="bg-success/30 text-success px-1 rounded">"published"</span>,
+  "last_modified": "2023-10-27T14:32:01Z",
+  "approver_id": "USR-JD-101"
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<!-- Drawer Footer -->
+<div class="px-space-6 py-space-4 border-t border-outline-variant bg-surface shrink-0 flex justify-end gap-space-3">
+<button class="px-4 py-2 rounded-md border border-outline-variant text-body-medium font-body-medium text-on-surface hover:bg-surface-subtle transition-colors">
+                Copy Raw JSON
+            </button>
+<button class="px-4 py-2 rounded-md bg-primary text-on-primary text-body-medium font-body-medium hover:bg-primary/90 transition-colors" onclick="closeDrawer()">
+                Close
+            </button>
+</div>
+</div>
+<script>
+        function openDrawer() {
+            document.getElementById('diffDrawer').classList.remove('drawer-closed');
+            document.getElementById('diffDrawer').classList.add('drawer-open');
+            document.getElementById('drawerBackdrop').classList.remove('backdrop-closed');
+            document.getElementById('drawerBackdrop').classList.add('backdrop-open');
+        }
+
+        function closeDrawer() {
+            document.getElementById('diffDrawer').classList.remove('drawer-open');
+            document.getElementById('diffDrawer').classList.add('drawer-closed');
+            document.getElementById('drawerBackdrop').classList.remove('backdrop-open');
+            document.getElementById('drawerBackdrop').classList.add('backdrop-closed');
+        }
+    </script>
+</body></html>

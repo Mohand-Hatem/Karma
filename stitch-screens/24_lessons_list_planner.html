@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Karma - Grade 10 Physics Lessons</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        "outline-variant": "#c3c6d7",
+                        "red-500": "#ef4444",
+                        "midnight-navy": "#0f2942",
+                        "surface-variant": "#e1e2ed",
+                        "primary": "#004ac6",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "on-error-container": "#93000a",
+                        "secondary-container": "#76f4e0",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#b4c5ff",
+                        "primary-fixed": "#dbe1ff",
+                        "tertiary": "#943700",
+                        "tertiary-fixed-dim": "#ffb596",
+                        "outline": "#737686",
+                        "on-surface": "#191b23",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "surface-dim": "#d9d9e5",
+                        "surface-container": "#ededf9",
+                        "surface": "#faf8ff",
+                        "error": "#ba1a1a",
+                        "inverse-on-surface": "#f0f0fb",
+                        "tertiary-fixed": "#ffdbcd",
+                        "on-secondary-fixed-variant": "#005047",
+                        "surface-bright": "#faf8ff",
+                        "secondary": "#006b5f",
+                        "on-primary-fixed": "#00174b",
+                        "primary-container": "#2563eb",
+                        "on-primary-container": "#eeefff",
+                        "tertiary-container": "#bc4800",
+                        "surface-tint": "#0053db",
+                        "surface-container-high": "#e7e7f3",
+                        "on-surface-variant": "#434655",
+                        "emerald-500": "#10b981",
+                        "secondary-fixed-dim": "#59dbc7",
+                        "surface-container-low": "#f3f3fe",
+                        "on-tertiary-fixed": "#360f00",
+                        "error-container": "#ffdad6",
+                        "inverse-surface": "#2e3039",
+                        "surface-container-highest": "#e1e2ed",
+                        "amber-500": "#f59e0b",
+                        "background": "#faf8ff",
+                        "on-primary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#006f63",
+                        "on-secondary-fixed": "#00201c",
+                        "slate-50": "#f8fafc",
+                        "slate-900": "#0f172a",
+                        "secondary-fixed": "#79f7e3",
+                        "on-background": "#191b23",
+                        "on-tertiary-container": "#ffede6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "space-3": "12px",
+                        "sidebar-expanded": "256px",
+                        "space-6": "24px",
+                        "space-2": "8px",
+                        "space-8": "32px",
+                        "space-12": "48px",
+                        "space-1": "4px",
+                        "sidebar-collapsed": "68px",
+                        "space-4": "16px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Inter", "sans-serif"],
+                        "body-lg": ["Inter", "sans-serif"],
+                        "headline-sm": ["Inter", "sans-serif"],
+                        "label-sm": ["Inter", "sans-serif"],
+                        "body-md": ["Inter", "sans-serif"],
+                        "headline-lg": ["Inter", "sans-serif"],
+                        "label-md": ["Inter", "sans-serif"],
+                        "headline-md": ["Inter", "sans-serif"],
+                        "headline-xl": ["Inter", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg": ["30px", { "lineHeight": "38px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-xl": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .material-symbols-outlined.fill { font-variation-settings: 'FILL' 1; }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md flex h-screen overflow-hidden">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col h-full py-space-6 px-space-4 w-64 h-screen sticky top-0 left-0 bg-surface border-r border-outline-variant z-50">
+<div class="flex items-center gap-space-3 mb-space-8 px-space-2">
+<div class="w-10 h-10 rounded-lg bg-primary text-on-primary flex items-center justify-center font-bold text-headline-sm">
+                K
+            </div>
+<div>
+<h1 class="text-h2 font-h2 font-bold text-primary">Karma SaaS</h1>
+<p class="text-label-sm font-label-sm text-on-surface-variant">AY 2023-24</p>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto">
+<ul class="space-y-space-1">
+<li>
+<a class="flex items-center gap-space-3 px-space-3 py-space-2 rounded-lg text-text-muted hover:bg-surface-subtle transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-body-medium font-body-medium">Dashboard</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-space-3 px-space-3 py-space-2 rounded-lg text-primary font-bold bg-surface-container-low border-l-4 border-primary" href="#">
+<span class="material-symbols-outlined fill">school</span>
+<span class="text-body-medium font-body-medium">Academic</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-space-3 px-space-3 py-space-2 rounded-lg text-text-muted hover:bg-surface-subtle transition-colors" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-body-medium font-body-medium">Student Info</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-space-3 px-space-3 py-space-2 rounded-lg text-text-muted hover:bg-surface-subtle transition-colors" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="text-body-medium font-body-medium">Attendance</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-space-3 px-space-3 py-space-2 rounded-lg text-text-muted hover:bg-surface-subtle transition-colors" href="#">
+<span class="material-symbols-outlined">grade</span>
+<span class="text-body-medium font-body-medium">Gradebook</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-space-3 px-space-3 py-space-2 rounded-lg text-text-muted hover:bg-surface-subtle transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-body-medium font-body-medium">Settings</span>
+</a>
+</li>
+</ul>
+</div>
+<div class="mt-auto pt-space-6 border-t border-outline-variant">
+<button class="w-full bg-primary text-on-primary py-space-2 rounded-lg font-label-md hover:bg-primary-container transition-colors mb-space-4">
+                Quick Action
+            </button>
+<ul class="space-y-space-1">
+<li>
+<a class="flex items-center gap-space-3 px-space-3 py-space-2 rounded-lg text-text-muted hover:bg-surface-subtle transition-colors" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="text-body-medium font-body-medium">Help Center</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-space-3 px-space-3 py-space-2 rounded-lg text-text-muted hover:bg-surface-subtle transition-colors" href="#">
+<span class="material-symbols-outlined">support_agent</span>
+<span class="text-body-medium font-body-medium">Support</span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col h-full overflow-hidden bg-background">
+<!-- TopNavBar (Mobile Only Fallback/Header) -->
+<header class="md:hidden flex justify-between items-center h-16 px-space-6 w-full bg-surface/80 backdrop-blur-md border-b border-outline-variant sticky top-0 z-40">
+<div class="text-h1 font-h1 font-black text-text-primary">Karma</div>
+<div class="flex items-center gap-space-4">
+<span class="material-symbols-outlined">notifications</span>
+<span class="material-symbols-outlined">search</span>
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined">person</span>
+</div>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto p-space-4 md:p-space-8">
+<div class="max-w-7xl mx-auto">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-space-8 gap-space-4">
+<div>
+<div class="flex items-center gap-space-2 text-label-sm font-label-sm text-on-surface-variant uppercase mb-space-1">
+<span>Academic</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<span>Grade 10</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<span class="text-primary font-bold">Physics</span>
+</div>
+<h2 class="text-headline-xl font-headline-xl text-on-surface">Lessons Archive &amp; Planner</h2>
+</div>
+<div class="flex gap-space-3">
+<button class="flex items-center gap-space-2 px-space-4 py-space-2 rounded-lg border border-outline text-on-surface font-label-md hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined">filter_list</span>
+                            Filter
+                        </button>
+<button class="flex items-center gap-space-2 px-space-4 py-space-2 rounded-lg bg-primary text-on-primary font-label-md hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined">add</span>
+                            New Lesson
+                        </button>
+</div>
+</div>
+<!-- Content Grid -->
+<div class="space-y-space-8">
+<!-- Week 1 Unit Group -->
+<section>
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-space-4 flex items-center gap-space-2 pb-space-2 border-b border-outline-variant">
+<span class="text-on-surface-variant text-body-md font-body-md">Unit 1: Mechanics /</span>
+                            Week 1
+                        </h3>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-4">
+<!-- Published Lesson Card -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-space-4 hover:bg-surface-container-low transition-colors group">
+<div class="flex justify-between items-start mb-space-3">
+<span class="inline-flex items-center px-space-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-800 uppercase tracking-wider">
+                                        Published
+                                    </span>
+<button class="text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<h4 class="text-headline-sm font-headline-sm text-on-surface mb-space-1">Kinematics Intro</h4>
+<div class="flex items-center gap-space-2 text-body-sm font-body-sm text-on-surface-variant mb-space-4">
+<span class="material-symbols-outlined text-[16px]">event</span>
+                                    Oct 12, 2023
+                                    <span class="text-outline mx-1">•</span>
+                                    Period 2
+                                </div>
+<div class="flex flex-wrap gap-space-2 mt-auto">
+<div class="flex items-center gap-space-1 bg-surface-variant px-space-2 py-space-1 rounded-md text-label-sm font-label-sm text-on-surface">
+<span class="material-symbols-outlined text-[14px]">picture_as_pdf</span>
+                                        Slides.pdf
+                                    </div>
+<div class="flex items-center gap-space-1 bg-surface-variant px-space-2 py-space-1 rounded-md text-label-sm font-label-sm text-on-surface">
+<span class="material-symbols-outlined text-[14px]">play_circle</span>
+                                        Demo Video
+                                    </div>
+</div>
+</div>
+<!-- Published Lesson Card -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-space-4 hover:bg-surface-container-low transition-colors group">
+<div class="flex justify-between items-start mb-space-3">
+<span class="inline-flex items-center px-space-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-800 uppercase tracking-wider">
+                                        Published
+                                    </span>
+<button class="text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<h4 class="text-headline-sm font-headline-sm text-on-surface mb-space-1">Velocity vs Time</h4>
+<div class="flex items-center gap-space-2 text-body-sm font-body-sm text-on-surface-variant mb-space-4">
+<span class="material-symbols-outlined text-[16px]">event</span>
+                                    Oct 14, 2023
+                                    <span class="text-outline mx-1">•</span>
+                                    Period 4
+                                </div>
+<div class="flex flex-wrap gap-space-2 mt-auto">
+<div class="flex items-center gap-space-1 bg-surface-variant px-space-2 py-space-1 rounded-md text-label-sm font-label-sm text-on-surface">
+<span class="material-symbols-outlined text-[14px]">assignment</span>
+                                        Worksheet
+                                    </div>
+</div>
+</div>
+</div>
+</section>
+<!-- Week 2 Unit Group -->
+<section>
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-space-4 flex items-center gap-space-2 pb-space-2 border-b border-outline-variant">
+<span class="text-on-surface-variant text-body-md font-body-md">Unit 1: Mechanics /</span>
+                            Week 2
+                        </h3>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-4">
+<!-- Draft Lesson Card -->
+<div class="bg-surface-container-lowest rounded-xl border border-dashed border-outline p-space-4 opacity-75 hover:opacity-100 hover:bg-surface-container-low transition-all group">
+<div class="flex justify-between items-start mb-space-3">
+<span class="inline-flex items-center px-space-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-600 uppercase tracking-wider">
+                                        Draft
+                                    </span>
+<button class="text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<h4 class="text-headline-sm font-headline-sm text-on-surface mb-space-1">Newton's First Law</h4>
+<div class="flex items-center gap-space-2 text-body-sm font-body-sm text-on-surface-variant mb-space-4">
+<span class="material-symbols-outlined text-[16px]">event</span>
+                                    Oct 19, 2023
+                                    <span class="text-outline mx-1">•</span>
+                                    Period 2
+                                </div>
+<div class="flex flex-wrap gap-space-2 mt-auto">
+<button class="flex items-center gap-space-1 text-primary text-label-sm font-label-sm hover:underline">
+<span class="material-symbols-outlined text-[14px]">add</span>
+                                        Add Resource
+                                    </button>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+
+<html class="light" dir="ltr" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Karma - Settings</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed": "#0d1c2e",
+                        "on-primary-fixed": "#00174b",
+                        "secondary-fixed": "#d5e3fc",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "primary-fixed": "#dbe1ff",
+                        "on-surface-variant": "#434655",
+                        "tertiary-fixed": "#ffdbcd",
+                        "secondary-container": "#d5e3fc",
+                        "primary-container": "#2563eb",
+                        "on-surface": "#191b23",
+                        "inverse-surface": "#2e3039",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        "info": "#6366f1",
+                        "on-tertiary-fixed": "#360f00",
+                        "error": "#ef4444",
+                        "tertiary-container": "#bc4800",
+                        "secondary": "#515f74",
+                        "surface-subtle": "#f1f5f9",
+                        "on-background": "#191b23",
+                        "success": "#10b981",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "on-primary-container": "#eeefff",
+                        "on-tertiary-container": "#ffede6",
+                        "inverse-on-surface": "#f0f0fb",
+                        "surface": "#ffffff",
+                        "outline": "#737686",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb596",
+                        "inverse-primary": "#b4c5ff",
+                        "tertiary": "#943700",
+                        "text-muted": "#64748b",
+                        "on-secondary-container": "#57657a",
+                        "warning": "#f59e0b",
+                        "surface-tint": "#0053db",
+                        "surface-container": "#ededf9",
+                        "surface-bright": "#faf8ff",
+                        "on-error": "#ffffff",
+                        "secondary-fixed-dim": "#b9c7df",
+                        "surface-container-high": "#e7e7f3",
+                        "on-secondary-fixed-variant": "#3a485b",
+                        "on-error-container": "#93000a",
+                        "surface-container-low": "#f3f3fe",
+                        "surface-container-lowest": "#ffffff",
+                        "background": "#faf8ff",
+                        "text-primary": "#0f172a",
+                        "on-primary": "#ffffff",
+                        "surface-container-highest": "#e1e2ed",
+                        "app-bg": "#f8fafc",
+                        "outline-variant": "#c3c6d7",
+                        "primary": "#004ac6",
+                        "surface-dim": "#d9d9e5",
+                        "surface-variant": "#e1e2ed"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "space-4": "16px",
+                        "space-6": "24px",
+                        "space-12": "48px",
+                        "space-1": "4px",
+                        "space-3": "12px",
+                        "space-8": "32px",
+                        "space-2": "8px"
+                    },
+                    "fontFamily": {
+                        "h3": ["inter"],
+                        "display": ["inter"],
+                        "h1": ["inter"],
+                        "caption": ["inter"],
+                        "h2": ["inter"],
+                        "h1-mobile": ["inter"],
+                        "body-medium": ["inter"],
+                        "body-default": ["inter"],
+                        "micro": ["inter"],
+                        "display-mobile": ["inter"]
+                    },
+                    "fontSize": {
+                        "h3": ["15px", { "lineHeight": "1.4", "letterSpacing": "0", "fontWeight": "600" }],
+                        "display": ["32px", { "lineHeight": "1.25", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "h1": ["24px", { "lineHeight": "1.3", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+                        "caption": ["12px", { "lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "h2": ["18px", { "lineHeight": "1.35", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "h1-mobile": ["22px", { "lineHeight": "1.3", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+                        "body-medium": ["14px", { "lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "500" }],
+                        "body-default": ["14px", { "lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400" }],
+                        "micro": ["11px", { "lineHeight": "1.3", "letterSpacing": "0.02em", "fontWeight": "600" }],
+                        "display-mobile": ["28px", { "lineHeight": "1.25", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #c3c6d7;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #737686;
+        }
+    </style>
+</head>
+<body class="bg-app-bg text-on-surface font-body-default antialiased flex flex-col md:flex-row h-screen overflow-hidden">
+<!-- SideNavBar (Desktop Only) -->
+<nav class="hidden md:flex flex-col h-full py-space-6 px-space-4 w-64 sticky top-0 left-0 bg-surface dark:bg-inverse-surface border-r border-outline-variant dark:border-outline z-30 flex-shrink-0">
+<div class="mb-space-8 px-space-2 flex items-center gap-space-3">
+<div class="w-10 h-10 rounded-lg bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-h2 font-h2 shrink-0">K</div>
+<div class="flex flex-col">
+<span class="text-h2 font-h2 font-bold text-primary dark:text-inverse-primary truncate">Karma SaaS</span>
+<span class="text-caption font-caption text-text-muted truncate">AY 2023-24</span>
+</div>
+</div>
+<button class="w-full bg-primary hover:bg-primary-fixed-dim text-on-primary h-[38px] rounded-lg font-body-medium text-body-medium mb-space-6 flex items-center justify-center gap-2 transition-colors duration-150 scale-98 active:scale-95 shadow-sm">
+<span class="material-symbols-outlined text-[20px]">add</span>
+            Quick Action
+        </button>
+<div class="flex-1 overflow-y-auto">
+<ul class="space-y-1">
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-text-muted dark:text-on-surface-variant hover:bg-surface-subtle dark:hover:bg-surface-container-high transition-colors duration-150 group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary">dashboard</span>
+<span class="text-body-medium font-body-medium">Dashboard</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-text-muted dark:text-on-surface-variant hover:bg-surface-subtle dark:hover:bg-surface-container-high transition-colors duration-150 group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary">school</span>
+<span class="text-body-medium font-body-medium">Academic</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-text-muted dark:text-on-surface-variant hover:bg-surface-subtle dark:hover:bg-surface-container-high transition-colors duration-150 group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary">group</span>
+<span class="text-body-medium font-body-medium">Student Info</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-text-muted dark:text-on-surface-variant hover:bg-surface-subtle dark:hover:bg-surface-container-high transition-colors duration-150 group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary">calendar_today</span>
+<span class="text-body-medium font-body-medium">Attendance</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-text-muted dark:text-on-surface-variant hover:bg-surface-subtle dark:hover:bg-surface-container-high transition-colors duration-150 group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary">grade</span>
+<span class="text-body-medium font-body-medium">Gradebook</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary-container/10 text-primary dark:text-primary-fixed-dim font-bold transition-colors duration-150" href="#">
+<span class="material-symbols-outlined text-[20px] fill">settings</span>
+<span class="text-body-medium font-body-medium">Settings</span>
+</a>
+</li>
+</ul>
+</div>
+<div class="mt-auto pt-space-4 border-t border-outline-variant/50">
+<ul class="space-y-1">
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-text-muted dark:text-on-surface-variant hover:bg-surface-subtle dark:hover:bg-surface-container-high transition-colors duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]">help</span>
+<span class="text-body-medium font-body-medium">Help Center</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-text-muted dark:text-on-surface-variant hover:bg-surface-subtle dark:hover:bg-surface-container-high transition-colors duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]">support_agent</span>
+<span class="text-body-medium font-body-medium">Support</span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col min-w-0 overflow-hidden">
+<!-- TopNavBar (Desktop) -->
+<header class="hidden md:flex justify-between items-center h-16 px-space-6 w-full docked full-width top-0 sticky z-40 bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-md border-b border-outline-variant dark:border-outline">
+<div class="flex items-center gap-space-6">
+<!-- Search (on_left) -->
+<div class="relative w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-[18px]">search</span>
+<input class="w-full h-[36px] pl-10 pr-4 bg-surface-container-lowest border border-outline-variant rounded-md text-body-medium font-body-medium focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary transition-all" placeholder="Search (⌘K)" type="text"/>
+</div>
+<nav class="flex gap-space-6">
+<a class="text-caption font-caption text-text-muted dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-all duration-200 ease-in-out py-1" href="#">Directory</a>
+<a class="text-caption font-caption text-text-muted dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-all duration-200 ease-in-out py-1" href="#">Calendar</a>
+<a class="text-caption font-caption text-text-muted dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-all duration-200 ease-in-out py-1" href="#">Reports</a>
+</nav>
+</div>
+<div class="flex items-center gap-space-4">
+<button class="text-caption font-caption font-medium text-text-muted hover:text-primary transition-colors">EN/AR</button>
+<div class="flex items-center gap-space-2 text-text-muted">
+<button class="p-2 rounded-full hover:bg-surface-subtle transition-colors"><span class="material-symbols-outlined text-[20px]">notifications</span></button>
+</div>
+<div class="w-8 h-8 rounded-full bg-surface-container-high border border-outline-variant overflow-hidden cursor-pointer ring-2 ring-primary ring-offset-2">
+<img alt="User Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBf4_wGcwbOD8LtUA4OpuqaTp0mNUZf9qS8pwoUrRU2FfEQ-AsYE1wFGKz8ljz42y1r6wGWcREE1R5QCtx4PZ4WxqLZ2S1PCipxjxyiw8YizNDr2Ci0bOrTJKGO5X5mUvu-Cghu6A-trwtQjLX28R2h5s9Anju-qDA4ngzBfMBSfif9eYT17a1vlrDwe20pYft9YdpCwprt_MBIAE4R59IOMWg7e43WxzwHDj9lm-_fRfg3th0O9HxhoA"/>
+</div>
+</div>
+</header>
+<!-- TopAppBar (Mobile) - Simplified for demo -->
+<header class="md:hidden flex items-center justify-between h-14 px-4 bg-surface border-b border-outline-variant sticky top-0 z-40">
+<div class="text-h2 font-h2 font-bold text-primary">Karma</div>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant">
+<img alt="User Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqwguFKoRPudBL8OcJOILYFPWnqTuf7XBFbzF1uIP_VYAlV7RaeyPstKJ2OC2psNxofTzRho6bzIfixTAPdPIJPY0nW5knFez8UagY-jq3T9xSZFizyIAqQveF_Mp6ExMfXMQVid3p6Umweir1tU-jlD90_8YFTbOvW7BF8a3nQ_CB7ZyUb8VMk_tEiX2RSEjCNMTpgm43QFYYeH20BmGl5W3064iT-Ksmq-yGpWZ9abzzLhhq7JK6Ag"/>
+</div>
+</header>
+<!-- Scrollable Content Canvas -->
+<main class="flex-1 overflow-y-auto p-4 md:p-8 lg:p-12">
+<div class="max-w-4xl mx-auto">
+<!-- Page Header -->
+<div class="mb-space-8">
+<h1 class="text-display font-display text-text-primary md:text-display-mobile">Account Settings</h1>
+<p class="text-body-default font-body-default text-text-muted mt-1">Manage your personal information, preferences, and security.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-6 lg:gap-space-8 items-start">
+<!-- Left Column: Personal Info & Preferences -->
+<div class="lg:col-span-8 flex flex-col gap-space-6">
+<!-- Personal Info Card -->
+<section class="bg-surface rounded-lg border border-outline-variant p-space-6 shadow-[0_1px_2px_rgba(0,0,0,0.05)]">
+<div class="border-b border-outline-variant pb-space-4 mb-space-6">
+<h2 class="text-h2 font-h2 text-text-primary">Personal Information</h2>
+<p class="text-caption font-caption text-text-muted mt-1">Update your photo and personal details.</p>
+</div>
+<form class="flex flex-col gap-space-6">
+<!-- Avatar Upload -->
+<div class="flex items-center gap-space-6">
+<div class="relative group cursor-pointer">
+<div class="w-20 h-20 rounded-full border-2 border-outline-variant overflow-hidden group-hover:border-primary transition-colors">
+<img alt="Current Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjuN7jgC3Lawa5jjJ03g6g-5IwhtkzDFazkbpyadkWrhAcvN7C8Llz0oPHwZiyfzRlaF-tuJpFx8wF6KrTurikibGwiqnsOOf9jckp6GZ2uOr8L33pmsmxySzmUo4BWNr3jIc3RjnSfK8o_JfcgxwdivXwDXNYpJAX33WN4we4GJSpMS09yj22PYKl1cqRXCIbX2Slbp_H142FOPEPDO_LgevyDlQyF4lc6frVFAJLisg3YS5bz1Nbxw"/>
+</div>
+<div class="absolute inset-0 bg-on-surface/50 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-on-primary">photo_camera</span>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<button class="text-body-medium font-body-medium text-primary hover:text-on-primary-fixed-variant transition-colors text-left font-semibold" type="button">Change Avatar</button>
+<span class="text-caption font-caption text-text-muted">JPG, GIF or PNG. Max size of 2MB.</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-4">
+<div class="flex flex-col gap-1">
+<label class="text-caption font-caption font-medium text-on-surface-variant" for="firstName">First Name</label>
+<input class="h-[38px] px-3 bg-surface border border-outline-variant rounded-md text-body-default font-body-default focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" id="firstName" type="text" value="Admin"/>
+</div>
+<div class="flex flex-col gap-1">
+<label class="text-caption font-caption font-medium text-on-surface-variant" for="lastName">Last Name</label>
+<input class="h-[38px] px-3 bg-surface border border-outline-variant rounded-md text-body-default font-body-default focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" id="lastName" type="text" value="User"/>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<label class="text-caption font-caption font-medium text-on-surface-variant" for="email">Email Address</label>
+<input class="h-[38px] px-3 bg-surface-subtle border border-outline-variant rounded-md text-body-default font-body-default text-text-muted cursor-not-allowed" disabled="" id="email" type="email" value="admin@karmasaas.com"/>
+<p class="text-micro font-micro text-text-muted mt-1 flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">info</span> Contact IT to change your email address.</p>
+</div>
+<div class="pt-space-4 border-t border-outline-variant flex justify-end">
+<button class="h-[38px] px-space-4 bg-primary hover:bg-primary-fixed-dim text-on-primary rounded-md font-body-medium text-body-medium transition-colors shadow-sm" type="submit">Save Changes</button>
+</div>
+</form>
+</section>
+<!-- Password Change Card -->
+<section class="bg-surface rounded-lg border border-outline-variant p-space-6 shadow-[0_1px_2px_rgba(0,0,0,0.05)]">
+<div class="border-b border-outline-variant pb-space-4 mb-space-6">
+<h2 class="text-h2 font-h2 text-text-primary">Change Password</h2>
+</div>
+<form class="flex flex-col gap-space-4">
+<div class="flex flex-col gap-1">
+<label class="text-caption font-caption font-medium text-on-surface-variant" for="currentPassword">Current Password</label>
+<input class="h-[38px] px-3 bg-surface border border-outline-variant rounded-md text-body-default font-body-default focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" id="currentPassword" type="password"/>
+</div>
+<div class="flex flex-col gap-1">
+<label class="text-caption font-caption font-medium text-on-surface-variant" for="newPassword">New Password</label>
+<input class="h-[38px] px-3 bg-surface border border-outline-variant rounded-md text-body-default font-body-default focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" id="newPassword" type="password"/>
+</div>
+<div class="flex flex-col gap-1">
+<label class="text-caption font-caption font-medium text-on-surface-variant" for="confirmPassword">Confirm New Password</label>
+<input class="h-[38px] px-3 bg-surface border border-outline-variant rounded-md text-body-default font-body-default focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" id="confirmPassword" type="password"/>
+</div>
+<div class="pt-space-4 mt-2 flex justify-end">
+<button class="h-[38px] px-space-4 bg-surface-container hover:bg-surface-container-high text-on-surface rounded-md font-body-medium text-body-medium border border-outline-variant transition-colors shadow-sm" type="submit">Update Password</button>
+</div>
+</form>
+</section>
+</div>
+<!-- Right Column: Preferences & Sessions -->
+<div class="lg:col-span-4 flex flex-col gap-space-6">
+<!-- Preferences Card -->
+<section class="bg-surface rounded-lg border border-outline-variant p-space-6 shadow-[0_1px_2px_rgba(0,0,0,0.05)]">
+<div class="border-b border-outline-variant pb-space-4 mb-space-4">
+<h2 class="text-h3 font-h3 text-text-primary">Preferences</h2>
+</div>
+<div class="flex flex-col gap-space-6">
+<!-- Language -->
+<div class="flex flex-col gap-2">
+<span class="text-caption font-caption font-medium text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">language</span> Language
+                                    </span>
+<div class="grid grid-cols-2 gap-2 p-1 bg-surface-container-low rounded-lg border border-outline-variant">
+<button class="py-1.5 px-3 rounded-md bg-surface shadow-sm border border-outline-variant text-body-medium font-body-medium text-text-primary text-center">English (LTR)</button>
+<button class="py-1.5 px-3 rounded-md text-body-medium font-body-medium text-text-muted hover:text-text-primary text-center transition-colors">العربية (RTL)</button>
+</div>
+</div>
+<!-- Theme -->
+<div class="flex flex-col gap-2">
+<span class="text-caption font-caption font-medium text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">palette</span> Theme
+                                    </span>
+<div class="grid grid-cols-3 gap-2 p-1 bg-surface-container-low rounded-lg border border-outline-variant">
+<button class="flex flex-col items-center gap-1 py-2 rounded-md bg-surface shadow-sm border border-outline-variant text-primary">
+<span class="material-symbols-outlined text-[18px]">light_mode</span>
+<span class="text-micro font-micro">Light</span>
+</button>
+<button class="flex flex-col items-center gap-1 py-2 rounded-md text-text-muted hover:text-text-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">dark_mode</span>
+<span class="text-micro font-micro">Dark</span>
+</button>
+<button class="flex flex-col items-center gap-1 py-2 rounded-md text-text-muted hover:text-text-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">desktop_windows</span>
+<span class="text-micro font-micro">System</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Active Sessions Card -->
+<section class="bg-surface rounded-lg border border-outline-variant p-space-6 shadow-[0_1px_2px_rgba(0,0,0,0.05)]">
+<div class="border-b border-outline-variant pb-space-4 mb-space-4 flex justify-between items-center">
+<h2 class="text-h3 font-h3 text-text-primary">Active Sessions</h2>
+<span class="bg-surface-subtle text-text-muted px-2 py-0.5 rounded-full text-micro font-micro border border-outline-variant">2</span>
+</div>
+<div class="flex flex-col gap-4">
+<!-- Session 1 (Current) -->
+<div class="flex items-start justify-between gap-3">
+<div class="flex gap-3">
+<div class="mt-1 text-success">
+<span class="material-symbols-outlined text-[20px]">computer</span>
+</div>
+<div class="flex flex-col">
+<span class="text-body-medium font-body-medium text-text-primary flex items-center gap-2">
+                                                Mac OS • Safari
+                                                <span class="text-[10px] uppercase font-bold text-success bg-success/10 px-1.5 rounded-sm">Current</span>
+</span>
+<span class="text-caption font-caption text-text-muted">Dubai, UAE • 192.168.1.1</span>
+<span class="text-caption font-caption text-text-muted">Active now</span>
+</div>
+</div>
+</div>
+<div class="h-px bg-outline-variant/50 w-full"></div>
+<!-- Session 2 -->
+<div class="flex items-start justify-between gap-3">
+<div class="flex gap-3">
+<div class="mt-1 text-text-muted">
+<span class="material-symbols-outlined text-[20px]">smartphone</span>
+</div>
+<div class="flex flex-col">
+<span class="text-body-medium font-body-medium text-text-primary">iOS • Safari Mobile</span>
+<span class="text-caption font-caption text-text-muted">Dubai, UAE • 10.0.0.5</span>
+<span class="text-caption font-caption text-text-muted">Last active: 2 hours ago</span>
+</div>
+</div>
+<button class="text-error hover:bg-error/10 p-1.5 rounded-md transition-colors" title="Revoke Session">
+<span class="material-symbols-outlined text-[18px]">logout</span>
+</button>
+</div>
+</div>
+<div class="mt-space-4 pt-space-4 border-t border-outline-variant">
+<button class="w-full h-[32px] flex items-center justify-center gap-2 text-error hover:bg-error/5 rounded-md text-caption font-caption font-medium transition-colors border border-error/20">
+                                    Revoke All Other Sessions
+                                </button>
+</div>
+</section>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

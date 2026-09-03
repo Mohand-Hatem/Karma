@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Karma - Account Setup</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom styles for specific states to keep HTML clean */
+        .input-base {
+            @apply w-full border border-outline-variant rounded-lg px-space-4 py-space-3 font-body-md text-body-md text-on-surface bg-surface-container-lowest transition-colors duration-200 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary placeholder-on-surface-variant/50;
+        }
+        .label-base {
+            @apply block font-label-md text-label-md text-on-surface-variant mb-space-2;
+        }
+    </style>
+<!-- Tailwind Configuration -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-container": "#006f63",
+                        "on-secondary-fixed-variant": "#005047",
+                        "on-surface": "#191b23",
+                        "surface-tint": "#0053db",
+                        "on-secondary-fixed": "#00201c",
+                        "surface-dim": "#d9d9e5",
+                        "surface-container-highest": "#e1e2ed",
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        "secondary-fixed": "#79f7e3",
+                        "tertiary-fixed-dim": "#ffb596",
+                        "secondary-container": "#76f4e0",
+                        "background": "#faf8ff",
+                        "surface-container-high": "#e7e7f3",
+                        "inverse-primary": "#b4c5ff",
+                        "outline": "#737686",
+                        "amber-500": "#f59e0b",
+                        "surface-container-low": "#f3f3fe",
+                        "inverse-on-surface": "#f0f0fb",
+                        "on-primary-container": "#eeefff",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "primary-container": "#2563eb",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed": "#360f00",
+                        "on-primary": "#ffffff",
+                        "outline-variant": "#c3c6d7",
+                        "error": "#ba1a1a",
+                        "surface-variant": "#e1e2ed",
+                        "slate-900": "#0f172a",
+                        "on-surface-variant": "#434655",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#bc4800",
+                        "on-tertiary-container": "#ffede6",
+                        "error-container": "#ffdad6",
+                        "on-tertiary": "#ffffff",
+                        "primary": "#004ac6",
+                        "secondary-fixed-dim": "#59dbc7",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed": "#00174b",
+                        "tertiary": "#943700",
+                        "red-500": "#ef4444",
+                        "inverse-surface": "#2e3039",
+                        "slate-50": "#f8fafc",
+                        "on-background": "#191b23",
+                        "primary-fixed": "#dbe1ff",
+                        "surface-bright": "#faf8ff",
+                        "emerald-500": "#10b981",
+                        "surface-container": "#ededf9",
+                        "midnight-navy": "#0f2942",
+                        "secondary": "#006b5f",
+                        "tertiary-fixed": "#ffdbcd",
+                        "surface": "#faf8ff",
+                        "on-error": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "space-8": "32px",
+                        "space-6": "24px",
+                        "space-12": "48px",
+                        "space-4": "16px",
+                        "sidebar-expanded": "256px",
+                        "space-2": "8px",
+                        "sidebar-collapsed": "68px",
+                        "space-3": "12px",
+                        "space-1": "4px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg": ["30px", { "lineHeight": "38px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-xl": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background min-h-screen flex flex-col items-center justify-center p-space-4 sm:p-space-8 text-on-surface font-body-md antialiased">
+<!-- Brand Anchor outside the main card -->
+<div class="mb-space-8 text-center flex items-center justify-center gap-space-2">
+<span class="material-symbols-outlined text-primary text-[32px]" data-weight="fill" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Karma</span>
+</div>
+<!-- Main Setup Card -->
+<main class="w-full max-w-[500px] bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm p-space-6 sm:p-space-8">
+<!-- Header Section -->
+<div class="text-center mb-space-8">
+<div class="w-16 h-16 mx-auto bg-surface-container rounded-lg border border-outline-variant flex items-center justify-center mb-space-4 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A modern, abstract geometric logo for an educational institution named Al-Amal Academy. The design is sleek, using sharp lines and a color palette of deep navy and bright white, set against a pristine, light-mode background. It conveys professionalism and academic excellence." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSnbjNnOvl6A6ubPN5JYNa7vmAe-hsc21v6CMJBqMV4ouzg0jaJnJdLIf-CK7dx1Vjx2MgLho9mzaQQl3Ku00BZPno7iP7tf41DeI9ApFFuSoO-_usHtjXIWixUuejM1SgOn99lNABCujavtwrmAXwKyAGcwmlJ_zdjcD8YFq8QouMDWIMqvNbo6e0VmSiP9KkHOwPu1w7i1dmcGVGdscZ3yT2YxuecFUmwdlGmLh0wC2e6lwbXQqIgQ"/>
+</div>
+<h1 class="font-headline-md text-headline-md text-on-surface mb-space-2">Welcome to Al-Amal Academy</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                You have been invited to join as <strong class="text-on-surface font-medium">Teacher</strong>. Complete your profile to get started.
+            </p>
+</div>
+<form class="space-y-space-6" onsubmit="event.preventDefault();">
+<!-- Email Field (Read-only) -->
+<div>
+<label class="label-base" for="email">Email Address</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-space-4 top-1/2 -translate-y-1/2 text-on-surface-variant/70 text-[20px]">mail</span>
+<input class="w-full border border-outline-variant rounded-lg px-space-4 pl-10 py-space-3 font-body-md text-body-md text-on-surface-variant bg-surface-container-low cursor-not-allowed" disabled="" id="email" readonly="" type="email" value="ahmed.hassan@alamal.edu"/>
+</div>
+</div>
+<!-- Full Name Field -->
+<div>
+<label class="label-base" for="fullname">Full Name</label>
+<input class="input-base" id="fullname" placeholder="e.g. Ahmed Hassan" type="text"/>
+</div>
+<!-- Password Fields -->
+<div class="space-y-space-4">
+<div>
+<label class="label-base" for="password">Password</label>
+<div class="relative">
+<input class="input-base pr-10" id="password" placeholder="Create a secure password" type="password"/>
+<button aria-label="Toggle password visibility" class="absolute right-space-4 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-on-surface focus:outline-none" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility_off</span>
+</button>
+</div>
+</div>
+<!-- Password Strength Checklist -->
+<div class="bg-surface-container py-space-3 px-space-4 rounded-lg border border-outline-variant/50">
+<p class="font-label-sm text-label-sm text-on-surface mb-space-2 uppercase">Password Requirements</p>
+<ul class="space-y-1">
+<li class="flex items-center gap-space-2 text-on-surface-variant font-body-sm text-body-sm" id="req-length">
+<span class="material-symbols-outlined text-[16px]">close</span>
+                            8+ characters
+                        </li>
+<li class="flex items-center gap-space-2 text-on-surface-variant font-body-sm text-body-sm" id="req-upper">
+<span class="material-symbols-outlined text-[16px]">close</span>
+                            Uppercase letter
+                        </li>
+<li class="flex items-center gap-space-2 text-on-surface-variant font-body-sm text-body-sm" id="req-number">
+<span class="material-symbols-outlined text-[16px]">close</span>
+                            Number
+                        </li>
+<li class="flex items-center gap-space-2 text-on-surface-variant font-body-sm text-body-sm" id="req-symbol">
+<span class="material-symbols-outlined text-[16px]">close</span>
+                            Special symbol
+                        </li>
+</ul>
+</div>
+<div>
+<label class="label-base" for="confirm_password">Confirm Password</label>
+<input class="input-base" id="confirm_password" placeholder="Re-enter password" type="password"/>
+</div>
+</div>
+<hr class="border-t border-outline-variant my-space-6"/>
+<!-- Preferences Section -->
+<div class="space-y-space-4">
+<h3 class="font-label-md text-label-md text-on-surface font-semibold uppercase tracking-wider text-xs">System Preferences</h3>
+<div class="grid grid-cols-1 gap-space-4">
+<div>
+<label class="label-base text-sm font-normal" for="timezone">Timezone</label>
+<div class="relative">
+<select class="input-base appearance-none pr-10 cursor-pointer text-sm" id="timezone">
+<option selected="" value="UTC+2">Africa/Cairo (UTC+2)</option>
+<option value="UTC+3">Asia/Riyadh (UTC+3)</option>
+<option value="UTC+4">Asia/Dubai (UTC+4)</option>
+<option value="UTC">Europe/London (UTC)</option>
+</select>
+<span class="material-symbols-outlined absolute right-space-4 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none text-[20px]">expand_more</span>
+</div>
+</div>
+<div>
+<label class="label-base text-sm font-normal">Preferred Interface Language</label>
+<div class="flex rounded-lg border border-outline-variant overflow-hidden p-1 bg-surface-container">
+<label class="flex-1 cursor-pointer">
+<input checked="" class="peer sr-only" name="language" type="radio" value="en"/>
+<div class="text-center py-2 px-4 rounded-md font-label-md text-label-md text-on-surface-variant peer-checked:bg-surface-container-lowest peer-checked:text-on-surface peer-checked:shadow-sm transition-all">
+                                    English
+                                </div>
+</label>
+<label class="flex-1 cursor-pointer">
+<input class="peer sr-only" name="language" type="radio" value="ar"/>
+<div class="text-center py-2 px-4 rounded-md font-label-md text-label-md text-on-surface-variant peer-checked:bg-surface-container-lowest peer-checked:text-on-surface peer-checked:shadow-sm transition-all">
+                                    العربية
+                                </div>
+</label>
+</div>
+</div>
+</div>
+</div>
+<!-- Submit Action -->
+<div class="pt-space-4">
+<button class="w-full bg-primary hover:bg-primary-fixed-dim text-on-primary font-label-md text-label-md py-space-3 px-space-6 rounded-lg transition-colors flex items-center justify-center gap-space-2" type="submit">
+                    Complete Account Setup & Enter Dashboard
+                    <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+</div>
+</form>
+</main>
+<!-- Simple Script for Visual Feedback (Interactive mock) -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const passwordInput = document.getElementById('password');
+            const reqs = {
+                length: { el: document.getElementById('req-length'), regex: /.{8,}/ },
+                upper: { el: document.getElementById('req-upper'), regex: /[A-Z]/ },
+                number: { el: document.getElementById('req-number'), regex: /[0-9]/ },
+                symbol: { el: document.getElementById('req-symbol'), regex: /[^A-Za-z0-9]/ }
+            };
+
+            passwordInput.addEventListener('input', (e) => {
+                const val = e.target.value;
+                for (const key in reqs) {
+                    const req = reqs[key];
+                    const icon = req.el.querySelector('.material-symbols-outlined');
+                    if (req.regex.test(val)) {
+                        req.el.classList.remove('text-on-surface-variant');
+                        req.el.classList.add('text-secondary');
+                        icon.textContent = 'check';
+                        icon.classList.add('text-secondary');
+                    } else {
+                        req.el.classList.add('text-on-surface-variant');
+                        req.el.classList.remove('text-secondary');
+                        icon.textContent = 'close';
+                        icon.classList.remove('text-secondary');
+                    }
+                }
+            });
+        });
+    </script>
+</body></html>

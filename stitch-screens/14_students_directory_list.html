@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+
+<html dir="ltr" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Students Directory - Karma</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-container": "#006f63",
+                        "on-secondary-fixed-variant": "#005047",
+                        "on-surface": "#191b23",
+                        "surface-tint": "#0053db",
+                        "on-secondary-fixed": "#00201c",
+                        "surface-dim": "#d9d9e5",
+                        "surface-container-highest": "#e1e2ed",
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        "secondary-fixed": "#79f7e3",
+                        "tertiary-fixed-dim": "#ffb596",
+                        "secondary-container": "#76f4e0",
+                        "background": "#faf8ff",
+                        "surface-container-high": "#e7e7f3",
+                        "inverse-primary": "#b4c5ff",
+                        "outline": "#737686",
+                        "amber-500": "#f59e0b",
+                        "surface-container-low": "#f3f3fe",
+                        "inverse-on-surface": "#f0f0fb",
+                        "on-primary-container": "#eeefff",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "primary-container": "#2563eb",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed": "#360f00",
+                        "on-primary": "#ffffff",
+                        "outline-variant": "#c3c6d7",
+                        "error": "#ba1a1a",
+                        "surface-variant": "#e1e2ed",
+                        "slate-900": "#0f172a",
+                        "on-surface-variant": "#434655",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#bc4800",
+                        "on-tertiary-container": "#ffede6",
+                        "error-container": "#ffdad6",
+                        "on-tertiary": "#ffffff",
+                        "primary": "#004ac6",
+                        "secondary-fixed-dim": "#59dbc7",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed": "#00174b",
+                        "tertiary": "#943700",
+                        "red-500": "#ef4444",
+                        "inverse-surface": "#2e3039",
+                        "slate-50": "#f8fafc",
+                        "on-background": "#191b23",
+                        "primary-fixed": "#dbe1ff",
+                        "surface-bright": "#faf8ff",
+                        "emerald-500": "#10b981",
+                        "surface-container": "#ededf9",
+                        "midnight-navy": "#0f2942",
+                        "secondary": "#006b5f",
+                        "tertiary-fixed": "#ffdbcd",
+                        "surface": "#faf8ff",
+                        "on-error": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "space-8": "32px",
+                        "space-6": "24px",
+                        "space-12": "48px",
+                        "space-4": "16px",
+                        "sidebar-expanded": "256px",
+                        "space-2": "8px",
+                        "sidebar-collapsed": "68px",
+                        "space-3": "12px",
+                        "space-1": "4px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg": ["30px", { "lineHeight": "38px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-xl": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined[data-weight="fill"] {
+            font-variation-settings: 'FILL' 1;
+        }
+        
+        /* Checkbox custom style */
+        .karma-checkbox:checked {
+            background-color: theme('colors.primary');
+            border-color: theme('colors.primary');
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md antialiased min-h-screen flex">
+<!-- SideNavBar -->
+<aside class="hidden md:flex flex-col h-screen sticky top-0 left-0 w-64 bg-surface border-r border-outline-variant py-space-6 px-space-4 shrink-0">
+<div class="mb-space-8 flex items-center gap-space-3 px-space-2">
+<div class="w-8 h-8 rounded-lg bg-primary text-on-primary flex items-center justify-center font-bold">K</div>
+<div>
+<h2 class="text-h2 font-h2 font-bold text-primary">Karma SaaS</h2>
+<p class="text-label-sm font-label-sm text-on-surface-variant">AY 2023-24</p>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-space-1 overflow-y-auto">
+<a class="flex items-center gap-space-3 px-space-3 py-space-2 rounded-lg text-text-muted hover:bg-surface-subtle transition-colors scale-98 active:scale-95 duration-150 group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">dashboard</span>
+<span class="text-body-medium font-body-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-space-3 px-space-3 py-space-2 rounded-lg text-text-muted hover:bg-surface-subtle transition-colors scale-98 active:scale-95 duration-150 group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">school</span>
+<span class="text-body-medium font-body-medium">Academic</span>
+</a>
+<a class="flex items-center gap-space-3 px-space-3 py-space-2 rounded-lg text-primary font-bold bg-primary/5 hover:bg-surface-subtle transition-colors scale-98 active:scale-95 duration-150 group" href="#">
+<span class="material-symbols-outlined text-primary" data-weight="fill">group</span>
+<span class="text-body-medium font-body-medium">Student Info</span>
+</a>
+<a class="flex items-center gap-space-3 px-space-3 py-space-2 rounded-lg text-text-muted hover:bg-surface-subtle transition-colors scale-98 active:scale-95 duration-150 group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">calendar_today</span>
+<span class="text-body-medium font-body-medium">Attendance</span>
+</a>
+<a class="flex items-center gap-space-3 px-space-3 py-space-2 rounded-lg text-text-muted hover:bg-surface-subtle transition-colors scale-98 active:scale-95 duration-150 group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">grade</span>
+<span class="text-body-medium font-body-medium">Gradebook</span>
+</a>
+<a class="flex items-center gap-space-3 px-space-3 py-space-2 rounded-lg text-text-muted hover:bg-surface-subtle transition-colors scale-98 active:scale-95 duration-150 group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">settings</span>
+<span class="text-body-medium font-body-medium">Settings</span>
+</a>
+</nav>
+<div class="mt-auto pt-space-4 border-t border-outline-variant flex flex-col gap-space-1">
+<button class="w-full bg-primary text-on-primary py-space-2 rounded-lg text-label-md font-label-md mb-space-4 hover:bg-primary/90 transition-colors">Quick Action</button>
+<a class="flex items-center gap-space-3 px-space-3 py-space-2 rounded-lg text-text-muted hover:bg-surface-subtle transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">help</span>
+<span class="text-body-medium font-body-medium">Help Center</span>
+</a>
+<a class="flex items-center gap-space-3 px-space-3 py-space-2 rounded-lg text-text-muted hover:bg-surface-subtle transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">support_agent</span>
+<span class="text-body-medium font-body-medium">Support</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col min-w-0">
+<!-- TopNavBar -->
+<header class="docked full-width top-0 sticky z-40 bg-surface/80 backdrop-blur-md border-b border-outline-variant flex justify-between items-center h-16 px-space-6 w-full">
+<div class="flex items-center gap-space-6">
+<!-- Mobile menu button -->
+<button class="md:hidden text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h1 class="text-h1 font-h1 font-black text-text-primary hidden md:block">Karma</h1>
+<nav class="hidden md:flex items-center gap-space-6 ml-space-4">
+<a class="text-primary border-b-2 border-primary pb-1 text-caption font-caption transition-all duration-200 ease-in-out" href="#">Directory</a>
+<a class="text-text-muted hover:text-primary text-caption font-caption transition-all duration-200 ease-in-out" href="#">Calendar</a>
+<a class="text-text-muted hover:text-primary text-caption font-caption transition-all duration-200 ease-in-out" href="#">Reports</a>
+</nav>
+</div>
+<div class="flex items-center gap-space-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">search</span>
+<input class="pl-10 pr-4 py-1.5 bg-surface-container-low border border-outline-variant rounded-lg text-body-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent w-48 transition-all" placeholder="Search..." type="text"/>
+</div>
+<div class="flex items-center gap-space-2">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-1">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors p-1 sm:hidden">
+<span class="material-symbols-outlined">search</span>
+</button>
+</div>
+<div class="h-6 w-px bg-outline-variant mx-1 hidden sm:block"></div>
+<button class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary hidden sm:block">EN/AR</button>
+<button class="bg-primary text-on-primary px-space-3 py-1.5 rounded-lg text-label-sm font-label-sm hover:bg-primary/90 transition-colors hidden sm:block">Create New</button>
+<div class="w-8 h-8 rounded-full bg-surface-variant overflow-hidden ml-2 cursor-pointer border border-outline-variant">
+<img alt="User Avatar" class="w-full h-full object-cover" data-alt="Professional headshot of a school administrator in a bright office setting. High key lighting, modern academic vibe." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuGniPmJPsG-2FeZhLEwGf3BnHLRHyQ5emqHnsR7w1HQ4uayLe3930C2UdloKjj6qjufCIibRZBQzjpita6D-Jv8IGSlx86WtRo5kQy0ahmwJGwP3MYhX7mzww27CG2m8maePVEe25LgVjkE0RS9SaaV6jaz6gNli47Nv3XCFqCnh8CFlPx-7nQKPClZnq8R_Hn_2F5Cvz8idnOrTsiuaLEpINjiGjL3IdGCbOGtFYSBgmwkrO_MMKqg"/>
+</div>
+</div>
+</header>
+<!-- Page Content -->
+<div class="flex-1 overflow-y-auto p-space-4 md:p-space-6 bg-surface-container-lowest">
+<div class="max-w-7xl mx-auto space-y-space-6">
+<!-- Page Header -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-4">
+<div>
+<h1 class="text-headline-lg font-headline-lg text-on-surface">Students Directory <span class="text-headline-sm text-on-surface-variant font-normal">(1,248 students)</span></h1>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-1">Manage student records, view details, and export data.</p>
+</div>
+<div class="flex items-center gap-space-3 shrink-0">
+<button class="flex items-center gap-2 px-space-4 py-2 bg-surface border border-outline-variant rounded-lg text-label-md font-label-md hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                            Export CSV
+                        </button>
+<button class="flex items-center gap-2 px-space-4 py-2 bg-primary text-on-primary rounded-lg text-label-md font-label-md hover:bg-primary/90 transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                            Enroll Student
+                        </button>
+</div>
+</div>
+<!-- Filter Toolbar -->
+<div class="bg-surface border border-outline-variant rounded-lg p-space-4 shadow-sm flex flex-col md:flex-row gap-space-4 items-end">
+<div class="flex-1 w-full relative">
+<label class="block text-label-sm font-label-sm text-on-surface-variant mb-1">Search</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-bright border border-outline-variant rounded-lg text-body-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" placeholder="Search by name, ID code..." type="text"/>
+</div>
+</div>
+<div class="w-full md:w-40 shrink-0">
+<label class="block text-label-sm font-label-sm text-on-surface-variant mb-1">Grade Level</label>
+<div class="relative">
+<select class="w-full pl-3 pr-8 py-2 bg-surface-bright border border-outline-variant rounded-lg text-body-sm appearance-none focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent cursor-pointer">
+<option value="">All Grades</option>
+<option value="9">Grade 9</option>
+<option value="10">Grade 10</option>
+<option value="11">Grade 11</option>
+<option value="12">Grade 12</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+</div>
+<div class="w-full md:w-32 shrink-0">
+<label class="block text-label-sm font-label-sm text-on-surface-variant mb-1">Class</label>
+<div class="relative">
+<select class="w-full pl-3 pr-8 py-2 bg-surface-bright border border-outline-variant rounded-lg text-body-sm appearance-none focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent cursor-pointer">
+<option value="">All Classes</option>
+<option value="A">Section A</option>
+<option value="B">Section B</option>
+<option value="C">Section C</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+</div>
+<div class="w-full md:w-40 shrink-0">
+<label class="block text-label-sm font-label-sm text-on-surface-variant mb-1">Status</label>
+<div class="relative">
+<select class="w-full pl-3 pr-8 py-2 bg-surface-bright border border-outline-variant rounded-lg text-body-sm appearance-none focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent cursor-pointer">
+<option value="">Active Only</option>
+<option value="active">Active</option>
+<option value="transferred">Transferred</option>
+<option value="archived">Archived</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+</div>
+<button class="hidden md:flex h-10 w-10 shrink-0 items-center justify-center bg-surface-container border border-outline-variant rounded-lg hover:bg-surface-container-highest transition-colors text-on-surface-variant" title="Clear Filters">
+<span class="material-symbols-outlined text-[20px]">filter_alt_off</span>
+</button>
+</div>
+<!-- Data Table -->
+<div class="bg-surface border border-outline-variant rounded-lg shadow-sm overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant">
+<th class="py-space-3 px-space-4 w-12">
+<input class="karma-checkbox w-4 h-4 rounded border-outline-variant text-primary focus:ring-primary cursor-pointer" type="checkbox"/>
+</th>
+<th class="py-space-3 px-space-4 text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Student</th>
+<th class="py-space-3 px-space-4 text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Code</th>
+<th class="py-space-3 px-space-4 text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Grade &amp; Class</th>
+<th class="py-space-3 px-space-4 text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Primary Parent</th>
+<th class="py-space-3 px-space-4 text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Attendance</th>
+<th class="py-space-3 px-space-4 text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Status</th>
+<th class="py-space-3 px-space-4 text-right w-16"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low transition-colors group cursor-pointer">
+<td class="py-space-3 px-space-4">
+<input class="karma-checkbox w-4 h-4 rounded border-outline-variant text-primary focus:ring-primary cursor-pointer" type="checkbox"/>
+</td>
+<td class="py-space-3 px-space-4">
+<div class="flex items-center gap-space-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest overflow-hidden border border-outline-variant shrink-0">
+<img alt="Student photo" class="w-full h-full object-cover" data-alt="Headshot of a smiling female high school student wearing a navy uniform blazer. Studio lighting, clean white background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0wf3QNEg4GQI82Tn_qPiAWtDrf2mRr06b4IpTwhXBswjUNw_8HA6wyt-NCZi27YPmOj4l7tGcWGKOgfXSqLJCPTs0siU456_7V2c7l_xxzoN0GkdpQoD1lNyU-636nHeA9Rw0IcdvWCI8wX3JkA11l8IUeeTR-ucymZbpF9cHsLxL2kpWqS1jiK2MRzDGuOagzOrOKyK8eFCnfbmVnQCHcZ73yhSk1KVldTF2VQXLPgITT6kfYgW1qw"/>
+</div>
+<div>
+<div class="text-body-sm font-label-md text-on-surface group-hover:text-primary transition-colors">Sarah Al-Fayed</div>
+<div class="text-label-sm font-body-sm text-on-surface-variant">DOB: 12 May 2008</div>
+</div>
+</div>
+</td>
+<td class="py-space-3 px-space-4 text-body-sm font-body-sm text-on-surface-variant font-mono">
+                                        STU-24-1042
+                                    </td>
+<td class="py-space-3 px-space-4">
+<div class="text-body-sm font-label-md text-on-surface">Grade 10</div>
+<div class="text-label-sm font-body-sm text-on-surface-variant">Section A</div>
+</td>
+<td class="py-space-3 px-space-4">
+<div class="text-body-sm font-body-sm text-on-surface">Tariq Al-Fayed</div>
+<div class="text-label-sm font-body-sm text-on-surface-variant">+971 50 123 4567</div>
+</td>
+<td class="py-space-3 px-space-4">
+<div class="flex items-center gap-2">
+<span class="text-body-sm font-label-md text-on-surface">98%</span>
+<div class="w-16 h-1.5 bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-emerald-500 w-[98%]"></div>
+</div>
+</div>
+</td>
+<td class="py-space-3 px-space-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-500 border border-emerald-500/20">Active</span>
+</td>
+<td class="py-space-3 px-space-4 text-right">
+<button class="text-on-surface-variant hover:text-primary p-1 rounded-md hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low transition-colors group cursor-pointer">
+<td class="py-space-3 px-space-4">
+<input class="karma-checkbox w-4 h-4 rounded border-outline-variant text-primary focus:ring-primary cursor-pointer" type="checkbox"/>
+</td>
+<td class="py-space-3 px-space-4">
+<div class="flex items-center gap-space-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-label-md font-bold text-on-surface-variant border border-outline-variant shrink-0">
+                                                MK
+                                            </div>
+<div>
+<div class="text-body-sm font-label-md text-on-surface group-hover:text-primary transition-colors">Marcus Klein</div>
+<div class="text-label-sm font-body-sm text-on-surface-variant">DOB: 03 Nov 2007</div>
+</div>
+</div>
+</td>
+<td class="py-space-3 px-space-4 text-body-sm font-body-sm text-on-surface-variant font-mono">
+                                        STU-24-0891
+                                    </td>
+<td class="py-space-3 px-space-4">
+<div class="text-body-sm font-label-md text-on-surface">Grade 11</div>
+<div class="text-label-sm font-body-sm text-on-surface-variant">Section C</div>
+</td>
+<td class="py-space-3 px-space-4">
+<div class="text-body-sm font-body-sm text-on-surface">Elena Klein</div>
+<div class="text-label-sm font-body-sm text-on-surface-variant">+971 55 987 6543</div>
+</td>
+<td class="py-space-3 px-space-4">
+<div class="flex items-center gap-2">
+<span class="text-body-sm font-label-md text-on-surface">85%</span>
+<div class="w-16 h-1.5 bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-amber-500 w-[85%]"></div>
+</div>
+</div>
+</td>
+<td class="py-space-3 px-space-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-500 border border-emerald-500/20">Active</span>
+</td>
+<td class="py-space-3 px-space-4 text-right">
+<button class="text-on-surface-variant hover:text-primary p-1 rounded-md hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low transition-colors group cursor-pointer">
+<td class="py-space-3 px-space-4">
+<input class="karma-checkbox w-4 h-4 rounded border-outline-variant text-primary focus:ring-primary cursor-pointer" type="checkbox"/>
+</td>
+<td class="py-space-3 px-space-4">
+<div class="flex items-center gap-space-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest overflow-hidden border border-outline-variant shrink-0">
+<img alt="Student photo" class="w-full h-full object-cover" data-alt="Headshot of a male middle school student looking serious. Wearing a light blue school polo. Bright studio lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPlH4kP7SovbDo8tYu0GWpEHQbB4IIK77jO0zedM1dz_tXqNSX3ZiWRZnMZKRlC4X4FCEkI6gZlHpDc9EXNRfBEDZu74HIc6LrWz0_NroxZLbv_O0bEFZyGeZYzvSj4tEy7TNAEnI4fPIzORF1-DydiuuyMPpWG2ZpAN1zBtxWqQzsMkxe9xGxEfBv-F1DcWZ42sOZ4Ayy0nOyotthjdBkmgv5N4yYoevJVRxc9Lv6HLoT6SxOdsih_w"/>
+</div>
+<div>
+<div class="text-body-sm font-label-md text-on-surface group-hover:text-primary transition-colors">Omar Hassan</div>
+<div class="text-label-sm font-body-sm text-on-surface-variant">DOB: 22 Jan 2010</div>
+</div>
+</div>
+</td>
+<td class="py-space-3 px-space-4 text-body-sm font-body-sm text-on-surface-variant font-mono">
+                                        STU-23-4412
+                                    </td>
+<td class="py-space-3 px-space-4">
+<div class="text-body-sm font-label-md text-on-surface">Grade 8</div>
+<div class="text-label-sm font-body-sm text-on-surface-variant">Section B</div>
+</td>
+<td class="py-space-3 px-space-4">
+<div class="text-body-sm font-body-sm text-on-surface">Fatima Hassan</div>
+<div class="text-label-sm font-body-sm text-on-surface-variant">+971 52 345 6789</div>
+</td>
+<td class="py-space-3 px-space-4">
+<div class="flex items-center gap-2">
+<span class="text-body-sm font-label-md text-on-surface">92%</span>
+<div class="w-16 h-1.5 bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-emerald-500 w-[92%]"></div>
+</div>
+</div>
+</td>
+<td class="py-space-3 px-space-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-outline-variant text-on-surface-variant border border-outline">Transferred</span>
+</td>
+<td class="py-space-3 px-space-4 text-right">
+<button class="text-on-surface-variant hover:text-primary p-1 rounded-md hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="px-space-4 py-space-3 border-t border-outline-variant bg-surface flex items-center justify-between">
+<div class="text-body-sm font-body-sm text-on-surface-variant">
+                            Showing <span class="font-medium text-on-surface">1</span> to <span class="font-medium text-on-surface">10</span> of <span class="font-medium text-on-surface">1,248</span> students
+                        </div>
+<div class="flex items-center gap-1">
+<button class="px-3 py-1.5 border border-outline-variant rounded-md text-body-sm font-label-md text-on-surface-variant hover:bg-surface-container disabled:opacity-50 disabled:cursor-not-allowed" disabled="">Previous</button>
+<div class="hidden sm:flex gap-1">
+<button class="w-8 h-8 flex items-center justify-center rounded-md bg-primary text-on-primary text-body-sm font-label-md">1</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-md hover:bg-surface-container text-on-surface text-body-sm font-label-md transition-colors">2</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-md hover:bg-surface-container text-on-surface text-body-sm font-label-md transition-colors">3</button>
+<span class="w-8 h-8 flex items-center justify-center text-on-surface-variant">...</span>
+<button class="w-8 h-8 flex items-center justify-center rounded-md hover:bg-surface-container text-on-surface text-body-sm font-label-md transition-colors">125</button>
+</div>
+<button class="px-3 py-1.5 border border-outline-variant rounded-md text-body-sm font-label-md text-on-surface hover:bg-surface-container transition-colors">Next</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

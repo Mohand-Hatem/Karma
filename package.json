@@ -11,7 +11,9 @@
     "typecheck": "npm run typecheck --workspaces --if-present",
     "test": "npm run test --workspaces --if-present",
     "build": "npm run build --workspaces --if-present",
-    "db:generate": "npm run db:generate --workspace=@karma/api"
+    "db:generate": "npm run db:generate --workspace=@karma/api",
+    "db:seed": "npm run db:seed --workspace=@karma/api",
+    "db:clean-tests": "npm run db:clean-tests --workspace=@karma/api"
   },
   "devDependencies": {
     "eslint": "^9.39.5",

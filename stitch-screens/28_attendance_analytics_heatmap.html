@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+
+<html dir="ltr" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Attendance Analytics - Karma SaaS</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        "outline-variant": "#c3c6d7",
+                        "red-500": "#ef4444",
+                        "midnight-navy": "#0f2942",
+                        "surface-variant": "#e1e2ed",
+                        "primary": "#004ac6",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "on-error-container": "#93000a",
+                        "secondary-container": "#76f4e0",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#b4c5ff",
+                        "primary-fixed": "#dbe1ff",
+                        "tertiary": "#943700",
+                        "tertiary-fixed-dim": "#ffb596",
+                        "outline": "#737686",
+                        "on-surface": "#191b23",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "surface-dim": "#d9d9e5",
+                        "surface-container": "#ededf9",
+                        "surface": "#faf8ff",
+                        "error": "#ba1a1a",
+                        "inverse-on-surface": "#f0f0fb",
+                        "tertiary-fixed": "#ffdbcd",
+                        "on-secondary-fixed-variant": "#005047",
+                        "surface-bright": "#faf8ff",
+                        "secondary": "#006b5f",
+                        "on-primary-fixed": "#00174b",
+                        "primary-container": "#2563eb",
+                        "on-primary-container": "#eeefff",
+                        "tertiary-container": "#bc4800",
+                        "surface-tint": "#0053db",
+                        "surface-container-high": "#e7e7f3",
+                        "on-surface-variant": "#434655",
+                        "emerald-500": "#10b981",
+                        "secondary-fixed-dim": "#59dbc7",
+                        "surface-container-low": "#f3f3fe",
+                        "on-tertiary-fixed": "#360f00",
+                        "error-container": "#ffdad6",
+                        "inverse-surface": "#2e3039",
+                        "surface-container-highest": "#e1e2ed",
+                        "amber-500": "#f59e0b",
+                        "background": "#faf8ff",
+                        "on-primary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#006f63",
+                        "on-secondary-fixed": "#00201c",
+                        "slate-50": "#f8fafc",
+                        "slate-900": "#0f172a",
+                        "secondary-fixed": "#79f7e3",
+                        "on-background": "#191b23",
+                        "on-tertiary-container": "#ffede6"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "space-3": "12px",
+                        "sidebar-expanded": "256px",
+                        "space-6": "24px",
+                        "space-2": "8px",
+                        "space-8": "32px",
+                        "space-12": "48px",
+                        "space-1": "4px",
+                        "sidebar-collapsed": "68px",
+                        "space-4": "16px"
+                    },
+                    fontFamily: {
+                        "body-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-xl": ["Inter"]
+                    },
+                    fontSize: {
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg": ["30px", { "lineHeight": "38px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-xl": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .heatmap-cell { width: 100%; aspect-ratio: 1; border-radius: 4px; }
+        .heatmap-high { background-color: #006b5f; }
+        .heatmap-medium { background-color: #59dbc7; }
+        .heatmap-low { background-color: #ffdad6; }
+        .heatmap-empty { background-color: #e7e7f3; }
+        
+        /* Custom scrollbar for table */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #faf8ff;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #c3c6d7;
+            border-radius: 3px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #737686;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased min-h-screen flex">
+<!-- SideNavBar (Shared Component) -->
+<aside class="bg-surface dark:bg-inverse-surface border-r border-outline-variant dark:border-outline flat no shadows scale-98 active:scale-95 duration-150 flex flex-col h-full py-space-6 px-space-4 w-64 h-screen sticky top-0 left-0 hidden lg:flex">
+<!-- Brand -->
+<div class="flex items-center gap-3 mb-space-8 px-space-2">
+<div class="w-10 h-10 rounded bg-primary flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined" data-weight="fill">school</span>
+</div>
+<div>
+<h1 class="text-h2 font-h2 font-bold text-primary dark:text-inverse-primary text-headline-sm">Karma SaaS</h1>
+<p class="text-label-sm font-label-sm text-on-surface-variant">AY 2023-24</p>
+</div>
+</div>
+<!-- Navigation Links -->
+<nav class="flex-1 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-space-4 py-space-3 rounded text-text-muted dark:text-on-surface-variant hover:bg-surface-subtle dark:hover:bg-surface-container-high transition-colors text-body-md font-body-md" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-space-4 py-space-3 rounded text-text-muted dark:text-on-surface-variant hover:bg-surface-subtle dark:hover:bg-surface-container-high transition-colors text-body-md font-body-md" href="#">
+<span class="material-symbols-outlined">school</span>
+                Academic
+            </a>
+<a class="flex items-center gap-3 px-space-4 py-space-3 rounded text-text-muted dark:text-on-surface-variant hover:bg-surface-subtle dark:hover:bg-surface-container-high transition-colors text-body-md font-body-md" href="#">
+<span class="material-symbols-outlined">group</span>
+                Student Info
+            </a>
+<a class="flex items-center gap-3 px-space-4 py-space-3 rounded text-primary dark:text-primary-fixed-dim font-bold bg-surface-container hover:bg-surface-subtle dark:hover:bg-surface-container-high transition-colors text-body-md font-body-md" href="#">
+<span class="material-symbols-outlined" data-weight="fill">calendar_today</span>
+                Attendance
+            </a>
+<a class="flex items-center gap-3 px-space-4 py-space-3 rounded text-text-muted dark:text-on-surface-variant hover:bg-surface-subtle dark:hover:bg-surface-container-high transition-colors text-body-md font-body-md" href="#">
+<span class="material-symbols-outlined">grade</span>
+                Gradebook
+            </a>
+<a class="flex items-center gap-3 px-space-4 py-space-3 rounded text-text-muted dark:text-on-surface-variant hover:bg-surface-subtle dark:hover:bg-surface-container-high transition-colors text-body-md font-body-md" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Settings
+            </a>
+</nav>
+<!-- CTA & Footer -->
+<div class="mt-auto flex flex-col gap-4">
+<button class="bg-primary text-on-primary w-full py-space-3 rounded-lg text-label-md font-label-md hover:bg-on-primary-fixed-variant transition-colors">
+                Quick Action
+            </button>
+<div class="flex flex-col gap-1 border-t border-outline-variant pt-space-4">
+<a class="flex items-center gap-3 px-space-4 py-space-2 rounded text-on-surface-variant hover:bg-surface-container-high transition-colors text-label-md font-label-md" href="#">
+<span class="material-symbols-outlined text-[20px]">help</span>
+                    Help Center
+                </a>
+<a class="flex items-center gap-3 px-space-4 py-space-2 rounded text-on-surface-variant hover:bg-surface-container-high transition-colors text-label-md font-label-md" href="#">
+<span class="material-symbols-outlined text-[20px]">support_agent</span>
+                    Support
+                </a>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col min-w-0">
+<!-- TopNavBar (Shared Component) -->
+<header class="bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-md border-b border-outline-variant dark:border-outline flat no shadows transition-all duration-200 ease-in-out flex justify-between items-center h-16 px-space-6 w-full docked full-width top-0 sticky z-40">
+<div class="flex items-center gap-6">
+<!-- Mobile Menu Toggle (hidden on lg) -->
+<button class="lg:hidden text-on-surface-variant hover:text-primary">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<!-- Search Bar -->
+<div class="relative hidden sm:block w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container rounded-lg border border-outline-variant focus:border-primary focus:ring-2 focus:ring-primary/20 text-body-sm font-body-sm outline-none transition-all" placeholder="Search..." type="text"/>
+</div>
+</div>
+<!-- Top Nav Links -->
+<nav class="hidden md:flex gap-6 items-center">
+<a class="text-text-muted dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim text-caption font-caption" href="#">Directory</a>
+<a class="text-text-muted dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim text-caption font-caption" href="#">Calendar</a>
+<a class="text-text-muted dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim text-caption font-caption" href="#">Reports</a>
+</nav>
+<!-- Actions & Profile -->
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">search</span>
+</button>
+<div class="hidden sm:block h-6 w-px bg-outline-variant mx-2"></div>
+<button class="hidden sm:block text-label-md font-label-md text-on-surface-variant hover:text-primary">EN/AR</button>
+<button class="hidden sm:block bg-primary text-on-primary px-4 py-2 rounded-lg text-label-md font-label-md hover:bg-on-primary-fixed-variant transition-colors">
+                    Create New
+                </button>
+<img alt="User Avatar" class="w-8 h-8 rounded-full border border-outline-variant object-cover" data-alt="A professional headshot of a school administrator in a modern office setting. The lighting is bright and clean, typical of a professional environment. The person is looking slightly off-camera with a neutral expression." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAY_u0Z55ShkNKs8hqC5geRakxz8RSKGTAhpqNGIIzrsKBntXAvMKMlwBiMxHw4xhBENeGjeaPayWQZZucCBskGv-vI7qfME5ySnJqYA5mG6W2dpio3U0iWabNy5ZOZjQlen4Zac1DEeJZ5HHvPGRWE0NFletV13bL81n3JuLqFzKTrdzIehYoipCk3BapVbsVOJqaBwPX2Cgtl2xjwrNz0DgHNYiDUp1wEhXRXDnwGGJWBQ84jGwbBnw"/>
+</div>
+</header>
+<!-- Page Content Canvas -->
+<div class="flex-1 overflow-y-auto p-space-4 sm:p-space-6 lg:p-space-8">
+<div class="max-w-7xl mx-auto flex flex-col gap-space-6">
+<!-- Header & Filters -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+<div>
+<h2 class="text-headline-lg font-headline-lg text-on-surface">Attendance Analytics</h2>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-1">School-wide attendance overview and chronic absenteeism tracking.</p>
+</div>
+<div class="flex flex-wrap gap-3">
+<select class="bg-surface border border-outline-variant rounded-lg px-3 py-2 text-label-md font-label-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none">
+<option>AY 2023-24</option>
+<option>AY 2022-23</option>
+</select>
+<select class="bg-surface border border-outline-variant rounded-lg px-3 py-2 text-label-md font-label-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none">
+<option>Term 2</option>
+<option>Term 1</option>
+</select>
+<select class="bg-surface border border-outline-variant rounded-lg px-3 py-2 text-label-md font-label-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none">
+<option>All Classes</option>
+<option>Grade 10</option>
+<option>Grade 11</option>
+</select>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-space-6">
+<!-- KPI Cards (Row 1, Full Width) -->
+<div class="lg:col-span-3 grid grid-cols-1 sm:grid-cols-3 gap-space-6">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-space-6 flex items-center justify-between">
+<div>
+<p class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Average Daily Attendance</p>
+<p class="text-headline-xl font-headline-xl text-on-surface mt-2">94.2%</p>
+</div>
+<div class="w-12 h-12 rounded-full bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed">
+<span class="material-symbols-outlined text-[28px]">trending_up</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-space-6 flex items-center justify-between">
+<div>
+<p class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Chronically Absent</p>
+<p class="text-headline-xl font-headline-xl text-error mt-2">4.8%</p>
+</div>
+<div class="w-12 h-12 rounded-full bg-error-container flex items-center justify-center text-on-error-container">
+<span class="material-symbols-outlined text-[28px]">warning</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-space-6 flex items-center justify-between">
+<div>
+<p class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Perfect Attendance</p>
+<p class="text-headline-xl font-headline-xl text-primary mt-2">18%</p>
+</div>
+<div class="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center text-on-primary-fixed">
+<span class="material-symbols-outlined text-[28px]">stars</span>
+</div>
+</div>
+</div>
+<!-- Monthly Heatmap (Col 1-2) -->
+<div class="lg:col-span-2 bg-surface-container-lowest border border-outline-variant rounded-xl p-space-6">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Daily Attendance Rate</h3>
+<div class="flex gap-2 items-center text-label-sm font-label-sm text-on-surface-variant">
+<span>Low</span>
+<div class="w-3 h-3 heatmap-low rounded-sm"></div>
+<div class="w-3 h-3 heatmap-medium rounded-sm"></div>
+<div class="w-3 h-3 heatmap-high rounded-sm"></div>
+<span>High</span>
+</div>
+</div>
+<!-- Simulated Heatmap Grid -->
+<div class="grid grid-cols-7 gap-2">
+<!-- Days Header -->
+<div class="text-center text-label-sm font-label-sm text-on-surface-variant mb-2">Mon</div>
+<div class="text-center text-label-sm font-label-sm text-on-surface-variant mb-2">Tue</div>
+<div class="text-center text-label-sm font-label-sm text-on-surface-variant mb-2">Wed</div>
+<div class="text-center text-label-sm font-label-sm text-on-surface-variant mb-2">Thu</div>
+<div class="text-center text-label-sm font-label-sm text-on-surface-variant mb-2">Fri</div>
+<div class="text-center text-label-sm font-label-sm text-outline mb-2">Sat</div>
+<div class="text-center text-label-sm font-label-sm text-outline mb-2">Sun</div>
+<!-- Week 1 -->
+<div class="heatmap-cell heatmap-high" title="98%"></div>
+<div class="heatmap-cell heatmap-high" title="97%"></div>
+<div class="heatmap-cell heatmap-medium" title="92%"></div>
+<div class="heatmap-cell heatmap-high" title="96%"></div>
+<div class="heatmap-cell heatmap-low" title="84%"></div>
+<div class="heatmap-cell heatmap-empty"></div>
+<div class="heatmap-cell heatmap-empty"></div>
+<!-- Week 2 -->
+<div class="heatmap-cell heatmap-high" title="99%"></div>
+<div class="heatmap-cell heatmap-high" title="98%"></div>
+<div class="heatmap-cell heatmap-high" title="95%"></div>
+<div class="heatmap-cell heatmap-medium" title="91%"></div>
+<div class="heatmap-cell heatmap-high" title="96%"></div>
+<div class="heatmap-cell heatmap-empty"></div>
+<div class="heatmap-cell heatmap-empty"></div>
+<!-- Week 3 -->
+<div class="heatmap-cell heatmap-medium" title="93%"></div>
+<div class="heatmap-cell heatmap-low" title="86%"></div>
+<div class="heatmap-cell heatmap-medium" title="90%"></div>
+<div class="heatmap-cell heatmap-high" title="97%"></div>
+<div class="heatmap-cell heatmap-high" title="98%"></div>
+<div class="heatmap-cell heatmap-empty"></div>
+<div class="heatmap-cell heatmap-empty"></div>
+<!-- Week 4 -->
+<div class="heatmap-cell heatmap-high" title="96%"></div>
+<div class="heatmap-cell heatmap-high" title="95%"></div>
+<div class="heatmap-cell heatmap-high" title="97%"></div>
+<div class="heatmap-cell heatmap-high" title="99%"></div>
+<div class="heatmap-cell heatmap-medium" title="92%"></div>
+<div class="heatmap-cell heatmap-empty"></div>
+<div class="heatmap-cell heatmap-empty"></div>
+</div>
+</div>
+<!-- Grade 10 Comparison Chart (Col 3) -->
+<div class="lg:col-span-1 bg-surface-container-lowest border border-outline-variant rounded-xl p-space-6 flex flex-col">
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-4">Grade 10 Attendance</h3>
+<div class="flex-1 min-h-[250px] relative">
+<canvas id="gradeChart"></canvas>
+</div>
+</div>
+<!-- Chronic Absenteeism Table (Full Width) -->
+<div class="lg:col-span-3 bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden flex flex-col">
+<div class="p-space-6 border-b border-outline-variant flex justify-between items-center bg-surface-bright">
+<div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-error">flag</span>
+                                    Chronic Absenteeism Watchlist
+                                </h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-1">Students with attendance &lt; 85%.</p>
+</div>
+<button class="flex items-center gap-2 text-primary hover:text-on-primary-fixed-variant text-label-md font-label-md transition-colors">
+                                Export CSV <span class="material-symbols-outlined text-[18px]">download</span>
+</button>
+</div>
+<div class="overflow-x-auto custom-scrollbar">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-subtle border-b border-outline-variant">
+<tr>
+<th class="p-space-4 text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Student Name</th>
+<th class="p-space-4 text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">ID</th>
+<th class="p-space-4 text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Class</th>
+<th class="p-space-4 text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Attendance %</th>
+<th class="p-space-4 text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Consecutive Absences</th>
+<th class="p-space-4 text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider text-right">Action</th>
+</tr>
+</thead>
+<tbody>
+<tr class="border-b border-outline-variant hover:bg-surface-container-low transition-colors group">
+<td class="p-space-4 flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center text-label-sm text-on-surface font-semibold">JD</div>
+<span class="text-body-sm font-body-sm text-on-surface font-medium">John Doe</span>
+</td>
+<td class="p-space-4 text-body-sm font-body-sm text-on-surface-variant">S-1029</td>
+<td class="p-space-4 text-body-sm font-body-sm text-on-surface-variant">10-A</td>
+<td class="p-space-4">
+<div class="flex items-center gap-2">
+<span class="text-body-sm font-body-sm text-error font-bold">78%</span>
+<div class="w-16 h-1.5 bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-error" style="width: 78%"></div>
+</div>
+</div>
+</td>
+<td class="p-space-4 text-body-sm font-body-sm text-on-surface-variant">3 Days</td>
+<td class="p-space-4 text-right">
+<button class="text-primary hover:text-on-primary-fixed-variant text-label-sm font-label-sm border border-primary px-3 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">Contact Parent</button>
+</td>
+</tr>
+<tr class="border-b border-outline-variant hover:bg-surface-container-low transition-colors group">
+<td class="p-space-4 flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center text-label-sm text-on-surface font-semibold">AS</div>
+<span class="text-body-sm font-body-sm text-on-surface font-medium">Alice Smith</span>
+</td>
+<td class="p-space-4 text-body-sm font-body-sm text-on-surface-variant">S-1104</td>
+<td class="p-space-4 text-body-sm font-body-sm text-on-surface-variant">10-C</td>
+<td class="p-space-4">
+<div class="flex items-center gap-2">
+<span class="text-body-sm font-body-sm text-error font-bold">81%</span>
+<div class="w-16 h-1.5 bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-error" style="width: 81%"></div>
+</div>
+</div>
+</td>
+<td class="p-space-4 text-body-sm font-body-sm text-on-surface-variant">1 Day</td>
+<td class="p-space-4 text-right">
+<button class="text-primary hover:text-on-primary-fixed-variant text-label-sm font-label-sm border border-primary px-3 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">Contact Parent</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="p-space-4 flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center text-label-sm text-on-surface font-semibold">RJ</div>
+<span class="text-body-sm font-body-sm text-on-surface font-medium">Robert Jones</span>
+</td>
+<td class="p-space-4 text-body-sm font-body-sm text-on-surface-variant">S-0942</td>
+<td class="p-space-4 text-body-sm font-body-sm text-on-surface-variant">11-B</td>
+<td class="p-space-4">
+<div class="flex items-center gap-2">
+<span class="text-body-sm font-body-sm text-amber-500 font-bold">84%</span>
+<div class="w-16 h-1.5 bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-amber-500" style="width: 84%"></div>
+</div>
+</div>
+</td>
+<td class="p-space-4 text-body-sm font-body-sm text-on-surface-variant">0 Days</td>
+<td class="p-space-4 text-right">
+<button class="text-primary hover:text-on-primary-fixed-variant text-label-sm font-label-sm border border-primary px-3 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">Contact Parent</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // Initialize Chart.js Bar Chart
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('gradeChart').getContext('2d');
+            
+            // Tailwind Colors (approximated for canvas)
+            const colorPrimary = '#004ac6'; // Indigo variant
+            const colorSecondary = '#006b5f'; // Teal variant
+            const colorSurfaceVariant = '#e1e2ed';
+            const colorText = '#434655';
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['10-A', '10-B', '10-C', '10-D'],
+                    datasets: [{
+                        label: 'Attendance Rate (%)',
+                        data: [95, 92, 88, 97],
+                        backgroundColor: [
+                            colorPrimary,
+                            colorSecondary,
+                            '#ffdad6', // Error container indicating issue in 10-C
+                            colorPrimary
+                        ],
+                        borderRadius: 4,
+                        barThickness: 32
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            backgroundColor: '#191b23',
+                            titleFont: { family: 'Inter', size: 12 },
+                            bodyFont: { family: 'Inter', size: 14, weight: 'bold' },
+                            padding: 12,
+                            cornerRadius: 8,
+                            displayColors: false,
+                            callbacks: {
+                                label: function(context) {
+                                    return context.parsed.y + '%';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            min: 80,
+                            max: 100,
+                            grid: {
+                                color: colorSurfaceVariant,
+                                drawBorder: false,
+                            },
+                            ticks: {
+                                color: colorText,
+                                font: { family: 'Inter', size: 12 },
+                                stepSize: 5
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false,
+                                drawBorder: false
+                            },
+                            ticks: {
+                                color: colorText,
+                                font: { family: 'Inter', size: 12 }
+                            }
+                        }
+                    },
+                    animation: {
+                        duration: 1000,
+                        easing: 'easeOutQuart'
+                    }
+                }
+            });
+        });
+    </script>
+</body></html>

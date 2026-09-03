@@ -1,9 +1,8 @@
 import { beforeAll, afterAll, describe, expect, it } from 'vitest'
-import { PrismaClient } from '@prisma/client'
+import { rawPrisma } from '../db/prisma'
 import { withTenantScope } from './prisma-extension'
 import { runWithOrganization } from './context'
 
-const rawPrisma = new PrismaClient()
 const scopedPrisma = withTenantScope(rawPrisma)
 
 let orgAPlanId: string

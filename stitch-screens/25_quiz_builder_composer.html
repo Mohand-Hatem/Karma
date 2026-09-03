@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Karma - Interactive Quiz Builder</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        "outline-variant": "#c3c6d7",
+                        "red-500": "#ef4444",
+                        "midnight-navy": "#0f2942",
+                        "surface-variant": "#e1e2ed",
+                        "primary": "#004ac6",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "on-error-container": "#93000a",
+                        "secondary-container": "#76f4e0",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#b4c5ff",
+                        "primary-fixed": "#dbe1ff",
+                        "tertiary": "#943700",
+                        "tertiary-fixed-dim": "#ffb596",
+                        "outline": "#737686",
+                        "on-surface": "#191b23",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "surface-dim": "#d9d9e5",
+                        "surface-container": "#ededf9",
+                        "surface": "#faf8ff",
+                        "error": "#ba1a1a",
+                        "inverse-on-surface": "#f0f0fb",
+                        "tertiary-fixed": "#ffdbcd",
+                        "on-secondary-fixed-variant": "#005047",
+                        "surface-bright": "#faf8ff",
+                        "secondary": "#006b5f",
+                        "on-primary-fixed": "#00174b",
+                        "primary-container": "#2563eb",
+                        "on-primary-container": "#eeefff",
+                        "tertiary-container": "#bc4800",
+                        "surface-tint": "#0053db",
+                        "surface-container-high": "#e7e7f3",
+                        "on-surface-variant": "#434655",
+                        "emerald-500": "#10b981",
+                        "secondary-fixed-dim": "#59dbc7",
+                        "surface-container-low": "#f3f3fe",
+                        "on-tertiary-fixed": "#360f00",
+                        "error-container": "#ffdad6",
+                        "inverse-surface": "#2e3039",
+                        "surface-container-highest": "#e1e2ed",
+                        "amber-500": "#f59e0b",
+                        "background": "#faf8ff",
+                        "on-primary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#006f63",
+                        "on-secondary-fixed": "#00201c",
+                        "slate-50": "#f8fafc",
+                        "slate-900": "#0f172a",
+                        "secondary-fixed": "#79f7e3",
+                        "on-background": "#191b23",
+                        "on-tertiary-container": "#ffede6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "space-3": "12px",
+                        "sidebar-expanded": "256px",
+                        "space-6": "24px",
+                        "space-2": "8px",
+                        "space-8": "32px",
+                        "space-12": "48px",
+                        "space-1": "4px",
+                        "sidebar-collapsed": "68px",
+                        "space-4": "16px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-xl": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg": ["30px", { "lineHeight": "38px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-xl": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col md:flex-row antialiased" dir="ltr">
+<!-- SideNavBar -->
+<nav class="w-64 h-screen sticky top-0 left-0 bg-surface border-r border-outline-variant flex flex-col py-space-6 px-space-4 hidden md:flex shrink-0">
+<div class="mb-space-8 px-space-2 flex items-center gap-space-3">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-primary text-body-sm font-body-sm" data-icon="school">school</span>
+</div>
+<div>
+<div class="text-h2 font-h2 font-bold text-primary">Karma SaaS</div>
+<div class="text-label-sm font-label-sm text-text-muted">AY 2023-24</div>
+</div>
+</div>
+<ul class="flex flex-col gap-space-1 flex-grow">
+<li>
+<a class="flex items-center gap-space-3 px-space-3 py-space-2 rounded-DEFAULT text-text-muted hover:bg-surface-subtle transition-colors scale-98 active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-body-medium font-body-medium">Dashboard</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-space-3 px-space-3 py-space-2 rounded-DEFAULT text-primary font-bold hover:bg-surface-subtle transition-colors scale-98 active:scale-95 duration-150 bg-primary-container/10" href="#">
+<span class="material-symbols-outlined" data-icon="school" data-weight="fill" style="font-variation-settings: 'FILL' 1;">school</span>
+<span class="text-body-medium font-body-medium">Academic</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-space-3 px-space-3 py-space-2 rounded-DEFAULT text-text-muted hover:bg-surface-subtle transition-colors scale-98 active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="text-body-medium font-body-medium">Student Info</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-space-3 px-space-3 py-space-2 rounded-DEFAULT text-text-muted hover:bg-surface-subtle transition-colors scale-98 active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span class="text-body-medium font-body-medium">Attendance</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-space-3 px-space-3 py-space-2 rounded-DEFAULT text-text-muted hover:bg-surface-subtle transition-colors scale-98 active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="grade">grade</span>
+<span class="text-body-medium font-body-medium">Gradebook</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-space-3 px-space-3 py-space-2 rounded-DEFAULT text-text-muted hover:bg-surface-subtle transition-colors scale-98 active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-body-medium font-body-medium">Settings</span>
+</a>
+</li>
+</ul>
+<div class="mt-auto flex flex-col gap-space-4">
+<button class="bg-primary text-on-primary py-space-2 px-space-4 rounded-lg font-label-md text-label-md w-full hover:bg-on-primary-fixed-variant transition-colors">
+                Quick Action
+            </button>
+<ul class="flex flex-col gap-space-1 border-t border-outline-variant pt-space-4">
+<li>
+<a class="flex items-center gap-space-3 px-space-3 py-space-2 rounded-DEFAULT text-text-muted hover:bg-surface-subtle transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="help">help</span>
+<span class="text-body-sm font-body-sm">Help Center</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-space-3 px-space-3 py-space-2 rounded-DEFAULT text-text-muted hover:bg-surface-subtle transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="support_agent">support_agent</span>
+<span class="text-body-sm font-body-sm">Support</span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col min-w-0 bg-surface-container-low">
+<!-- TopNavBar (Mobile only for this layout) -->
+<nav class="md:hidden flex justify-between items-center h-16 px-space-4 w-full bg-surface/80 backdrop-blur-md border-b border-outline-variant sticky top-0 z-40">
+<div class="text-h1 font-h1 font-black text-text-primary">Karma</div>
+<div class="flex items-center gap-space-4">
+<button class="text-text-muted"><span class="material-symbols-outlined" data-icon="search">search</span></button>
+<button class="text-text-muted"><span class="material-symbols-outlined" data-icon="menu">menu</span></button>
+</div>
+</nav>
+<main class="flex-1 overflow-y-auto p-space-4 md:p-space-8 relative pb-32">
+<!-- Header Section -->
+<div class="max-w-4xl mx-auto mb-space-8">
+<div class="flex items-center justify-between mb-space-6">
+<h1 class="text-headline-xl font-headline-xl text-on-surface">Quiz Builder</h1>
+<div class="flex gap-space-3">
+<button class="px-space-4 py-space-2 rounded-lg border border-outline-variant text-on-surface text-label-md font-label-md hover:bg-surface-container-highest transition-colors">
+                            Preview
+                        </button>
+</div>
+</div>
+<!-- Quiz Metadata Card -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-space-6 shadow-sm">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-6">
+<div class="col-span-1 md:col-span-2">
+<label class="block text-label-sm font-label-sm text-on-surface-variant mb-space-2 uppercase">Quiz Title</label>
+<input class="w-full bg-surface text-on-surface border border-outline-variant rounded-lg px-space-4 py-space-3 text-body-lg font-body-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-shadow" placeholder="e.g. Midterm Assessment: Cellular Biology" type="text"/>
+</div>
+<div>
+<label class="block text-label-sm font-label-sm text-on-surface-variant mb-space-2 uppercase">Subject</label>
+<div class="relative">
+<select class="w-full bg-surface text-on-surface border border-outline-variant rounded-lg px-space-4 py-space-3 text-body-md font-body-md appearance-none focus:outline-none focus:ring-2 focus:ring-primary">
+<option disabled="" selected="" value="">Select Subject</option>
+<option value="bio">Biology</option>
+<option value="chem">Chemistry</option>
+<option value="phys">Physics</option>
+</select>
+<span class="material-symbols-outlined absolute inset-inline-end-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+<div>
+<label class="block text-label-sm font-label-sm text-on-surface-variant mb-space-2 uppercase">Grade Category</label>
+<div class="relative">
+<select class="w-full bg-surface text-on-surface border border-outline-variant rounded-lg px-space-4 py-space-3 text-body-md font-body-md appearance-none focus:outline-none focus:ring-2 focus:ring-primary">
+<option value="formative">Formative Assessment</option>
+<option value="summative">Summative Assessment</option>
+<option value="homework">Homework</option>
+</select>
+<span class="material-symbols-outlined absolute inset-inline-end-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+<div>
+<label class="block text-label-sm font-label-sm text-on-surface-variant mb-space-2 uppercase">Time Limit</label>
+<div class="flex items-center gap-space-2">
+<input class="w-24 bg-surface text-on-surface border border-outline-variant rounded-lg px-space-4 py-space-3 text-body-md font-body-md text-center focus:outline-none focus:ring-2 focus:ring-primary" type="number" value="45"/>
+<span class="text-body-md font-body-md text-on-surface-variant">minutes</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Question Builder Area -->
+<div class="max-w-4xl mx-auto space-y-space-6">
+<div class="flex items-center justify-between border-b border-outline-variant pb-space-2">
+<h2 class="text-headline-md font-headline-md text-on-surface">Questions</h2>
+<span class="text-label-md font-label-md text-on-surface-variant bg-surface-container-high px-space-2 py-space-1 rounded-full">Total: 2</span>
+</div>
+<!-- Question 1: Multiple Choice -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-space-6 shadow-sm relative group transition-all hover:border-primary-fixed-dim">
+<div class="absolute inset-inline-start-0 top-0 bottom-0 w-1 bg-surface-variant rounded-l-xl group-hover:bg-primary transition-colors"></div>
+<div class="flex justify-between items-start mb-space-4">
+<div class="flex items-center gap-space-3">
+<span class="flex items-center justify-center w-8 h-8 rounded-full bg-surface-container text-label-md font-label-md text-on-surface-variant">1</span>
+<span class="text-label-sm font-label-sm font-bold uppercase tracking-wider text-primary">Multiple Choice</span>
+</div>
+<div class="flex gap-space-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-space-1 text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-[20px]" data-icon="content_copy">content_copy</span></button>
+<button class="p-space-1 text-on-surface-variant hover:text-error transition-colors"><span class="material-symbols-outlined text-[20px]" data-icon="delete">delete</span></button>
+</div>
+</div>
+<div class="mb-space-6">
+<textarea class="w-full bg-surface text-on-surface border-none rounded-lg px-0 py-space-2 text-headline-sm font-headline-sm focus:ring-0 placeholder:text-outline-variant resize-none" placeholder="Enter your question here..." rows="2">Which organelle is known as the powerhouse of the cell?</textarea>
+</div>
+<div class="space-y-space-3">
+<!-- Option A -->
+<div class="flex items-center gap-space-3 bg-surface rounded-lg border border-outline-variant p-space-3 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all">
+<input class="w-5 h-5 text-primary border-outline-variant focus:ring-primary focus:ring-offset-surface" id="q1_a" name="q1_correct" type="radio"/>
+<input class="flex-1 bg-transparent border-none p-0 text-body-md font-body-md focus:ring-0 text-on-surface" type="text" value="Nucleus"/>
+<button class="text-on-surface-variant hover:text-error"><span class="material-symbols-outlined text-[20px]" data-icon="close">close</span></button>
+</div>
+<!-- Option B -->
+<div class="flex items-center gap-space-3 bg-primary-container/5 rounded-lg border border-primary p-space-3 transition-all relative">
+<div class="absolute inset-y-0 inset-inline-end-0 flex items-center pr-3 pointer-events-none">
+<span class="material-symbols-outlined text-primary text-[20px]" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<input checked="" class="w-5 h-5 text-primary border-outline-variant focus:ring-primary focus:ring-offset-surface" id="q1_b" name="q1_correct" type="radio"/>
+<input class="flex-1 bg-transparent border-none p-0 text-body-md font-body-md focus:ring-0 text-on-surface font-medium pr-10" type="text" value="Mitochondria"/>
+<button class="text-on-surface-variant hover:text-error mr-8"><span class="material-symbols-outlined text-[20px]" data-icon="close">close</span></button>
+</div>
+<!-- Option C -->
+<div class="flex items-center gap-space-3 bg-surface rounded-lg border border-outline-variant p-space-3 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all">
+<input class="w-5 h-5 text-primary border-outline-variant focus:ring-primary focus:ring-offset-surface" id="q1_c" name="q1_correct" type="radio"/>
+<input class="flex-1 bg-transparent border-none p-0 text-body-md font-body-md focus:ring-0 text-on-surface" type="text" value="Ribosome"/>
+<button class="text-on-surface-variant hover:text-error"><span class="material-symbols-outlined text-[20px]" data-icon="close">close</span></button>
+</div>
+<!-- Option D -->
+<div class="flex items-center gap-space-3 bg-surface rounded-lg border border-outline-variant p-space-3 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all">
+<input class="w-5 h-5 text-primary border-outline-variant focus:ring-primary focus:ring-offset-surface" id="q1_d" name="q1_correct" type="radio"/>
+<input class="flex-1 bg-transparent border-none p-0 text-body-md font-body-md focus:ring-0 text-on-surface" type="text" value="Endoplasmic Reticulum"/>
+<button class="text-on-surface-variant hover:text-error"><span class="material-symbols-outlined text-[20px]" data-icon="close">close</span></button>
+</div>
+</div>
+<button class="mt-space-4 flex items-center gap-space-2 text-primary text-label-md font-label-md hover:text-on-primary-fixed-variant transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="add">add</span> Add Option
+                    </button>
+</div>
+<!-- Question 2: True/False -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-space-6 shadow-sm relative group transition-all hover:border-primary-fixed-dim">
+<div class="absolute inset-inline-start-0 top-0 bottom-0 w-1 bg-surface-variant rounded-l-xl group-hover:bg-primary transition-colors"></div>
+<div class="flex justify-between items-start mb-space-4">
+<div class="flex items-center gap-space-3">
+<span class="flex items-center justify-center w-8 h-8 rounded-full bg-surface-container text-label-md font-label-md text-on-surface-variant">2</span>
+<span class="text-label-sm font-label-sm font-bold uppercase tracking-wider text-secondary">True / False</span>
+</div>
+<div class="flex gap-space-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-space-1 text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-[20px]" data-icon="content_copy">content_copy</span></button>
+<button class="p-space-1 text-on-surface-variant hover:text-error transition-colors"><span class="material-symbols-outlined text-[20px]" data-icon="delete">delete</span></button>
+</div>
+</div>
+<div class="mb-space-6">
+<textarea class="w-full bg-surface text-on-surface border-none rounded-lg px-0 py-space-2 text-headline-sm font-headline-sm focus:ring-0 placeholder:text-outline-variant resize-none" placeholder="Enter your question here..." rows="2">All bacteria are harmful to humans.</textarea>
+</div>
+<div class="flex gap-space-4">
+<label class="flex-1 flex items-center justify-center gap-space-3 bg-surface rounded-lg border border-outline-variant p-space-4 cursor-pointer hover:bg-surface-container-high transition-colors">
+<input class="w-5 h-5 text-primary border-outline-variant focus:ring-primary focus:ring-offset-surface" name="q2_correct" type="radio" value="true"/>
+<span class="text-body-md font-body-md text-on-surface font-medium">True</span>
+</label>
+<label class="flex-1 flex items-center justify-center gap-space-3 bg-error-container/20 rounded-lg border border-error p-space-4 cursor-pointer relative">
+<div class="absolute inset-y-0 inset-inline-end-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-error text-[20px]" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<input checked="" class="w-5 h-5 text-error border-error focus:ring-error focus:ring-offset-surface" name="q2_correct" type="radio" value="false"/>
+<span class="text-body-md font-body-md text-on-surface font-medium">False</span>
+</label>
+</div>
+</div>
+<!-- Add New Question Buttons -->
+<div class="flex justify-center gap-space-4 pt-space-4">
+<button class="flex items-center gap-space-2 px-space-6 py-space-3 bg-surface-container-lowest border border-dashed border-outline-variant rounded-xl text-on-surface-variant text-label-md font-label-md hover:border-primary hover:text-primary transition-all shadow-sm hover:shadow-md">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span> Add Multiple Choice
+                    </button>
+<button class="flex items-center gap-space-2 px-space-6 py-space-3 bg-surface-container-lowest border border-dashed border-outline-variant rounded-xl text-on-surface-variant text-label-md font-label-md hover:border-primary hover:text-primary transition-all shadow-sm hover:shadow-md">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span> Add True/False
+                    </button>
+</div>
+</div>
+</main>
+</div>
+<!-- Sticky Bottom Publish Bar -->
+<div class="fixed bottom-0 right-0 left-0 md:left-64 bg-surface-container-lowest border-t border-outline-variant p-space-4 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] z-50 flex justify-between items-center backdrop-blur-sm bg-surface-container-lowest/90">
+<div class="text-body-sm font-body-sm text-text-muted hidden sm:block">
+            Last saved: Just now
+        </div>
+<div class="flex gap-space-4 w-full sm:w-auto">
+<button class="flex-1 sm:flex-none px-space-6 py-space-2 rounded-lg border border-outline-variant text-on-surface text-label-md font-label-md hover:bg-surface-container-highest transition-colors">
+                Save Draft
+            </button>
+<button class="flex-1 sm:flex-none px-space-8 py-space-2 rounded-lg bg-primary text-on-primary text-label-md font-label-md hover:bg-on-primary-fixed-variant transition-colors shadow-sm flex items-center justify-center gap-space-2">
+<span class="material-symbols-outlined text-[20px]" data-icon="publish">publish</span>
+                Publish Quiz
+            </button>
+</div>
+</div>
+</body></html>

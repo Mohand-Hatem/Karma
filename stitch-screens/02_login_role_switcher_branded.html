@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Karma - Login</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "surface-container": "#ededf9",
+                "outline": "#737686",
+                "surface-dim": "#d9d9e5",
+                "secondary-fixed-dim": "#b9c7df",
+                "on-primary-fixed-variant": "#003ea8",
+                "success": "#10b981",
+                "on-tertiary-container": "#ffede6",
+                "on-error": "#ffffff",
+                "primary-fixed": "#dbe1ff",
+                "inverse-on-surface": "#f0f0fb",
+                "on-background": "#191b23",
+                "info": "#6366f1",
+                "surface-container-lowest": "#ffffff",
+                "on-primary-fixed": "#00174b",
+                "on-secondary": "#ffffff",
+                "inverse-surface": "#2e3039",
+                "tertiary-fixed-dim": "#ffb596",
+                "error": "#ef4444",
+                "tertiary": "#943700",
+                "error-container": "#ffdad6",
+                "text-primary": "#0f172a",
+                "surface-container-highest": "#e1e2ed",
+                "on-secondary-fixed": "#0d1c2e",
+                "on-tertiary-fixed-variant": "#7d2d00",
+                "primary-container": "#2563eb",
+                "surface-variant": "#e1e2ed",
+                "app-bg": "#f8fafc",
+                "primary-fixed-dim": "#b4c5ff",
+                "surface-tint": "#0053db",
+                "text-muted": "#64748b",
+                "outline-variant": "#c3c6d7",
+                "on-tertiary": "#ffffff",
+                "surface-container-high": "#e7e7f3",
+                "surface-subtle": "#f1f5f9",
+                "on-surface": "#191b23",
+                "on-tertiary-fixed": "#360f00",
+                "inverse-primary": "#b4c5ff",
+                "surface": "#ffffff",
+                "warning": "#f59e0b",
+                "background": "#faf8ff",
+                "secondary-fixed": "#d5e3fc",
+                "surface-bright": "#faf8ff",
+                "on-secondary-fixed-variant": "#3a485b",
+                "on-secondary-container": "#57657a",
+                "surface-container-low": "#f3f3fe",
+                "primary": "#004ac6",
+                "tertiary-fixed": "#ffdbcd",
+                "on-error-container": "#93000a",
+                "tertiary-container": "#bc4800",
+                "secondary": "#515f74",
+                "on-primary-container": "#eeefff",
+                "on-surface-variant": "#434655",
+                "secondary-container": "#d5e3fc",
+                "on-primary": "#ffffff"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+        },
+        "spacing": {
+                "space-1": "4px",
+                "space-6": "24px",
+                "space-3": "12px",
+                "space-2": "8px",
+                "space-8": "32px",
+                "space-12": "48px",
+                "space-4": "16px"
+        },
+        "fontFamily": {
+                "display-mobile": [
+                        "inter"
+                ],
+                "h2": [
+                        "inter"
+                ],
+                "h1-mobile": [
+                        "inter"
+                ],
+                "caption": [
+                        "inter"
+                ],
+                "body-default": [
+                        "inter"
+                ],
+                "h1": [
+                        "inter"
+                ],
+                "h3": [
+                        "inter"
+                ],
+                "micro": [
+                        "inter"
+                ],
+                "body-medium": [
+                        "inter"
+                ],
+                "display": [
+                        "inter"
+                ]
+        },
+        "fontSize": {
+                "display-mobile": [
+                        "28px",
+                        {
+                                "lineHeight": "1.25",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "h2": [
+                        "18px",
+                        {
+                                "lineHeight": "1.35",
+                                "letterSpacing": "-0.01em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "h1-mobile": [
+                        "22px",
+                        {
+                                "lineHeight": "1.3",
+                                "letterSpacing": "-0.015em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "caption": [
+                        "12px",
+                        {
+                                "lineHeight": "1.4",
+                                "letterSpacing": "0.01em",
+                                "fontWeight": "500"
+                        }
+                ],
+                "body-default": [
+                        "14px",
+                        {
+                                "lineHeight": "1.5",
+                                "letterSpacing": "0",
+                                "fontWeight": "400"
+                        }
+                ],
+                "h1": [
+                        "24px",
+                        {
+                                "lineHeight": "1.3",
+                                "letterSpacing": "-0.015em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "h3": [
+                        "15px",
+                        {
+                                "lineHeight": "1.4",
+                                "letterSpacing": "0",
+                                "fontWeight": "600"
+                        }
+                ],
+                "micro": [
+                        "11px",
+                        {
+                                "lineHeight": "1.3",
+                                "letterSpacing": "0.02em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "body-medium": [
+                        "14px",
+                        {
+                                "lineHeight": "1.5",
+                                "letterSpacing": "0",
+                                "fontWeight": "500"
+                        }
+                ],
+                "display": [
+                        "32px",
+                        {
+                                "lineHeight": "1.25",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "700"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+<style>
+        .material-symbols-outlined {
+          font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24
+        }
+    </style>
+</head>
+<body class="bg-app-bg text-text-primary h-full flex flex-col md:flex-row antialiased">
+<!-- Left Side: Branding & Value Prop -->
+<div class="hidden md:flex flex-col w-[55%] bg-gradient-to-br from-app-bg to-surface-subtle border-r border-outline-variant p-12 relative overflow-hidden">
+<!-- Background Pattern / Subtlety -->
+<div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(#64748b 1px, transparent 1px); background-size: 24px 24px;"></div>
+<div class="relative z-10 flex flex-col h-full">
+<!-- Brand -->
+<div class="flex items-center mb-space-12">
+<img alt="Karma Logo" class="h-12 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCE93sEan8bNvVdHwMLvhL9YIWWBH9vXkCFZ57Vt4J_DjsrHtsQovvqBkEhzomN5NDLejtUmrlv9B2Tz0--hgPsccYpR4O2oAG1pPDLHMTRY0Ub9f13HTny07E6e5d2-4EVyV1M5sP1ULtd07moXQL7byNjCleSMg1wdLTrcNYajGByQvjxRqhCKvzWpx6laM4Q421unJ45D5Qvy9B1DcNRI-hC9kROShD-M2Gbh5Yl853rYYvEBjLvkSQkvYW2yTgKCzA"/>
+</div>
+<!-- Value Prop Headline -->
+<div class="max-w-lg mt-16">
+<h1 class="text-display font-display font-bold text-text-primary mb-space-4 leading-tight">School management, built for how schools actually run.</h1>
+<p class="text-body-default font-body-default text-text-muted">A high-performance workspace tailored for administrators, teachers, and parents.</p>
+</div>
+<!-- Abstract KPI Chart Preview -->
+<div class="mt-auto max-w-md w-full bg-surface rounded-xl border border-outline-variant p-space-6 shadow-sm flex flex-col gap-space-4">
+<div class="flex justify-between items-center border-b border-outline-variant pb-space-3">
+<span class="text-h3 font-h3 text-text-primary">Attendance Overview</span>
+<span class="material-symbols-outlined text-text-muted text-sm">more_horiz</span>
+</div>
+<div class="flex items-end gap-space-2 h-32 mt-space-2">
+<div class="w-1/6 bg-primary-fixed rounded-t-sm h-[60%]"></div>
+<div class="w-1/6 bg-primary-fixed rounded-t-sm h-[75%]"></div>
+<div class="w-1/6 bg-primary-fixed rounded-t-sm h-[65%]"></div>
+<div class="w-1/6 bg-primary-container rounded-t-sm h-[90%] shadow-sm relative">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 text-micro font-micro text-primary-container">98%</div>
+</div>
+<div class="w-1/6 bg-primary-fixed rounded-t-sm h-[80%]"></div>
+<div class="w-1/6 bg-primary-fixed rounded-t-sm h-[70%]"></div>
+</div>
+<div class="flex justify-between text-caption font-caption text-text-muted mt-space-1">
+<span>Mon</span>
+<span>Tue</span>
+<span>Wed</span>
+<span>Thu</span>
+<span>Fri</span>
+<span>Sat</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Side: Login Flow -->
+<div class="flex flex-col w-full md:w-[45%] h-full bg-surface items-center justify-center relative p-space-6 md:p-space-12">
+<!-- Top Nav (Language / Theme) -->
+<div class="absolute top-space-6 right-space-6 flex items-center gap-space-4">
+<button class="flex items-center gap-space-1 text-body-medium font-body-medium text-text-muted hover:text-text-primary transition-colors">
+<span>English</span>
+<span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+<div class="h-4 w-px bg-outline-variant"></div>
+<button class="text-text-muted hover:text-text-primary transition-colors flex items-center justify-center w-8 h-8 rounded-full hover:bg-surface-subtle">
+<span class="material-symbols-outlined text-sm">light_mode</span>
+</button>
+</div>
+<div class="w-full max-w-sm flex flex-col mt-space-12 md:mt-0">
+<!-- Mobile Logo -->
+<div class="flex md:hidden items-center mb-space-8 justify-center">
+<img alt="Karma Logo" class="h-10 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_n59zxNUDY1hQ8iB8NE0UN1xt-gYLYUpZ1zUo008k0BcbweU-u6wY-W8a4mOQ2EJIetgnLP0H7a-6-xCVwys-oZ6W-xLtgwJvyXJOYg3PyD15jGwzucGeSZj84TA8TazfVlv2GKF9u-IlqUxas8lkBCsgUueqh_5hiQLzLmr0YvBallOPYofOA3NheN1XKHcj0ygjLmnnYd_chQUrfWmLq7bRtSyMxI5K7WrD3scqNPWMf0TDjviXDhqrBtvPGOZXYZA"/>
+</div>
+<!-- Login Header -->
+<div class="text-center mb-space-8">
+<h2 class="text-h1 font-h1 text-text-primary mb-space-2">Welcome back</h2>
+<p class="text-body-default font-body-default text-text-muted">Sign in to your school account</p>
+</div>
+<!-- Standard Login Form -->
+<form class="flex flex-col gap-space-4 mb-space-8" onsubmit="event.preventDefault();">
+<div class="flex flex-col gap-space-1">
+<label class="text-caption font-caption text-text-primary" for="email">Email address</label>
+<input class="w-full border border-outline-variant rounded-md px-space-3 py-2 text-body-default font-body-default focus:ring-2 focus:ring-primary-container/20 focus:border-primary-container outline-none transition-all placeholder:text-text-muted/60" id="email" placeholder="sarah@karma.edu" type="email"/>
+</div>
+<div class="flex flex-col gap-space-1">
+<label class="text-caption font-caption text-text-primary" for="password">Password</label>
+<div class="relative">
+<input class="w-full border border-outline-variant rounded-md px-space-3 py-2 text-body-default font-body-default focus:ring-2 focus:ring-primary-container/20 focus:border-primary-container outline-none transition-all" id="password" type="password" value="password123"/>
+<button class="absolute right-space-3 top-1/2 -translate-y-1/2 text-text-muted hover:text-text-primary flex items-center justify-center" type="button">
+<span class="material-symbols-outlined text-sm">visibility_off</span>
+</button>
+</div>
+</div>
+<div class="flex items-center justify-between mt-space-1">
+<label class="flex items-center gap-space-2 cursor-pointer group">
+<input class="rounded border-outline-variant text-primary-container focus:ring-primary-container/20 cursor-pointer" type="checkbox"/>
+<span class="text-caption font-caption text-text-muted group-hover:text-text-primary transition-colors">Remember me</span>
+</label>
+<a class="text-caption font-caption text-primary-container hover:text-primary transition-colors font-medium" href="#">Forgot password?</a>
+</div>
+<button class="w-full bg-primary-container text-on-primary rounded-md py-2 mt-space-2 text-body-medium font-body-medium hover:bg-surface-tint transition-colors shadow-sm active:scale-[0.98]" type="submit">
+                    Sign In
+                </button>
+</form>
+<!-- Divider -->
+<div class="relative flex items-center py-space-4 mb-space-4">
+<div class="flex-grow border-t border-outline-variant"></div>
+<span class="flex-shrink-0 mx-space-4 text-micro font-micro text-text-muted uppercase tracking-wider bg-surface px-2">Or explore with a demo account</span>
+<div class="flex-grow border-t border-outline-variant"></div>
+</div>
+<!-- Demo Accounts Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-3">
+<button class="flex flex-col items-start p-space-3 border border-outline-variant rounded-md hover:border-primary-container hover:bg-surface-subtle transition-colors text-left group">
+<div class="flex items-center gap-space-2 mb-1 w-full">
+<span class="material-symbols-outlined text-text-muted group-hover:text-primary-container text-sm">admin_panel_settings</span>
+<span class="text-caption font-caption text-text-primary font-medium truncate">Sarah Jenkins</span>
+</div>
+<span class="text-micro font-micro text-text-muted ml-6">Principal</span>
+</button>
+<button class="flex flex-col items-start p-space-3 border border-outline-variant rounded-md hover:border-primary-container hover:bg-surface-subtle transition-colors text-left group">
+<div class="flex items-center gap-space-2 mb-1 w-full">
+<span class="material-symbols-outlined text-text-muted group-hover:text-primary-container text-sm">school</span>
+<span class="text-caption font-caption text-text-primary font-medium truncate">Ahmed Hassan</span>
+</div>
+<span class="text-micro font-micro text-text-muted ml-6">Physics Teacher</span>
+</button>
+<button class="flex flex-col items-start p-space-3 border border-outline-variant rounded-md hover:border-primary-container hover:bg-surface-subtle transition-colors text-left group">
+<div class="flex items-center gap-space-2 mb-1 w-full">
+<span class="material-symbols-outlined text-text-muted group-hover:text-primary-container text-sm">backpack</span>
+<span class="text-caption font-caption text-text-primary font-medium truncate">Omar Hatem</span>
+</div>
+<span class="text-micro font-micro text-text-muted ml-6">Grade 10 Student</span>
+</button>
+<button class="flex flex-col items-start p-space-3 border border-outline-variant rounded-md hover:border-primary-container hover:bg-surface-subtle transition-colors text-left group">
+<div class="flex items-center gap-space-2 mb-1 w-full">
+<span class="material-symbols-outlined text-text-muted group-hover:text-primary-container text-sm">family_restroom</span>
+<span class="text-caption font-caption text-text-primary font-medium truncate">Mariam Hatem</span>
+</div>
+<span class="text-micro font-micro text-text-muted ml-6">Parent</span>
+</button>
+</div>
+<!-- Footer links -->
+<div class="mt-auto pt-space-12 text-center flex gap-space-4 justify-center text-caption font-caption text-text-muted">
+<a class="hover:text-text-primary transition-colors" href="#">Help</a>
+<a class="hover:text-text-primary transition-colors" href="#">Privacy</a>
+<a class="hover:text-text-primary transition-colors" href="#">Terms</a>
+</div>
+</div>
+</div>
+</body></html>

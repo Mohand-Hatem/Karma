@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+
+<html class="h-full bg-surface dark:bg-inverse-surface" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lesson 4: Circular Motion &amp; Gravitation | Karma SaaS</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        "outline-variant": "#c3c6d7",
+                        "red-500": "#ef4444",
+                        "midnight-navy": "#0f2942",
+                        "surface-variant": "#e1e2ed",
+                        "primary": "#004ac6",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "on-error-container": "#93000a",
+                        "secondary-container": "#76f4e0",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#b4c5ff",
+                        "primary-fixed": "#dbe1ff",
+                        "tertiary": "#943700",
+                        "tertiary-fixed-dim": "#ffb596",
+                        "outline": "#737686",
+                        "on-surface": "#191b23",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "surface-dim": "#d9d9e5",
+                        "surface-container": "#ededf9",
+                        "surface": "#faf8ff",
+                        "error": "#ba1a1a",
+                        "inverse-on-surface": "#f0f0fb",
+                        "tertiary-fixed": "#ffdbcd",
+                        "on-secondary-fixed-variant": "#005047",
+                        "surface-bright": "#faf8ff",
+                        "secondary": "#006b5f",
+                        "on-primary-fixed": "#00174b",
+                        "primary-container": "#2563eb",
+                        "on-primary-container": "#eeefff",
+                        "tertiary-container": "#bc4800",
+                        "surface-tint": "#0053db",
+                        "surface-container-high": "#e7e7f3",
+                        "on-surface-variant": "#434655",
+                        "emerald-500": "#10b981",
+                        "secondary-fixed-dim": "#59dbc7",
+                        "surface-container-low": "#f3f3fe",
+                        "on-tertiary-fixed": "#360f00",
+                        "error-container": "#ffdad6",
+                        "inverse-surface": "#2e3039",
+                        "surface-container-highest": "#e1e2ed",
+                        "amber-500": "#f59e0b",
+                        "background": "#faf8ff",
+                        "on-primary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#006f63",
+                        "on-secondary-fixed": "#00201c",
+                        "slate-50": "#f8fafc",
+                        "slate-900": "#0f172a",
+                        "secondary-fixed": "#79f7e3",
+                        "on-background": "#191b23",
+                        "on-tertiary-container": "#ffede6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "space-3": "12px",
+                        "sidebar-expanded": "256px",
+                        "space-6": "24px",
+                        "space-2": "8px",
+                        "space-8": "32px",
+                        "space-12": "48px",
+                        "space-1": "4px",
+                        "sidebar-collapsed": "68px",
+                        "space-4": "16px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-xl": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-xl": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .sidebar-transition { transition: width 0.3s ease; }
+        .katex-formula { display: inline-block; font-family: 'Times New Roman', serif; font-style: italic; }
+    </style>
+</head>
+<body class="h-full flex antialiased text-on-surface bg-background">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col h-full py-space-6 px-space-4 bg-surface dark:bg-inverse-surface w-64 h-screen sticky top-0 left-0 border-r border-outline-variant dark:border-outline">
+<div class="mb-space-8 px-space-4">
+<div class="flex items-center gap-space-3">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-on-primary font-bold">K</div>
+<div>
+<h1 class="text-h2 font-h2 font-bold text-primary dark:text-inverse-primary text-headline-sm">Karma SaaS</h1>
+<p class="text-label-sm font-label-sm text-on-surface-variant">AY 2023-24</p>
+</div>
+</div>
+</div>
+<button class="mb-space-6 flex items-center justify-center gap-space-2 bg-primary text-on-primary py-space-3 px-space-4 rounded-lg font-label-md text-label-md hover:bg-on-primary-fixed-variant transition-colors w-full">
+<span class="material-symbols-outlined" data-icon="add" style="font-variation-settings: 'FILL' 1;">add</span>
+            Quick Action
+        </button>
+<div class="flex-1 overflow-y-auto">
+<ul class="space-y-space-2">
+<li>
+<a class="flex items-center gap-space-3 px-space-4 py-space-3 rounded-lg text-text-muted dark:text-on-surface-variant hover:bg-surface-subtle dark:hover:bg-surface-container-high transition-colors scale-98 active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-body-medium font-body-medium">Dashboard</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-space-3 px-space-4 py-space-3 rounded-lg text-primary dark:text-primary-fixed-dim font-bold bg-surface-container-low border-l-4 border-primary" href="#">
+<span class="material-symbols-outlined" data-icon="school" style="font-variation-settings: 'FILL' 1;">school</span>
+<span class="text-body-medium font-body-medium">Academic</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-space-3 px-space-4 py-space-3 rounded-lg text-text-muted dark:text-on-surface-variant hover:bg-surface-subtle dark:hover:bg-surface-container-high transition-colors scale-98 active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="text-body-medium font-body-medium">Student Info</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-space-3 px-space-4 py-space-3 rounded-lg text-text-muted dark:text-on-surface-variant hover:bg-surface-subtle dark:hover:bg-surface-container-high transition-colors scale-98 active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span class="text-body-medium font-body-medium">Attendance</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-space-3 px-space-4 py-space-3 rounded-lg text-text-muted dark:text-on-surface-variant hover:bg-surface-subtle dark:hover:bg-surface-container-high transition-colors scale-98 active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="grade">grade</span>
+<span class="text-body-medium font-body-medium">Gradebook</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-space-3 px-space-4 py-space-3 rounded-lg text-text-muted dark:text-on-surface-variant hover:bg-surface-subtle dark:hover:bg-surface-container-high transition-colors scale-98 active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-body-medium font-body-medium">Settings</span>
+</a>
+</li>
+</ul>
+</div>
+<div class="mt-auto pt-space-6 border-t border-outline-variant dark:border-outline">
+<ul class="space-y-space-2">
+<li>
+<a class="flex items-center gap-space-3 px-space-4 py-space-2 rounded-lg text-text-muted dark:text-on-surface-variant hover:bg-surface-subtle dark:hover:bg-surface-container-high transition-colors scale-98 active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="text-body-medium font-body-medium">Help Center</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-space-3 px-space-4 py-space-2 rounded-lg text-text-muted dark:text-on-surface-variant hover:bg-surface-subtle dark:hover:bg-surface-container-high transition-colors scale-98 active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="support_agent">support_agent</span>
+<span class="text-body-medium font-body-medium">Support</span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col min-w-0 bg-background">
+<!-- TopNavBar -->
+<header class="hidden md:flex justify-between items-center h-16 px-space-6 w-full bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-md docked full-width top-0 sticky z-40 border-b border-outline-variant dark:border-outline">
+<div class="flex items-center gap-space-8">
+<div class="text-h1 font-h1 font-black text-text-primary dark:text-on-surface text-headline-sm">Karma</div>
+<nav class="flex items-center gap-space-6">
+<a class="text-caption font-caption text-text-muted dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-all duration-200 ease-in-out" href="#">Directory</a>
+<a class="text-caption font-caption text-text-muted dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-all duration-200 ease-in-out" href="#">Calendar</a>
+<a class="text-caption font-caption text-text-muted dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-all duration-200 ease-in-out" href="#">Reports</a>
+</nav>
+</div>
+<div class="flex items-center gap-space-4">
+<div class="relative w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline" data-icon="search">search</span>
+<input class="w-full pl-10 pr-4 py-2 border border-outline-variant rounded-lg bg-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-body-sm font-body-sm placeholder-outline" placeholder="Search..." type="text"/>
+</div>
+<button class="text-primary hover:bg-surface-container-high p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-label-md font-label-md text-on-surface hover:bg-surface-container-high px-3 py-1.5 rounded-md transition-colors">EN/AR</button>
+<button class="bg-primary text-on-primary px-4 py-2 rounded-lg text-label-md font-label-md hover:bg-on-primary-fixed-variant transition-colors">Create New</button>
+<img alt="User Avatar" class="w-8 h-8 rounded-full border border-outline-variant object-cover" data-alt="A small circular avatar placeholder image for a user profile in a web application header, maintaining a clean, professional aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbzBnQWyAkIAy2fajFzHACIsKHlzOtokJnPNkQN2_2TvmIRJKzWA58FCrr1NHC_IZvEaJ5hoeHosQAha-eZQXbJpb_h7qSKCdxq2cx3-dri0_HK63CNiPnCotnWUTTYcDmvEWgiLRrFhAqE-0QfZ7smiw3gbr116Viiu4vr3xIL7HLVJ_Ee-Af_9DRKQCuJ9vHn5AEgtTJcJatHlYZ_PyMKDp3obwtTpKNG2A9ewgymofnQ4QwyV1XPg"/>
+</div>
+</header>
+<!-- Mobile Header (Simplified) -->
+<header class="md:hidden flex justify-between items-center h-16 px-space-4 w-full bg-surface/80 backdrop-blur-md sticky top-0 z-40 border-b border-outline-variant">
+<button class="p-2 text-on-surface"><span class="material-symbols-outlined" data-icon="menu">menu</span></button>
+<div class="text-headline-sm font-headline-sm font-bold text-primary">Karma</div>
+<img alt="User Avatar" class="w-8 h-8 rounded-full border border-outline-variant object-cover" data-alt="A small circular avatar placeholder image for a user profile in a mobile application header." src="https://lh3.googleusercontent.com/aida-public/AB6AXuArVzDQAWDx3IB_sOzsiPTjoZCq_DWkRJqMl1hsKvz1VbflentddLx-CiXDLoJevmJAej4gX1oAukxxxZkbO8KTtHx-WJ7UaLZX28C8OSbkXNHTqR2dPOG_aiUtjx0pUaMBl_sDGAJf2HT1j2pQko_DJ7wNAAZt8VFYu6eHwc8lPVG9K0sv_9vwum0ikQ9dHHMNT2-PldoMKvbeFCxSE_XDFR0h_Cp_BwnuMnboZF6YGJ4S-rzr5IQyaw"/>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 overflow-y-auto p-space-4 md:p-space-8 lg:p-space-12 max-w-5xl mx-auto w-full">
+<!-- Breadcrumbs & Status -->
+<div class="flex items-center justify-between mb-space-6">
+<div class="flex items-center gap-2 text-body-sm font-body-sm text-on-surface-variant">
+<a class="hover:text-primary transition-colors" href="#">Physics 101</a>
+<span class="material-symbols-outlined text-[16px]" data-icon="chevron_right">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">Unit 2: Mechanics</a>
+<span class="material-symbols-outlined text-[16px]" data-icon="chevron_right">chevron_right</span>
+<span class="text-on-surface font-medium">Lesson 4</span>
+</div>
+<div class="flex items-center gap-space-3">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-surface-container-high text-on-surface">
+                        Est. Time: 45 min
+                    </span>
+<label class="flex items-center cursor-pointer gap-2">
+<span class="text-label-md font-label-md text-on-surface-variant">Mark Complete</span>
+<div class="relative">
+<input class="sr-only group peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-500"></div>
+</div>
+</label>
+</div>
+</div>
+<!-- Title & Metadata -->
+<div class="mb-space-8">
+<h1 class="text-headline-xl font-headline-xl text-on-surface mb-space-3">Circular Motion &amp; Gravitation</h1>
+<p class="text-body-lg font-body-lg text-on-surface-variant max-w-3xl">Understand the mechanics of objects moving in circular paths and the fundamental principles of universal gravitation driving planetary motion.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-space-8">
+<!-- Main Article Column -->
+<div class="lg:col-span-2 space-y-space-8">
+<!-- Section 1: Uniform Circular Motion -->
+<section class="bg-surface-container-lowest rounded-xl p-space-6 md:p-space-8 border border-outline-variant shadow-sm">
+<h2 class="text-headline-md font-headline-md text-on-surface mb-space-4">1. Uniform Circular Motion</h2>
+<div class="prose prose-slate max-w-none text-body-md font-body-md text-on-surface-variant space-y-space-4">
+<p>An object moving in a circle of radius <span class="katex-formula">r</span> with a constant speed <span class="katex-formula">v</span> is said to be in uniform circular motion. Even though the speed is constant, the velocity vector is constantly changing direction, which means the object is accelerating.</p>
+<div class="my-space-6 p-space-4 bg-surface-container-low rounded-lg border-l-4 border-primary">
+<h4 class="text-label-md font-label-md text-on-surface mb-2 uppercase tracking-wider">Centripetal Acceleration</h4>
+<p class="mb-2">The acceleration points towards the center of the circle and is given by:</p>
+<div class="text-center font-bold text-headline-sm text-primary py-2">
+                                    a<sub>c</sub> = v<sup>2</sup> / r
+                                </div>
+</div>
+<p>According to Newton's Second Law, this acceleration requires a net force directed toward the center, known as the centripetal force (<span class="katex-formula">F<sub>c</sub></span>).</p>
+</div>
+</section>
+<!-- Section 2: Diagram -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant overflow-hidden shadow-sm">
+<div class="h-64 bg-slate-50 relative border-b border-outline-variant flex items-center justify-center">
+<img alt="Circular Motion Diagram" class="w-full h-full object-cover mix-blend-multiply opacity-80" data-alt="A clean, academic diagram illustrating uniform circular motion. A central point with a dashed circular path, an object on the path with a velocity vector tangent to the circle, and a centripetal force vector pointing towards the center. Drawn with crisp lines, professional typography, and a modern light-mode academic aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIvPGs0S3OxZzhPJa_bsCMBB3U6DQyC1Z6NWyT9x26ea1jNrymJu-3lIfbXZJLlfW4-bOxFPh3FD263LZDtrarG2bK6DsbYBPv9Ha7x5tMpAUv9gYreAaoJrIMIGVbSKSv-f3JT-m8ttYWmt4IP9fhdxo7qfKDK44Af_nWdjcdb76ssHNs8KXxeQawo2bF-Ac9YcJIKvjgow3ubgLqQ05bQoInQpVkYfr6kCGp8qLbiVvg5TEEGdQ7lw"/>
+</div>
+<div class="p-space-4 bg-surface-container-lowest">
+<p class="text-label-sm font-label-sm text-on-surface-variant text-center">Figure 1.1: Velocity vector <span class="katex-formula">v</span> is tangent to the path, while force <span class="katex-formula">F<sub>c</sub></span> is radial.</p>
+</div>
+</section>
+<!-- Section 3: Universal Gravitation -->
+<section class="bg-surface-container-lowest rounded-xl p-space-6 md:p-space-8 border border-outline-variant shadow-sm">
+<h2 class="text-headline-md font-headline-md text-on-surface mb-space-4">2. Newton's Law of Universal Gravitation</h2>
+<div class="prose prose-slate max-w-none text-body-md font-body-md text-on-surface-variant space-y-space-4">
+<p>Newton posited that every point mass attracts every other point mass in the universe with a force that is directly proportional to the product of their masses and inversely proportional to the square of the distance between them.</p>
+<div class="my-space-6 p-space-4 bg-surface-container rounded-lg flex flex-col md:flex-row items-center gap-space-6">
+<div class="flex-1">
+<div class="text-center md:text-left font-bold text-headline-sm text-midnight-navy py-2">
+                                        F = G(m<sub>1</sub>m<sub>2</sub>) / r<sup>2</sup>
+</div>
+</div>
+<div class="flex-1 text-body-sm font-body-sm border-l md:border-l-2 border-outline-variant pl-space-4">
+<ul class="space-y-1">
+<li><strong>F:</strong> Gravitational force</li>
+<li><strong>G:</strong> Gravitational constant (6.674×10<sup>-11</sup> N⋅m²/kg²)</li>
+<li><strong>m<sub>1</sub>, m<sub>2</sub>:</strong> Masses of the objects</li>
+<li><strong>r:</strong> Distance between centers</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Sidebar Column (Resources & Tasks) -->
+<div class="space-y-space-6">
+<!-- Downloadable Resources -->
+<div class="bg-surface-container-lowest rounded-xl p-space-6 border border-outline-variant shadow-sm">
+<h3 class="text-headline-sm font-headline-sm text-on-surface flex items-center gap-2 mb-space-4">
+<span class="material-symbols-outlined text-primary" data-icon="folder">folder</span>
+                            Resources
+                        </h3>
+<ul class="space-y-space-3">
+<li>
+<a class="flex items-start gap-space-3 p-space-3 rounded-lg hover:bg-surface-container transition-colors group" href="#">
+<div class="bg-error-container text-on-error-container p-2 rounded flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]" data-icon="picture_as_pdf">picture_as_pdf</span>
+</div>
+<div>
+<h4 class="text-label-md font-label-md text-on-surface group-hover:text-primary transition-colors">Lesson 4 Slides</h4>
+<p class="text-label-sm font-label-sm text-on-surface-variant">2.4 MB • PDF</p>
+</div>
+</a>
+</li>
+<li>
+<a class="flex items-start gap-space-3 p-space-3 rounded-lg hover:bg-surface-container transition-colors group" href="#">
+<div class="bg-error-container text-on-error-container p-2 rounded flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]" data-icon="picture_as_pdf">picture_as_pdf</span>
+</div>
+<div>
+<h4 class="text-label-md font-label-md text-on-surface group-hover:text-primary transition-colors">Formula Cheat Sheet</h4>
+<p class="text-label-sm font-label-sm text-on-surface-variant">0.8 MB • PDF</p>
+</div>
+</a>
+</li>
+</ul>
+</div>
+<!-- Homework Assignment Card -->
+<div class="bg-surface-container-lowest rounded-xl p-space-6 border border-outline-variant shadow-sm relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-amber-500"></div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface flex items-center gap-2 mb-space-2">
+<span class="material-symbols-outlined text-amber-500" data-icon="assignment">assignment</span>
+                            Homework
+                        </h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant mb-space-4">Problem Set 4: Gravitational Forces is due before the next lecture.</p>
+<div class="flex items-center justify-between mb-space-4 text-label-sm font-label-sm">
+<span class="text-on-surface-variant">Due:</span>
+<span class="text-on-surface font-semibold">Oct 24, 11:59 PM</span>
+</div>
+<button class="w-full bg-surface-container-highest text-on-surface hover:bg-surface-variant py-2 px-4 rounded-lg text-label-md font-label-md transition-colors border border-outline-variant flex items-center justify-center gap-2">
+                            Go to Assignment
+                            <span class="material-symbols-outlined text-[18px]" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+<!-- Upcoming Module Hint -->
+<div class="bg-surface-container-low rounded-xl p-space-4 border border-outline-variant border-dashed">
+<p class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wide mb-1">Up Next</p>
+<p class="text-body-sm font-body-sm text-on-surface font-medium">Lesson 5: Work, Energy, and Power</p>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden flex justify-around items-center h-16 bg-surface border-t border-outline-variant sticky bottom-0 z-40 w-full px-space-2 pb-safe">
+<a class="flex flex-col items-center justify-center w-full h-full text-text-muted hover:bg-surface-subtle transition-colors" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="dashboard">dashboard</span>
+<span class="text-[10px] font-medium leading-none">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center w-full h-full text-primary hover:bg-surface-subtle transition-colors relative" href="#">
+<div class="absolute top-0 w-8 h-1 bg-primary rounded-b-md"></div>
+<span class="material-symbols-outlined mb-1" data-icon="school" style="font-variation-settings: 'FILL' 1;">school</span>
+<span class="text-[10px] font-medium leading-none">Academic</span>
+</a>
+<a class="flex flex-col items-center justify-center w-full h-full text-text-muted hover:bg-surface-subtle transition-colors" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="group">group</span>
+<span class="text-[10px] font-medium leading-none">Students</span>
+</a>
+<a class="flex flex-col items-center justify-center w-full h-full text-text-muted hover:bg-surface-subtle transition-colors" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="more_horiz">more_horiz</span>
+<span class="text-[10px] font-medium leading-none">More</span>
+</a>
+</nav>
+</body></html>

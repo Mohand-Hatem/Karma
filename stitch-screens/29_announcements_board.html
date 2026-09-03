@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>School Announcements - Karma SaaS</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary-fixed-variant": "#7d2d00",
+                      "outline-variant": "#c3c6d7",
+                      "red-500": "#ef4444",
+                      "midnight-navy": "#0f2942",
+                      "surface-variant": "#e1e2ed",
+                      "primary": "#004ac6",
+                      "on-primary-fixed-variant": "#003ea8",
+                      "on-error-container": "#93000a",
+                      "secondary-container": "#76f4e0",
+                      "on-secondary": "#ffffff",
+                      "on-tertiary": "#ffffff",
+                      "on-error": "#ffffff",
+                      "inverse-primary": "#b4c5ff",
+                      "primary-fixed": "#dbe1ff",
+                      "tertiary": "#943700",
+                      "tertiary-fixed-dim": "#ffb596",
+                      "outline": "#737686",
+                      "on-surface": "#191b23",
+                      "primary-fixed-dim": "#b4c5ff",
+                      "surface-dim": "#d9d9e5",
+                      "surface-container": "#ededf9",
+                      "surface": "#faf8ff",
+                      "error": "#ba1a1a",
+                      "inverse-on-surface": "#f0f0fb",
+                      "tertiary-fixed": "#ffdbcd",
+                      "on-secondary-fixed-variant": "#005047",
+                      "surface-bright": "#faf8ff",
+                      "secondary": "#006b5f",
+                      "on-primary-fixed": "#00174b",
+                      "primary-container": "#2563eb",
+                      "on-primary-container": "#eeefff",
+                      "tertiary-container": "#bc4800",
+                      "surface-tint": "#0053db",
+                      "surface-container-high": "#e7e7f3",
+                      "on-surface-variant": "#434655",
+                      "emerald-500": "#10b981",
+                      "secondary-fixed-dim": "#59dbc7",
+                      "surface-container-low": "#f3f3fe",
+                      "on-tertiary-fixed": "#360f00",
+                      "error-container": "#ffdad6",
+                      "inverse-surface": "#2e3039",
+                      "surface-container-highest": "#e1e2ed",
+                      "amber-500": "#f59e0b",
+                      "background": "#faf8ff",
+                      "on-primary": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary-container": "#006f63",
+                      "on-secondary-fixed": "#00201c",
+                      "slate-50": "#f8fafc",
+                      "slate-900": "#0f172a",
+                      "secondary-fixed": "#79f7e3",
+                      "on-background": "#191b23",
+                      "on-tertiary-container": "#ffede6"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "space-3": "12px",
+                      "sidebar-expanded": "256px",
+                      "space-6": "24px",
+                      "space-2": "8px",
+                      "space-8": "32px",
+                      "space-12": "48px",
+                      "space-1": "4px",
+                      "sidebar-collapsed": "68px",
+                      "space-4": "16px"
+              },
+              "fontFamily": {
+                      "body-sm": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "headline-sm": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "body-md": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "label-md": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "headline-xl": ["Inter"]
+              },
+              "fontSize": {
+                      "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "headline-lg": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "headline-xl": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+          font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined[data-weight="fill"] {
+          font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* LTR/RTL support via logical properties is handled mainly via Tailwind classes like 'ps-', 'pe-', 'ms-', 'me-' but some raw CSS here for specific needs if any */
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+    </style>
+</head>
+<body class="flex flex-col md:flex-row min-h-screen bg-background font-body-md text-on-background">
+<!-- SideNavBar (Hidden on Mobile) -->
+<nav class="hidden md:flex flex-col h-screen sticky top-0 left-0 bg-surface border-r border-outline-variant w-sidebar-expanded flex-shrink-0 transition-all duration-300">
+<div class="flex flex-col h-full py-space-6 px-space-4">
+<!-- Brand -->
+<div class="flex items-center gap-space-3 mb-space-8 px-space-2">
+<div class="w-10 h-10 rounded-lg bg-primary-container text-on-primary-container flex items-center justify-center shrink-0 shadow-sm">
+<span class="text-headline-sm font-headline-sm font-bold">K</span>
+</div>
+<div class="overflow-hidden">
+<h1 class="text-headline-md font-headline-md font-bold text-primary truncate">Karma SaaS</h1>
+<p class="text-label-sm font-label-sm text-outline uppercase tracking-wider truncate">AY 2023-24</p>
+</div>
+</div>
+<!-- CTA -->
+<button class="mb-space-6 mx-space-2 bg-primary hover:bg-primary/90 text-on-primary rounded-lg py-space-3 px-space-4 flex items-center justify-center gap-2 transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[20px]">add</span>
+<span class="text-label-md font-label-md font-medium">Quick Action</span>
+</button>
+<!-- Nav Links -->
+<div class="flex-1 flex flex-col gap-space-1 overflow-y-auto">
+<a class="flex items-center gap-space-3 px-space-3 py-space-3 rounded-lg text-primary font-bold bg-surface-subtle transition-colors group relative" href="#">
+<div class="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-primary rounded-r-full"></div>
+<span class="material-symbols-outlined text-[22px] group-hover:scale-110 transition-transform" data-weight="fill">dashboard</span>
+<span class="text-body-md font-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-space-3 px-space-3 py-space-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors group" href="#">
+<span class="material-symbols-outlined text-[22px] group-hover:text-primary transition-colors">school</span>
+<span class="text-body-md font-body-md">Academic</span>
+</a>
+<a class="flex items-center gap-space-3 px-space-3 py-space-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors group" href="#">
+<span class="material-symbols-outlined text-[22px] group-hover:text-primary transition-colors">group</span>
+<span class="text-body-md font-body-md">Student Info</span>
+</a>
+<a class="flex items-center gap-space-3 px-space-3 py-space-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors group" href="#">
+<span class="material-symbols-outlined text-[22px] group-hover:text-primary transition-colors">calendar_today</span>
+<span class="text-body-md font-body-md">Attendance</span>
+</a>
+<a class="flex items-center gap-space-3 px-space-3 py-space-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors group" href="#">
+<span class="material-symbols-outlined text-[22px] group-hover:text-primary transition-colors">grade</span>
+<span class="text-body-md font-body-md">Gradebook</span>
+</a>
+<a class="flex items-center gap-space-3 px-space-3 py-space-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors group mt-auto" href="#">
+<span class="material-symbols-outlined text-[22px] group-hover:text-primary transition-colors">settings</span>
+<span class="text-body-md font-body-md">Settings</span>
+</a>
+</div>
+<!-- Footer Links -->
+<div class="border-t border-outline-variant pt-space-4 mt-space-4 flex flex-col gap-space-1">
+<a class="flex items-center gap-space-3 px-space-3 py-space-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary transition-colors">help</span>
+<span class="text-body-sm font-body-sm">Help Center</span>
+</a>
+<a class="flex items-center gap-space-3 px-space-3 py-space-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary transition-colors">support_agent</span>
+<span class="text-body-sm font-body-sm">Support</span>
+</a>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col min-w-0 bg-surface-container-low">
+<!-- TopNavBar (Web & Mobile context based on shared JSON) -->
+<header class="docked full-width top-0 sticky z-40 bg-surface/80 backdrop-blur-md border-b border-outline-variant transition-all duration-200 ease-in-out">
+<div class="flex justify-between items-center h-16 px-space-6 w-full max-w-7xl mx-auto">
+<!-- Mobile Menu Button & Brand -->
+<div class="flex items-center gap-space-4 md:hidden">
+<button class="text-on-surface hover:bg-surface-container p-2 rounded-lg transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<span class="text-headline-sm font-headline-sm font-black text-on-surface tracking-tight">Karma</span>
+</div>
+<!-- Desktop Search / Context (Based on "search_bar": "on_left") -->
+<div class="hidden md:flex flex-1 max-w-md relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">search</span>
+<input class="w-full bg-surface-container-high border-none rounded-full py-2 pl-10 pr-4 text-body-sm font-body-sm text-on-surface focus:ring-2 focus:ring-primary focus:bg-surface transition-all" placeholder="Search announcements, students, classes..." type="text"/>
+</div>
+<!-- Center Nav Links (Desktop) -->
+<div class="hidden md:flex flex-1 justify-center gap-space-6">
+<a class="text-caption font-caption text-text-muted hover:text-primary transition-all duration-200 py-1" href="#">Directory</a>
+<a class="text-caption font-caption text-text-muted hover:text-primary transition-all duration-200 py-1" href="#">Calendar</a>
+<a class="text-caption font-caption text-text-muted hover:text-primary transition-all duration-200 py-1" href="#">Reports</a>
+</div>
+<!-- Trailing Actions -->
+<div class="flex items-center gap-space-3 md:gap-space-4">
+<!-- Secondary Action -->
+<button class="hidden sm:flex text-label-sm font-label-sm text-on-surface-variant hover:bg-surface-container px-2 py-1 rounded transition-colors uppercase font-semibold">
+                        EN/AR
+                    </button>
+<!-- Icon Actions -->
+<button class="text-on-surface-variant hover:bg-surface-container p-2 rounded-full transition-colors relative">
+<span class="material-symbols-outlined">search</span>
+</button>
+<button class="text-on-surface-variant hover:bg-surface-container p-2 rounded-full transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-error rounded-full ring-2 ring-surface"></span>
+</button>
+<!-- Primary Action -->
+<button class="hidden md:flex bg-primary hover:bg-primary/90 text-on-primary text-label-md font-label-md px-space-4 py-2 rounded-lg transition-colors shadow-sm items-center gap-2">
+<span>Create New</span>
+</button>
+<!-- Profile Avatar -->
+<button class="ml-2 w-8 h-8 rounded-full overflow-hidden border border-outline-variant hover:ring-2 hover:ring-primary transition-all shadow-sm shrink-0">
+<img alt="User Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4FWSIPE_-Ja6fjYA6qInlNrGDq3iEPKkxlBl-tyVSp4X9WuSZkXge_3OIHUsTbuUxf9aIQeXWfhAqnCIXp6yCuAqYMYLEqpTe5-2JdN0CS3gMjmirZxtJUOQZuHIA1bXgyWrxhTMFbkNpsYWGzm0uoOinKWHinNRIWF14Gf0coayvAiKNx3OPD34zS8nRwZdXY52G6A-2U8A0_iyLlgAtvpFmbp2T8-BwJIe9MycRGa0JUQQrDWNjCA"/>
+</button>
+</div>
+</div>
+</header>
+<!-- Canvas / Page Content -->
+<main class="flex-1 overflow-y-auto p-space-4 md:p-space-8">
+<div class="max-w-4xl mx-auto space-y-space-6">
+<!-- Page Header -->
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-space-4 mb-space-8">
+<div>
+<h2 class="text-headline-lg font-headline-lg text-on-background mb-1">Announcements</h2>
+<p class="text-body-md font-body-md text-on-surface-variant">Stay updated with the latest school news and notices.</p>
+</div>
+<!-- Filters -->
+<div class="flex items-center gap-space-2 bg-surface p-1 rounded-lg border border-outline-variant w-full sm:w-auto overflow-x-auto">
+<button class="px-space-4 py-1.5 rounded-md bg-surface-container-high text-on-surface text-label-sm font-label-sm font-medium whitespace-nowrap">All</button>
+<button class="px-space-4 py-1.5 rounded-md hover:bg-surface-container text-on-surface-variant text-label-sm font-label-sm whitespace-nowrap transition-colors">Students</button>
+<button class="px-space-4 py-1.5 rounded-md hover:bg-surface-container text-on-surface-variant text-label-sm font-label-sm whitespace-nowrap transition-colors">Staff</button>
+<button class="px-space-4 py-1.5 rounded-md hover:bg-surface-container text-on-surface-variant text-label-sm font-label-sm whitespace-nowrap transition-colors">Parents</button>
+</div>
+</div>
+<!-- Feed Container -->
+<div class="space-y-space-6">
+<!-- Announcement Card 1 -->
+<article class="bg-surface rounded-xl border border-outline-variant shadow-sm overflow-hidden flex flex-col transition-all hover:border-outline duration-200">
+<!-- Card Header -->
+<div class="p-space-6 pb-space-4 flex justify-between items-start border-b border-outline-variant/30">
+<div class="flex items-center gap-space-3">
+<img alt="Author Avatar" class="w-10 h-10 rounded-full border border-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOwpSEpgu_fePJI7XGjsZLSRZ8HZ5RvGMrmjqL8cNR9hhBOe0YEUe3gXcwM-R9qJhDorDSnZaI2GqoJhoReugas5AHWTp5jwRprt6IaX5YeZNuQ8jAOKUziPfauh7t35pVYAwjzpS31HSgJ2Ygj552keA9SlI7We2k3Wuc3ZYyDclx0JRaq2C4ONw19XZYaj0JthEddbCzMuZKC1r1sHCRqvNKSq1azOXI6Jwcn8l1a6LbpsrS34W7rw"/>
+<div>
+<h3 class="text-label-md font-label-md text-on-surface font-semibold">Dr. Sarah Jenkins</h3>
+<div class="flex items-center gap-2 text-body-sm font-body-sm text-outline">
+<span>Principal</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<time datetime="2023-10-24T09:00">Oct 24, 9:00 AM</time>
+</div>
+</div>
+</div>
+<!-- Admin Controls -->
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-primary-fixed text-on-primary-fixed-variant text-label-sm font-label-sm">
+<span class="material-symbols-outlined text-[14px]">public</span> All School
+                                </span>
+<button class="p-1.5 text-outline hover:bg-surface-container rounded-md transition-colors" title="Edit">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-1.5 text-outline hover:text-error hover:bg-error-container/20 rounded-md transition-colors" title="Delete">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+<!-- Card Body -->
+<div class="p-space-6 space-y-space-4">
+<h4 class="text-headline-sm font-headline-sm text-on-background">Updated Term 1 Examination Schedule</h4>
+<div class="prose prose-sm prose-slate max-w-none text-body-md font-body-md text-on-surface-variant">
+<p>Dear Students and Staff,</p>
+<p>Please be advised that the Term 1 examination schedule has been slightly revised to accommodate the upcoming regional sports meet. The math and science finals have been shifted back by two days.</p>
+<ul>
+<li>Mathematics: Now scheduled for Nov 12th.</li>
+<li>Physics/Chemistry: Now scheduled for Nov 14th.</li>
+</ul>
+<p>Please review the attached PDF for the complete updated timetable. Ensure you arrive 15 minutes prior to the start time.</p>
+</div>
+</div>
+<!-- Card Footer / Attachments -->
+<div class="p-space-6 pt-0">
+<div class="flex flex-wrap gap-space-3">
+<a class="inline-flex items-center gap-2 p-2 pr-4 rounded-lg border border-outline-variant bg-surface-container-lowest hover:bg-surface-container transition-colors group" href="#">
+<div class="w-8 h-8 rounded bg-error-container text-error flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]">picture_as_pdf</span>
+</div>
+<div class="flex flex-col">
+<span class="text-label-sm font-label-sm text-on-surface group-hover:text-primary transition-colors">Term1_Revised_Schedule.pdf</span>
+<span class="text-[11px] text-outline">1.2 MB</span>
+</div>
+<span class="material-symbols-outlined text-outline ml-auto group-hover:text-primary text-[20px]">download</span>
+</a>
+</div>
+</div>
+</article>
+<!-- Announcement Card 2 -->
+<article class="bg-surface rounded-xl border border-outline-variant shadow-sm overflow-hidden flex flex-col transition-all hover:border-outline duration-200">
+<div class="p-space-6 pb-space-4 flex justify-between items-start border-b border-outline-variant/30">
+<div class="flex items-center gap-space-3">
+<img alt="Author Avatar" class="w-10 h-10 rounded-full border border-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDr4DYGN8xeIEMj3II8bRYFQAnGxKu_mEJa7POByIDlkTZrgs2czzQaQLY7NhrSAD9Sl-ZzepCcJY4VgYBrcyl7xW9VPcGfhts06ITEyXLkvSzMp6g7oMjIT_IzL5iVIm1zk2qdP90j2FTepfqXf-rb8PODZ9iI4SOVEzNPYmhWe1mDx3Swv46Y8IjthEtg35-rj3upLc4bKCSgAon1yYGorsmRXpyqBGUuZxbhp-Ul7Ko6VlpoPaNP7g"/>
+<div>
+<h3 class="text-label-md font-label-md text-on-surface font-semibold">Marcus Thorne</h3>
+<div class="flex items-center gap-2 text-body-sm font-body-sm text-outline">
+<span>Head of Athletics</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<time datetime="2023-10-23T14:30">Oct 23, 2:30 PM</time>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-emerald-500/10 text-emerald-700 text-label-sm font-label-sm">
+<span class="material-symbols-outlined text-[14px]">sports_soccer</span> Students
+                                </span>
+<button class="p-1.5 text-outline hover:bg-surface-container rounded-md transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<div class="p-space-6 space-y-space-4">
+<h4 class="text-headline-sm font-headline-sm text-on-background">Varsity Soccer Tryouts Registration Open</h4>
+<div class="prose prose-sm prose-slate max-w-none text-body-md font-body-md text-on-surface-variant">
+<p>Registration for the Winter Varsity Soccer tryouts is officially open. All interested students in grades 9-12 must submit their medical clearance forms prior to stepping on the field.</p>
+<p>Tryouts will be held on the main turf starting next Monday at 3:45 PM sharp. Bring your own cleats and shinguards.</p>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+</div>
+</body></html>

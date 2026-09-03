@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Classes Management - Karma SaaS</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-secondary-container": "#006f63",
+                        "on-secondary-fixed-variant": "#005047",
+                        "on-surface": "#191b23",
+                        "surface-tint": "#0053db",
+                        "on-secondary-fixed": "#00201c",
+                        "surface-dim": "#d9d9e5",
+                        "surface-container-highest": "#e1e2ed",
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        "secondary-fixed": "#79f7e3",
+                        "tertiary-fixed-dim": "#ffb596",
+                        "secondary-container": "#76f4e0",
+                        "background": "#faf8ff",
+                        "surface-container-high": "#e7e7f3",
+                        "inverse-primary": "#b4c5ff",
+                        "outline": "#737686",
+                        "amber-500": "#f59e0b",
+                        "surface-container-low": "#f3f3fe",
+                        "inverse-on-surface": "#f0f0fb",
+                        "on-primary-container": "#eeefff",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "primary-container": "#2563eb",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed": "#360f00",
+                        "on-primary": "#ffffff",
+                        "outline-variant": "#c3c6d7",
+                        "error": "#ba1a1a",
+                        "surface-variant": "#e1e2ed",
+                        "slate-900": "#0f172a",
+                        "on-surface-variant": "#434655",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#bc4800",
+                        "on-tertiary-container": "#ffede6",
+                        "error-container": "#ffdad6",
+                        "on-tertiary": "#ffffff",
+                        "primary": "#004ac6",
+                        "secondary-fixed-dim": "#59dbc7",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed": "#00174b",
+                        "tertiary": "#943700",
+                        "red-500": "#ef4444",
+                        "inverse-surface": "#2e3039",
+                        "slate-50": "#f8fafc",
+                        "on-background": "#191b23",
+                        "primary-fixed": "#dbe1ff",
+                        "surface-bright": "#faf8ff",
+                        "emerald-500": "#10b981",
+                        "surface-container": "#ededf9",
+                        "midnight-navy": "#0f2942",
+                        "secondary": "#006b5f",
+                        "tertiary-fixed": "#ffdbcd",
+                        "surface": "#faf8ff",
+                        "on-error": "#ffffff"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "space-8": "32px",
+                        "space-6": "24px",
+                        "space-12": "48px",
+                        "space-4": "16px",
+                        "sidebar-expanded": "256px",
+                        "space-2": "8px",
+                        "sidebar-collapsed": "68px",
+                        "space-3": "12px",
+                        "space-1": "4px"
+                    },
+                    fontFamily: {
+                        "body-sm": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    fontSize: {
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg": ["30px", { "lineHeight": "38px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-xl": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: var(--color-background); color: var(--color-on-background); }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased flex h-screen overflow-hidden rtl:dir-rtl">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col w-64 h-screen sticky top-0 left-0 border-r border-outline-variant bg-surface py-space-6 px-space-4">
+<!-- Brand -->
+<div class="flex items-center gap-space-3 mb-space-8 px-space-2">
+<div class="w-8 h-8 rounded bg-primary flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-body-lg">school</span>
+</div>
+<div>
+<h1 class="text-headline-sm font-headline-sm text-primary">Karma SaaS</h1>
+<p class="text-label-sm font-label-sm text-on-surface-variant">AY 2023-24</p>
+</div>
+</div>
+<!-- Navigation Tabs -->
+<div class="flex flex-col gap-space-2 flex-grow">
+<a class="flex items-center gap-space-3 px-space-3 py-space-2 rounded-lg text-text-muted hover:bg-surface-subtle transition-colors scale-98 active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-body-md font-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-space-3 px-space-3 py-space-2 rounded-lg text-primary font-bold bg-primary-fixed hover:bg-surface-subtle transition-colors scale-98 active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined">school</span>
+<span class="text-body-md font-body-md">Academic</span>
+</a>
+<a class="flex items-center gap-space-3 px-space-3 py-space-2 rounded-lg text-text-muted hover:bg-surface-subtle transition-colors scale-98 active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-body-md font-body-md">Student Info</span>
+</a>
+<a class="flex items-center gap-space-3 px-space-3 py-space-2 rounded-lg text-text-muted hover:bg-surface-subtle transition-colors scale-98 active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="text-body-md font-body-md">Attendance</span>
+</a>
+<a class="flex items-center gap-space-3 px-space-3 py-space-2 rounded-lg text-text-muted hover:bg-surface-subtle transition-colors scale-98 active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined">grade</span>
+<span class="text-body-md font-body-md">Gradebook</span>
+</a>
+<a class="flex items-center gap-space-3 px-space-3 py-space-2 rounded-lg text-text-muted hover:bg-surface-subtle transition-colors scale-98 active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-body-md font-body-md">Settings</span>
+</a>
+</div>
+<!-- Footer Tabs -->
+<div class="mt-auto flex flex-col gap-space-2 pt-space-4 border-t border-outline-variant">
+<a class="flex items-center gap-space-3 px-space-3 py-space-2 rounded-lg text-text-muted hover:bg-surface-subtle transition-colors" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="text-body-md font-body-md">Help Center</span>
+</a>
+<a class="flex items-center gap-space-3 px-space-3 py-space-2 rounded-lg text-text-muted hover:bg-surface-subtle transition-colors" href="#">
+<span class="material-symbols-outlined">support_agent</span>
+<span class="text-body-md font-body-md">Support</span>
+</a>
+<button class="mt-space-4 w-full bg-primary text-on-primary rounded-lg py-space-2 text-label-md font-label-md hover:opacity-90 transition-opacity">
+                Quick Action
+            </button>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col min-w-0 bg-surface-container-lowest overflow-y-auto">
+<!-- TopNavBar (Mobile) -->
+<header class="md:hidden flex justify-between items-center h-16 px-space-4 border-b border-outline-variant bg-surface/80 backdrop-blur-md sticky top-0 z-40">
+<div class="flex items-center gap-space-2">
+<div class="w-8 h-8 rounded bg-primary flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-body-lg">school</span>
+</div>
+<span class="text-headline-sm font-headline-sm font-black text-on-surface">Karma</span>
+</div>
+<button class="text-on-surface-variant">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</header>
+<!-- Canvas -->
+<main class="flex-1 p-space-4 md:p-space-8 max-w-7xl mx-auto w-full">
+<!-- Header Section -->
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-space-4 mb-space-8">
+<div>
+<h2 class="text-headline-lg font-headline-lg text-on-surface">Classes Management</h2>
+<p class="text-body-md font-body-md text-on-surface-variant mt-1">Manage class rosters and capacity across all grades.</p>
+</div>
+<div class="flex items-center gap-space-3">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface rounded-lg border border-outline-variant text-body-sm font-body-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all w-full sm:w-64" placeholder="Search classes..." type="text"/>
+</div>
+<button class="bg-primary text-on-primary px-space-4 py-space-2 rounded-lg text-label-md font-label-md hover:bg-on-primary-fixed-variant transition-colors whitespace-nowrap">
+<span class="material-symbols-outlined align-middle mr-1" style="font-size: 18px;">add</span> Add Class
+                    </button>
+</div>
+</div>
+<!-- Grade 10 Section -->
+<section class="mb-space-12">
+<div class="flex items-center gap-space-4 mb-space-6 border-b border-outline-variant pb-2">
+<h3 class="text-headline-md font-headline-md text-on-surface">Grade 10</h3>
+<span class="bg-surface-container text-on-surface-variant px-2 py-1 rounded-full text-label-sm font-label-sm">3 Classes</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-space-6">
+<!-- Class Card 10A -->
+<div class="bg-surface border border-outline-variant rounded-xl p-space-6 hover:bg-surface-container-lowest transition-colors relative group">
+<div class="flex justify-between items-start mb-space-4">
+<div>
+<h4 class="text-headline-sm font-headline-sm text-on-surface">Class 10A</h4>
+<p class="text-body-sm font-body-sm text-on-surface-variant flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[16px]">person</span> Homeroom: Sarah Jenkins
+                                </p>
+</div>
+<div class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center font-label-md">
+                                SJ
+                            </div>
+</div>
+<div class="mb-space-6">
+<div class="flex justify-between text-body-sm font-body-sm mb-1">
+<span class="text-on-surface-variant">Capacity</span>
+<span class="text-on-surface font-medium">28/30 students</span>
+</div>
+<div class="w-full bg-surface-container-high rounded-full h-2">
+<div class="bg-primary h-2 rounded-full" style="width: 93%"></div>
+</div>
+</div>
+<div class="flex gap-space-3">
+<button class="flex-1 bg-surface-container border border-outline-variant text-on-surface px-4 py-2 rounded-lg text-label-md font-label-md hover:bg-surface-container-high transition-colors">
+                                View Details
+                            </button>
+<button class="flex-1 bg-primary text-on-primary px-4 py-2 rounded-lg text-label-md font-label-md hover:bg-on-primary-fixed-variant transition-colors">
+                                Manage Roster
+                            </button>
+</div>
+</div>
+<!-- Class Card 10B -->
+<div class="bg-surface border border-outline-variant rounded-xl p-space-6 hover:bg-surface-container-lowest transition-colors relative group">
+<div class="flex justify-between items-start mb-space-4">
+<div>
+<h4 class="text-headline-sm font-headline-sm text-on-surface">Class 10B</h4>
+<p class="text-body-sm font-body-sm text-on-surface-variant flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[16px]">person</span> Homeroom: Michael Chen
+                                </p>
+</div>
+<div class="w-10 h-10 rounded-full bg-tertiary-container text-on-tertiary-container flex items-center justify-center font-label-md">
+                                MC
+                            </div>
+</div>
+<div class="mb-space-6">
+<div class="flex justify-between text-body-sm font-body-sm mb-1">
+<span class="text-on-surface-variant">Capacity</span>
+<span class="text-on-surface font-medium">30/30 students</span>
+</div>
+<div class="w-full bg-surface-container-high rounded-full h-2">
+<div class="bg-error h-2 rounded-full" style="width: 100%"></div>
+</div>
+</div>
+<div class="flex gap-space-3">
+<button class="flex-1 bg-surface-container border border-outline-variant text-on-surface px-4 py-2 rounded-lg text-label-md font-label-md hover:bg-surface-container-high transition-colors">
+                                View Details
+                            </button>
+<button class="flex-1 bg-primary text-on-primary px-4 py-2 rounded-lg text-label-md font-label-md hover:bg-on-primary-fixed-variant transition-colors">
+                                Manage Roster
+                            </button>
+</div>
+</div>
+<!-- Class Card 10C -->
+<div class="bg-surface border border-outline-variant rounded-xl p-space-6 hover:bg-surface-container-lowest transition-colors relative group">
+<div class="flex justify-between items-start mb-space-4">
+<div>
+<h4 class="text-headline-sm font-headline-sm text-on-surface">Class 10C</h4>
+<p class="text-body-sm font-body-sm text-on-surface-variant flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[16px]">person</span> Homeroom: David Alaba
+                                </p>
+</div>
+<img class="w-10 h-10 rounded-full object-cover" data-alt="A professional headshot of a male teacher in his 30s, wearing a smart casual blazer, smiling warmly against a bright, modern white office background, clean crisp lighting, corporate educational aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqTG8YPmN1COo6ZVyiQrbj7uF3Q89cmXwwZ6QLKSOrsB3kMxZxc5Z0hPLVuZk5ejk5QuEck1QrOllewWRkFRG6C2NfaMi5GyukBU0IKSIUxX5yJT6p-0gqZC0MXu04xh2klO7SuDBxZ9dBHS5a-Fyc2ma0KzfIjCmMDAB7F6r0fghZ0gNVhvvmKil5SO3uVDzmhQUBCpyKhZmjzuaSFuzaGSwEOpCHONitUXtsEWAebI7osTlCp5NkxQ"/>
+</div>
+<div class="mb-space-6">
+<div class="flex justify-between text-body-sm font-body-sm mb-1">
+<span class="text-on-surface-variant">Capacity</span>
+<span class="text-on-surface font-medium">24/30 students</span>
+</div>
+<div class="w-full bg-surface-container-high rounded-full h-2">
+<div class="bg-primary h-2 rounded-full" style="width: 80%"></div>
+</div>
+</div>
+<div class="flex gap-space-3">
+<button class="flex-1 bg-surface-container border border-outline-variant text-on-surface px-4 py-2 rounded-lg text-label-md font-label-md hover:bg-surface-container-high transition-colors">
+                                View Details
+                            </button>
+<button class="flex-1 bg-primary text-on-primary px-4 py-2 rounded-lg text-label-md font-label-md hover:bg-on-primary-fixed-variant transition-colors">
+                                Manage Roster
+                            </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Grade 11 Section -->
+<section class="mb-space-12">
+<div class="flex items-center gap-space-4 mb-space-6 border-b border-outline-variant pb-2">
+<h3 class="text-headline-md font-headline-md text-on-surface">Grade 11</h3>
+<span class="bg-surface-container text-on-surface-variant px-2 py-1 rounded-full text-label-sm font-label-sm">2 Classes</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-space-6">
+<!-- Class Card 11A -->
+<div class="bg-surface border border-outline-variant rounded-xl p-space-6 hover:bg-surface-container-lowest transition-colors relative group">
+<div class="flex justify-between items-start mb-space-4">
+<div>
+<h4 class="text-headline-sm font-headline-sm text-on-surface">Class 11A</h4>
+<p class="text-body-sm font-body-sm text-on-surface-variant flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[16px]">person</span> Homeroom: Elena Rostova
+                                </p>
+</div>
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-label-md">
+                                ER
+                            </div>
+</div>
+<div class="mb-space-6">
+<div class="flex justify-between text-body-sm font-body-sm mb-1">
+<span class="text-on-surface-variant">Capacity</span>
+<span class="text-on-surface font-medium">29/30 students</span>
+</div>
+<div class="w-full bg-surface-container-high rounded-full h-2">
+<div class="bg-amber-500 h-2 rounded-full" style="width: 96%"></div>
+</div>
+</div>
+<div class="flex gap-space-3">
+<button class="flex-1 bg-surface-container border border-outline-variant text-on-surface px-4 py-2 rounded-lg text-label-md font-label-md hover:bg-surface-container-high transition-colors">
+                                View Details
+                            </button>
+<button class="flex-1 bg-primary text-on-primary px-4 py-2 rounded-lg text-label-md font-label-md hover:bg-on-primary-fixed-variant transition-colors">
+                                Manage Roster
+                            </button>
+</div>
+</div>
+</div>
+</section>
+</main>
+</div>
+</body></html>
