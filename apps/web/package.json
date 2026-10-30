@@ -23,7 +23,7 @@
     "@visx/scale": "^4.0.1-alpha.0",
     "@visx/shape": "^4.0.1-alpha.0",
     "axios": "^1.20.0",
-    "better-auth": "^1.7.2",
+    "better-auth": "^1.7.7",
     "clsx": "^2.1.1",
     "d3-array": "^3.2.4",
     "d3-shape": "^3.2.0",
